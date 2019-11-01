@@ -1,6 +1,4 @@
-
-#include <stdlib.h>
-#include <stdio.h>
+#include "prototypes.h"
 
 static    int            ft_sym(long long int n)
 {
@@ -56,12 +54,4 @@ char                *ft_ftoa(float num)
       i++;
     }
     return (res);
-}
-
-int     main(void)
-{
-    float num = 123.12312;
-    printf("%s\n", ft_ftoa(num));
-    printf("%f\n", num);
-    return (0);
 }
