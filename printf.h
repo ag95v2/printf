@@ -5,7 +5,8 @@
 #include "libft.h"
 #include <stdarg.h>
 
-enum length		{hh, h, l, ll, L};
+enum length		{hh, h, l, ll, L}; //int-ая переменная, кот-ая принимает максимум 5 значений. И каждому из
+									//значений присвоили название. 
 
 //enum conv_spec	{d, i, o, u, x, X, f}
 

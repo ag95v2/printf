@@ -1,5 +1,6 @@
 
 #include "printf.h"
+#include "libft.h"
 
 /*
 **	Fill all fields of structure with zeros.
@@ -151,10 +152,9 @@ const char	*read_spec(const char *format, t_spec spec)
 	if (*format == '.')
 		format = read_precision(++format, spec);
 	format = read_length(format, spec);
-	format = read_conv_spec(format, spec);
+	format = read_conv_spec(format, spec); //last symbol - specificator of conversion (тип преобразования)
 	return (format);
 }
-
 
 int			ft_printf(const char *format, ...)
 {
@@ -162,10 +162,10 @@ int			ft_printf(const char *format, ...)
 	t_spec	spec;
 	char	*s;
 
-	va_start(vl, format);
-	while ((format = print_until_percent(format)))
+	va_start(vl, format); //читай с этой ссылки
+	while ((format = print_until_percent(format))) //доходим до процента
 	{
-		if (*(++format) == '%')
+		if (*(++format) == '%') //печать процента, если %%
 		{
 			ft_putchar(*(format++));
 			continue;
@@ -178,3 +178,6 @@ int			ft_printf(const char *format, ...)
 	
 	va_end(vl);
 }
+
+int		main(void)
+{}
