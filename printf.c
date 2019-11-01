@@ -152,7 +152,7 @@ const char	*read_spec(const char *format, t_spec spec)
 	if (*format == '.')
 		format = read_precision(++format, spec);
 	format = read_length(format, spec);
-	format = read_conv_spec(format, spec); //last symbol - specificator of conversion (тип преобразования)
+	format = read_conv_spec(format, spec); 
 	return (format);
 }
 
@@ -162,10 +162,10 @@ int			ft_printf(const char *format, ...)
 	t_spec	spec;
 	char	*s;
 
-	va_start(vl, format); //читай с этой ссылки
-	while ((format = print_until_percent(format))) //доходим до процента
+	va_start(vl, format); 
+	while ((format = print_until_percent(format))) 
 	{
-		if (*(++format) == '%') //печать процента, если %%
+		if (*(++format) == '%') 
 		{
 			ft_putchar(*(format++));
 			continue;
