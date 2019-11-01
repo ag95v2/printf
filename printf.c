@@ -173,10 +173,7 @@ int			ft_printf(const char *format, ...)
 		format = read_spec(format, spec);
 		if (format == -1)
 			return (-1);
-		/*
-		   How to implement this feature?
-		   s = get_arg_str(spec, va_arg(vl, ))
-		*/
+		s = get_arg_str(spec, va_arg(vl, ))
 	}
 	
 	va_end(vl);
