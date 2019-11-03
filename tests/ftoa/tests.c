@@ -11,7 +11,7 @@ void	test(float x)
 	free(res);
 	res = ft_ftoa(x);
 	printf("%-10s%s\n","Behrooz:", res);
-	free(res);
+
 }
 
 int main()
