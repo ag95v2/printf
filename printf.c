@@ -1,12 +1,11 @@
 
 #include "printf.h"
-#include "libft.h"
 
 /*
 **	Fill all fields of structure with zeros.
 */
 
-void		init_spec(t_spec spec)
+void		init_spec(t_spec *spec)
 {
 	spec->flag_zero = 0;
 	spec->flag_hash = 0;
@@ -35,17 +34,17 @@ const char	*print_until_percent(const char *format)
 	return (*format ? format : 0);
 }
 
-void read_flag(const char c, t_spec spec)
+void read_flag(const char c, t_spec *spec)
 {
-	if (*f == '+')
+	if (c == '+')
 		spec->flag_plus = 1;
-	if (*f == '-')
+	if (c == '-')
 		spec->flag_dash = 1;
-	if (*f == ' ')
+	if (c == ' ')
 		spec->flag_space = 1;
-	if (*f == '#')
+	if (c == '#')
 		spec->flag_hash = 1;
-	if (*f == '0')
+	if (c == '0')
 		spec->flag_zero = 1;
 }
 
@@ -56,7 +55,7 @@ void read_flag(const char c, t_spec spec)
 **	Return a pointer to first non-flag char in f
 */
 
-const char	*read_flags(const char *f, t_spec spec)
+const char	*read_flags(const char *f, t_spec *spec)
 {
 	while (*f == '+' || *f == '-' || *f == ' ' || *f == '#' || *f == '0')
 		read_flag(*(f++), spec);
@@ -68,12 +67,13 @@ const char	*read_flags(const char *f, t_spec spec)
 **  Fill the field "width"
 **	Return: ptr to first non-digit in f
 */
-const char	*read_width(const char *f, t_spec spec)
+
+const char	*read_width(const char *f, t_spec *spec)
 {
 	if (ft_isdigit(*f))
-		spec->width = ft_atoi(*f);
-	while (ft_isdigit(*(f++)))
-		;
+		spec->width = ft_atoi(f);
+	while (ft_isdigit(*f))
+		f++;
 	return (f);
 }
 
@@ -82,10 +82,10 @@ const char	*read_width(const char *f, t_spec spec)
 **  Fill the field "precision"
 **	Return: ptr to first non-digit in f
 */
-const char	*read_precision(const char *f, t_spec spec)
+const char	*read_precision(const char *f, t_spec *spec)
 {
 	if (ft_isdigit(*f))
-		spec->precision = ft_atoi(*f);
+		spec->precision = ft_atoi(f);
 	while (ft_isdigit(*(f++)))
 		;
 	return (f);
@@ -98,7 +98,7 @@ const char	*read_precision(const char *f, t_spec spec)
 **	Return: ptr to first non-digit in f
 */
 
-const char	*read_length(const char *f, t_spec spec)
+const char	*read_length(const char *f, t_spec *spec)
 {
 	if (*f == 'l' && *(f + 1) == 'l')
 	{
@@ -128,13 +128,12 @@ const char	*read_length(const char *f, t_spec spec)
 	return (f);
 }
 
-const char	read_conv_spec(const char *f, t_spec spec)
+const char	*read_conv_spec(const char *f, t_spec *spec)
 {
 	if (*f != 'd' &&*f != 'i' && *f != 'o' && *f != 'u' && *f != 'x'\
-			&& *f !='X' && *f != 'f')
-		return (-1);
-	if (*f == 'd')
-		spec->conv_spec = *f;
+			&& *f !='X' && *f != 'f' && *f != 'c' && *f != 's'	&& *f != 'p')
+		return (0);
+	spec->conv = *f;
 	return (++f);
 }
 
@@ -143,10 +142,12 @@ const char	read_conv_spec(const char *f, t_spec spec)
 **	Return 
 **	-pointer to first char after the end of conversion specification
 **	-0 in case of any problems
+**	Side effects: change a spec
 */
 
-const char	*read_spec(const char *format, t_spec spec)
+const char	*read_spec(const char *format, t_spec *spec)
 {
+	init_spec(spec);
 	format = read_flags(format, spec);
 	format = read_width(format, spec);
 	if (*format == '.')
@@ -154,6 +155,27 @@ const char	*read_spec(const char *format, t_spec spec)
 	format = read_length(format, spec);
 	format = read_conv_spec(format, spec); 
 	return (format);
+}
+
+/*
+**	Determine type of next arg according to spec
+**	Extract argument from original vl
+**	Return its string representation 
+*/
+
+char		*get_arg_str(t_spec spec, va_list *vl)
+{
+	void		*arg;
+	char		*res;
+	t_conv_f	*action;
+
+	// TODO: process possible malloc errors here
+	action = find_action(spec);
+	arg = action->arg_extract(spec, vl);
+	res = action->to_str(arg);
+	if (action->cleanup_needed)
+		free(arg);
+	return (res);
 }
 
 int			ft_printf(const char *format, ...)
@@ -167,14 +189,17 @@ int			ft_printf(const char *format, ...)
 	{
 		if (*(++format) == '%') 
 		{
+			// TODO: we would prefer buffered output.
 			ft_putchar(*(format++));
 			continue;
 		}
-		format = read_spec(format, spec);
-		if (format == -1)
+		format = read_spec(format, &spec);
+		if (!format)
 			return (-1);
-		s = get_arg_str(spec, va_arg(vl, ))
+		s = get_arg_str(spec, &vl);
+		ft_putstr(s);
 	}
-	
+	// TODO: process case with multiple string args without format string
 	va_end(vl);
+	return (0);
 }
