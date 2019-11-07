@@ -1,96 +1,90 @@
-
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-static	int			ft_sym(int n)
+int         ft_inter_len(long long inter)
 {
-	if (n < 0)
-		return (-n);
-	else
-		return (n);
+    int     i;
+
+    i = 0;
+    if (inter <= 0)
+    {
+        inter = inter * (-1);
+        i++;
+    }
+    while (inter > 0)
+    {
+        inter = inter / 10;
+        i++;
+    }
+    return (i);
 }
 
-char	*ft_strcpy(char *dst, const char *src)
-{
-	size_t		i;
+/* at first we are dividing fractional and integer
+** of input number;
+** find length of integer numbers. Count of fractional
+** numbers will be like precision + '\0' and  + '.';
+** 
+*/
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+char                *ft_ftoa(double num, long long p)
+{
+    double          fraction;
+    long long       inter;
+    double          tmp;
+    char            *str;
+    int             len;
+    int             i;
+    int             tmp2;
+    int             len2;
+    i = 0;
+    inter = (long long)num;
+    tmp = (double)inter;
+    fraction = num - tmp;
+    len = ft_inter_len(inter);
+    if (!(str = (char *)malloc(sizeof(char) * (len + p + 2))))
+        return (NULL);
+    len2 = len + 1;
+    if (inter == 0)
+    {
+        str[0] = '0';
+        str[len] = '.';
+        len++;
+    }
+    else
+    {
+        str[len--] = '.';
+        while (i <= len)
+        {
+          str[len] = inter % 10 + '0';
+          inter /= 10;
+          len--;
+        }
+    }
+    while (i < p)
+    {
+      fraction = fraction * 10;
+      tmp2 = (int)fraction;
+      str[len2++] = tmp2 + '0';
+      fraction = fraction - tmp2;
+      i++;
+    }
+  if (fraction > 0.5)
+  {
+      str[p + 1] = str[p + 1] + 1;
+//      str[p + 1] = 0;
+  }
+  str[len2] = '\0';
+    return (str);
 }
 
-static	int			ft_counter(int n)
-{
-	int		c;
+int main() {
 
-	if (n <= 0)
-		c = 1;
-	else
-		c = 0;
-	while (n)
-	{
-		n = n / 10;
-		c++;
-	}
-	return (c);
-}
-
-char				*ft_itoa(int n)
-{
-	int				len;
-	char			*res;
-
-	len = ft_counter(n);
-	if (!(res = malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	if (n == -2147483648)
-		return (ft_strcpy(res, "-2147483648"));
-	if (n == 0)
-		res[0] = '0';
-	if (n < 0)
-		res[0] = '-';
-	res[len] = '\0';
-	len--;
-	while (n)
-	{
-		res[len] = ft_sym(n % 10) + '0';
-		n = n / 10;
-		len--;
-	}
-	return (res);
-}
-
-
-char* ft_ftoa(double number)
-{
-
-    char* first;
-    char string[50];
-    char string_2[50];
-    double  number_2,change;
-	long int  fractional,decimal;
-
-
-    decimal = (int) number;     //extracting decimal part form fractional
-
-    number_2 = (double) decimal;
-
-    change = number - number_2;
-
-    fractional = change*1000; //extracting fractional part and changing it into integer
-
-    ft_itoa(decimal);
-    ft_itoa(fractional);
-
-    strcat(string,".");                     //adding dot between numbers
-    strcat(string,string_2);
-    first = string;
-
-    return (first);                           //returning final string
+  float a;
+  char  *b;
+  a = 12.3457;
+  b = ft_ftoa(a, 6);
+  printf("%s\n", b);
+  printf("%f\n", a);
+  return 0;
 }
