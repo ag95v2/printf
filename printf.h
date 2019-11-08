@@ -2,7 +2,7 @@
 #ifndef PRINTF_H
 #define PRINTF_H
 
-#include "libft.h"
+#include "./libft/includes/libft.h"
 #include <stdarg.h>
 
 enum length		{none, hh, h, l, ll, L}; 
@@ -99,6 +99,18 @@ void	*str_extractor(t_spec spec, va_list *vl);
 	{"s", &w_stoa, &str_extractor, 0},\
 	{0, 0, 0, 0}\
 }
+
+struct	varftoa
+{
+	long double		fraction;
+	long long		inter;
+	long double		tmp;
+	char			*str;
+	int				len_till_dot;
+	int				i;
+	int				len_af_dot;
+};
+
 
 t_conv_f	*find_action(t_spec spec);
 

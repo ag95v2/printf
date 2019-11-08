@@ -6,7 +6,7 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 20:13:48 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/08 22:45:20 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/11/08 23:22:06 by dpenney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ char	*ft_rounding_up(long double fraction, char *str, int len_af_dot)
 	{
 		str[len_af_dot - 1] += 1;
 	}
-	if (fraction >= 0.5 && str[len_af_dot - 1] == '9')
+	/*if (fraction >= 0.5 && str[len_af_dot - 1] == '9')
 	{
 		while (str[len_af_dot - 1] == '9')
 		{
 			str[len_af_dot - 1] = '0';
 			o++;
 		}
-	}
+	}*/
 	str[len_af_dot] = '\0';
 	return (str);
 }
@@ -85,16 +85,14 @@ char	*ft_ftoa(double num, long long p)
 {
 	struct varftoa	f;
 
-	f.i = 0;
 	f.inter = (long long)num;
 	f.tmp = (double)f.inter;
 	f.fraction = num - f.tmp;
 	f.len_till_dot = ft_inter_len(f.inter);
 	if (!(f.str = (char *)malloc(sizeof(char) * (f.len_till_dot + p + 2))))
 		return (NULL);
-    f.len_af_dot = f.len_till_dot + 1;
-//	ft_fill_str(f.str, f.len_till_dot, f.inter, f.i)
-    if (f.inter == 0)
+	f.len_af_dot = f.len_till_dot + 1;
+	if (f.inter == 0)
 	{
 		f.str[0] = '0';
 		f.str[f.len_till_dot] = '.';
@@ -103,11 +101,10 @@ char	*ft_ftoa(double num, long long p)
 	else
 	{
 		f.str[f.len_till_dot--] = '.';
-		while (f.i <= f.len_till_dot)
+		while (0 <= f.len_till_dot)
 		{
-			f.str[f.len_till_dot] = f.inter % 10 + '0';
+			f.str[f.len_till_dot--] = f.inter % 10 + '0';
 			f.inter /= 10;
-			f.len_till_dot--;
 		}
 	}
 	return (ft_fill_fraction(f.fraction, f.str, p, f.len_af_dot));
@@ -118,9 +115,9 @@ int	main(void)
 	float			a;
 	char			*b;
 
-	a = 213.11;
-	b = ft_ftoa(a, 6);
+	a = 211.899;
+	b = ft_ftoa(a, 0);
 	printf("%s\n", b);
-	printf("%1.6f\n", a);
+	printf("%1.0f\n", a);
 	return (0);
 }
