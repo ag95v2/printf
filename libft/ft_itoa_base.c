@@ -36,7 +36,7 @@ int         ft_num_len(int num, int base)
  *  'F'
 */
 
-char        *ft_itoa_base(int value, int base)
+char        *ft_itoa_base(long long value, int base)
 {
     char    *s;
     int     len;

@@ -7,30 +7,30 @@
 
 char	*itoa_b10u(long long n)
 {
-	// Your code here
-	// Convert long long to string base 10 (unsigned)
-	return ("123");
+	if (n < 0)
+		n = n * (-1);
+	return (ft_itoa_base(long long n, 10));
 }
 
 char	*itoa_b10(long long n)
 {
 	// Your code here
 	// Convert long long to string base 10
-	return ("123");
+	return (ft_itoa_base(long long n, 10));
 }
 
 char	*itoa_b2(long long n)
 {
 	// Your code here
 	// Convert long long to string base 2
-	return ("10101");
+	return (ft_itoa_base(long long n, 2));
 }
 
 char	*itoa_b8(long long n)
 {
 	// Your code here
 	// Convert long long to string base 8
-	return ("123456");
+	return (ft_itoa_base(long long n, 8));
 }
 
 char	*itoa_bX(long long n)
