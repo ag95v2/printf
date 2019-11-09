@@ -4,6 +4,7 @@
 */
 
 #include "printf.h"
+#include "libft/includes/libft.h"
 
 char	*itoa_b10u(long long n)
 {
@@ -37,12 +38,35 @@ char	*itoa_bX(long long n)
 {
 	// Your code here
 	// Convert long long to string base hex in uppercase
-	return ("1AB2");
+	return (ft_itoa_base(long long n, 16));
 }
 
-char	*itoa_bx(long long n)
+char	*itoa_bx(long long value)
 {
-	// Your code here
-	// Convert long long to string base hex in lowecase
-	return ("1ab2");
+    char    *s;
+    int     len;
+	int		base;
+
+	base = 16;
+    if (value == 0)
+        return (ft_strdup("0"));
+    if (base < 2 || base > 16)
+        return (NULL);
+    if (value == -2147483648 && base == 10)
+        return (ft_strdup("-2147483648"));
+    len = ft_num_len(value, base);
+    if (!(s = ft_strnew(len + 1)))
+        return (NULL);
+    if (value < 0)
+    {
+        s[0] = '-';
+        value = value * (-1);
+    }
+    s[len] = '\0';
+    while (len-- > 0)
+    {
+       s[len] = (value % base < 10) ? value % base + '0' : value % base + 'a' - 10;
+       value /= base;
+    }
+    return (s);
 }
