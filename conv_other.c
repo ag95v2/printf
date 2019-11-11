@@ -9,7 +9,7 @@ char	*ftoa(long double x)
 {
 	// Convert long double to string
 	// Your code here
-	return ("123.45");
+	return (ft_strdup("123.45"));
 }
 
 /*

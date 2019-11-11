@@ -27,14 +27,16 @@ char		*get_arg_str(t_spec spec, va_list *vl)
 	void		*arg;
 	char		*res;
 	t_conv_f	*action;
+	int			error;
 
-	// TODO: process possible malloc errors here
-	action = find_action(spec);
-	arg = action->arg_extract(spec, vl);
-	res = action->to_str(arg);
+	error = 0;
+	if (!(action = find_action(spec)) ||
+		!(arg = action->arg_extract(spec, vl)) ||
+		!(res = action->to_str(arg)))
+		error = 1;
 	if (action->cleanup_needed)
 		free(arg);
-	return (res);
+	return (error ? 0 : res);
 }
 
 int			ft_printf(const char *format, ...)
@@ -48,17 +50,16 @@ int			ft_printf(const char *format, ...)
 	{
 		if (*(++format) == '%') 
 		{
-			// TODO: we would prefer buffered output.
 			ft_putchar(*(format++));
 			continue;
 		}
 		format = read_spec(format, &spec);
-		if (!format)
+		if (!format || !(s = get_arg_str(spec, &vl)))
 			return (-1);
-		s = get_arg_str(spec, &vl);
 		ft_putstr(s);
+		if (spec.conv != 's')
+			free(s);
 	}
-	// TODO: process case with multiple string args without format string
 	va_end(vl);
 	return (0);
 }
