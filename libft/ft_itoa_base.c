@@ -1,27 +1,5 @@
 #include "libft.h"
 
-/*
- **if other number with minus, we are changing to positive
- **and plus 1 to i, than to take account a minus in our string
-*/
-
-int         ft_num_len(int num, int base)
-{
-    int     i;
-
-    i = 0;
-    if (num < 0)
-    {
-        num = num * (-1);
-        i++;
-    }
-    while (num > 0)
-    {
-        num = num / base;
-        i++;
-    }
-    return (i);
-}
 
 /*
  * -at first we are checking our number with other terms.
