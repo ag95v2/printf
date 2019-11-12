@@ -1,4 +1,3 @@
-P_ROOT := ../../
 SRC := arg_extractors.c \
 	   conv_other.c \
 	   conv_wrappers_other.c \
@@ -9,8 +8,15 @@ SRC := arg_extractors.c \
 	   read_spec.h \
 	   conv_int.c \
 	   conv_wrappers_int.c
-SRC		:= $(addprefix $(P_ROOT)/,$(SRC))
 all:
-	make -C $(P_ROOT)libft
-	make -C $(P_ROOT)
-	gcc -o test -g $(SRC) main.c -I $(P_ROOT) -I $(P_ROOT)libft/includes -L $(P_ROOT)libft -lft
+	make -C libft
+	gcc -g $(SRC) -c -I . -I libft/includes -L libft -lft
+	ar rc libftprintf.a *.o ./libft/*.o
+
+clean:
+	rm -f *.o
+
+fclean: clean
+	rm -f libftprintf.a
+
+re:	fclean all

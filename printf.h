@@ -2,7 +2,7 @@
 #ifndef PRINTF_H
 #define PRINTF_H
 
-#include "./libft/includes/libft.h"
+#include "libft.h"
 #include <stdarg.h>
 
 enum length		{none, hh, h, l, ll, L}; 
