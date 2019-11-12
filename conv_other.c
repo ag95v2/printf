@@ -23,8 +23,8 @@ char	*ctoa(char c)
 	res = (char *)malloc(sizeof(char) * (1 + 1));
 	if (!res)
 		return (res);
-	res[0] = c;
-	res[1] = 0;
+	res[0] = 'c';
+	res[1] = '0';
 	return (res);
 }
 
