@@ -104,8 +104,11 @@ const char	*read_length(const char *f, t_spec *spec)
 
 const char	*read_conv_spec(const char *f, t_spec *spec)
 {
-	if (*f != 'd' &&*f != 'i' && *f != 'o' && *f != 'u' && *f != 'x'\
-			&& *f !='X' && *f != 'f' && *f != 'c' && *f != 's'	&& *f != 'p')
+	if (\
+			*f != 'd' &&*f != 'i' && *f != 'o' && *f != 'u' && *f != 'x'\
+			&& *f !='X' && *f != 'f' && *f != 'c' && *f != 's'	&& *f != 'p'\
+			&& *f != '%'\
+		)
 		return (0);
 	spec->conv = *f;
 	return (++f);

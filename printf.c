@@ -1,7 +1,6 @@
 #include "printf.h"
 #include "read_spec.h"
 
-
 /*
 **	Print all normal chars until % or '\0'
 **	Return: 
@@ -13,7 +12,7 @@ const char	*print_until_percent(const char *format)
 {
 	while (*format && *format != '%')
 		ft_putchar(*(format++));
-	return (*format ? format : 0);
+	return (*format ? ++format : 0);
 }
 
 /*
@@ -48,11 +47,6 @@ int			ft_printf(const char *format, ...)
 	va_start(vl, format); 
 	while ((format = print_until_percent(format))) 
 	{
-		if (*(++format) == '%') 
-		{
-			ft_putchar(*(format++));
-			continue;
-		}
 		format = read_spec(format, &spec);
 		if (!format || !(s = get_arg_str(spec, &vl)))
 			return (-1);

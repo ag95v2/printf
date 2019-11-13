@@ -19,3 +19,9 @@ char	*w_ptoa(void *x)
 {
 	return (ptoa(x));
 }
+
+char	*w_percent(void *x)
+{
+	(void)x;
+	return (percent_to_a());
+}

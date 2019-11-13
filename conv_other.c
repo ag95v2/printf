@@ -9,6 +9,7 @@ char	*ftoa(long double x)
 {
 	// Convert long double to string
 	// Your code here
+	(void)x;
 	return (ft_strdup("123.45"));
 }
 
@@ -44,4 +45,9 @@ char	*stoa(char *s)
 char	*ptoa(void *p)
 {
 	return (itoa_bx(*(long long *)p));
+}
+
+char	*percent_to_a()
+{
+	return (ft_strdup("%"));
 }

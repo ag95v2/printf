@@ -2,7 +2,7 @@
 #ifndef PRINTF_H
 #define PRINTF_H
 
-#include "./libft/includes/libft.h"
+#include "libft.h"
 #include <stdarg.h>
 
 enum length		{none, hh, h, l, ll, L}; 
@@ -72,6 +72,7 @@ char	*ftoa(long double x);
 char	*ctoa(char c);
 char	*stoa(char *s);
 char	*ptoa(void *p);
+char	*percent_to_a();
 
 /*
 **	Non-integer convertors wrappers
@@ -81,12 +82,18 @@ char	*w_ftoa(void *x);
 char	*w_ctoa(void *x);
 char	*w_stoa(void *x);
 char	*w_ptoa(void *x);
+char	*w_percent(void *x);
 
+/*
+**	Argument extractors
+*/
 
 void	*int_extractor(t_spec spec, va_list *vl);
 void	*float_extractor(t_spec spec, va_list *vl);
 void	*char_extractor(t_spec spec, va_list *vl);
 void	*str_extractor(t_spec spec, va_list *vl);
+void	*dummy_extractor(t_spec spec, va_list *vl);
+
 
 # define ACTIONS {\
 	{"di", &w_itoa_b10, &int_extractor, 1},\
@@ -97,6 +104,7 @@ void	*str_extractor(t_spec spec, va_list *vl);
 	{"f", &w_ftoa, &float_extractor, 1},\
 	{"c", &w_ctoa, &char_extractor, 1},\
 	{"s", &w_stoa, &str_extractor, 0},\
+	{"%", &w_percent, &dummy_extractor, 0},\
 	{0, 0, 0, 0}\
 }
 

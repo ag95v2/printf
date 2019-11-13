@@ -10,7 +10,7 @@ SRC := arg_extractors.c \
 	   conv_wrappers_int.c
 all:
 	make -C libft
-	gcc -g $(SRC) -c -I . -I libft/includes -L libft -lft
+	gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes -L libft -lft
 	ar rc libftprintf.a *.o ./libft/*.o
 
 clean:
