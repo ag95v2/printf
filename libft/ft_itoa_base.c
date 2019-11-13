@@ -1,6 +1,5 @@
 #include "libft.h"
 
-
 /*
  * -at first we are checking our number with other terms.
  * -note that min int number term is actuall just if base == 10
@@ -18,26 +17,21 @@ char        *ft_itoa_base(long long value, int base)
 {
     char    *s;
     int     len;
+    unsigned long long value1;
 
-    if (value == 0)
+    value1 = (unsigned long long)value;
+    if (value1 == 0)
         return (ft_strdup("0"));
     if (base < 2 || base > 16)
         return (NULL);
-    if (value == -2147483648 && base == 10)
-        return (ft_strdup("-2147483648"));
-    len = ft_num_len(value, base);
+    len = ft_num_len(value1, base);
     if (!(s = ft_strnew(len + 1)))
         return (NULL);
-    if (value < 0)
-    {
-        s[0] = '-';
-        value = value * (-1);
-    }
     s[len] = '\0';
     while (len-- > 0)
     {
-       s[len] = (value % base < 10) ? value % base + '0' : value % base + 'A' - 10;
-       value /= base;
+       s[len] = (value1 % base < 10) ? value1 % base + '0' : value1 % base + 'A' - 10;
+       value1 /= base;
     }
     return (s);
 }

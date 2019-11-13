@@ -80,7 +80,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa_base(long long value, int base);
-int					ft_num_len(int num, int base);
+int					ft_num_len(long long num, int base);
 typedef struct		s_list
 {
 	void			*content;
