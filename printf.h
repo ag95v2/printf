@@ -119,7 +119,6 @@ struct	varftoa
 	int				len_af_dot;
 };
 
-
 t_conv_f	*find_action(t_spec spec);
 
 int			ft_printf(const char *format, ...);

@@ -1,5 +1,6 @@
 #include "printf.h"
 #include "read_spec.h"
+#include "apply_spec.h"
 
 /*
 **	Print all normal chars until % or '\0'
@@ -35,7 +36,7 @@ char		*get_arg_str(t_spec spec, va_list *vl)
 		error = 1;
 	if (action->cleanup_needed)
 		free(arg);
-	return (error ? 0 : res);
+	return (error || !(res = apply_spec(res, spec)) ? 0 : res);
 }
 
 int			ft_printf(const char *format, ...)

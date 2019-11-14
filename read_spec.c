@@ -12,7 +12,7 @@ void		init_spec(t_spec *spec)
 	spec->flag_dash = 0;
 	spec->flag_space = 0;
 	spec->width = 0;
-	spec->precision = 0;
+	spec->precision = -1;
 	spec->length = 0;
 	spec->conv = 0;
 }

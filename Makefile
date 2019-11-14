@@ -7,7 +7,8 @@ SRC := arg_extractors.c \
 	   printf.h	\
 	   read_spec.h \
 	   conv_int.c \
-	   conv_wrappers_int.c
+	   conv_wrappers_int.c\
+	   apply_spec.c
 all:
 	make -C libft
 	gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes -L libft -lft
