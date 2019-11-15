@@ -4,11 +4,9 @@
 
 int main()
 {
-	char *s;
 
-	s = NULL;
-	printf("%-16.1s\n", s);
-	ft_printf("%-16.1s\n", s);
+	printf("%d\n", -1);
+	ft_printf("%d\n", -1);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
