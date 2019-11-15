@@ -39,7 +39,10 @@ char	*add_suffix(char *s, char *suffix)
 	char	*new;
 
 	if (!s || !suffix)
+	{
+		free(s);
 		return (0);
+	}
 	len = ft_strlen(s);
 	new = ft_strnew(len + ft_strlen(suffix));
 	if (!new)
@@ -66,7 +69,10 @@ char	*add_prefix(char *s, char *prefix)
 	char	*new;
 
 	if (!s || !prefix)
+	{
+		free (s);
 		return (0);
+	}
 	len = ft_strlen(prefix);
 	new = ft_strnew(len + ft_strlen(s));
 	if (!new)
@@ -154,7 +160,7 @@ char	*char_n_dup(char c, int n)
 	if (n + 1 < n)
 		return (0);
 	
-	res = malloc(n > 0 ? n + 1 : 1);
+	res = ft_memalloc(n > 0 ? n + 1 : 1);
 	if (!res)
 		return (0);
 	if (n <= 0)
