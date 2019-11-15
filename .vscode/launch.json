@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) Запустить",
+            "name": "(gdb) Запустить",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/tests/ftoa/a.out",
@@ -14,11 +14,17 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb"
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Включить автоматическое форматирование для gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         },
 
         {
-
         }
 
     ]

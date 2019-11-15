@@ -31,12 +31,14 @@ char	*itoa_bX(long long n)
 	return (ft_itoa_base(n, 16));
 }
 
-char        *ft_itoa_base(long long value, int base)
+char        *ft_itoa_base(long long value)
 {
     char    *s;
     int     len;
     unsigned long long value1;
+    int     base;
 
+    base = 16;
     value1 = (unsigned long long)value;
     if (value1 == 0)
         return (ft_strdup("0"));

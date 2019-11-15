@@ -29,18 +29,18 @@ static void			str_rev(char *s)
 	}
 }
 
-static int			my_abs(int n)
+static int			my_abs(long long n)
 {
 	return (n > 0 ? n : -1 * n);
 }
 
-char				*ft_itoa(int n)
+char				*ft_itoa(long long n)
 {
 	char	*s;
 	int		i;
 
 	i = 0;
-	s = ft_memalloc(12);
+	s = ft_memalloc(30);
 	if (!s)
 		return (0);
 	if (n < 0)
