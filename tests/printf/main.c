@@ -2,34 +2,10 @@
 #include "printf.h"
 #include <stdio.h>
 
-//Mix tests
-static unsigned int		mx_u = 235;
-static long double			mx_Lf = 0.375l;
-static double				mx_f = 0.625;
-static long				mx_li =  4223372036854775800;
-static long long			mx_lli = 3223372036654775200;
-static char				mx_c = 'G';
-static short				mx_hi = -3244;
-static char				mx_hhi = 'F';
-static char			   *mx_s = "Hello, World!";
-static int					mx_i = 42;
-
 int main()
 {
-	printf("%p    %i    %li    %lli    %s  \n",
-	    	&mx_i, mx_i, mx_li, mx_lli, mx_s);
-	fflush(stdout);
 
-	ft_printf("%p    %i    %li    %lli    %s  ",
-	    	&mx_i, mx_i, mx_li, mx_lli, mx_s);
-
-	printf("  %Lf    %p    %i    %li    %lli    %s  \n",
-	    		mx_Lf, &mx_i, mx_i, mx_li, mx_lli, mx_s);
-	fflush(stdout);
-
-	ft_printf("  %Lf    %p    %i    %li    %lli    %s  ",
-	    		mx_Lf, &mx_i, mx_i, mx_li, mx_lli, mx_s);
-
+	ft_printf("%5%");
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
 	ft_printf("Test1 (no format string)\n");
