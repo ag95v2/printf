@@ -128,7 +128,12 @@ const char	*read_spec(const char *format, t_spec *spec)
 	format = read_flags(format, spec);
 	format = read_width(format, spec);
 	if (*format == '.')
+	{
+		//Copy of original UB (No precision spec provided but point exists)
+		//Initialize with zero instead of negative number in this case
+		spec->precision = 0;
 		format = read_precision(++format, spec);
+	}
 	format = read_length(format, spec);
 	format = read_conv_spec(format, spec); 
 	return (format);
