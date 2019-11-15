@@ -55,8 +55,14 @@ void	*char_extractor(t_spec spec, va_list *vl)
 
 void	*str_extractor(t_spec spec, va_list *vl)
 {
+	char *arg;
+
 	(void)spec;
-	return ((void *)va_arg(*vl, char *));
+	arg = va_arg(*vl, char *);	
+	// UB reproduction
+	if (!arg)
+		arg = "(null)";
+	return ((void *)arg);
 }
 
 /*
