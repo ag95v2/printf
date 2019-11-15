@@ -6,50 +6,38 @@
 #include "printf.h"
 #include "libft.h"
 
+#define	BINARY	"01"
+#define OCTAL	"01234567"
+#define DECIMAL "0123456789"
+#define HEX_L	"0123456789abcdef"
+#define HEX_U	"0123456789ABCDEF"
+
 char	*itoa_b10u(long long n)
 {
-	return (ft_itoa_base(n, 10));
+	return (ft_itoa_base(n, DECIMAL, 0));
 }
 
 char	*itoa_b10(long long n)
 {
-	return (ft_itoa_base(n, 10));
+	return (ft_itoa_base(n, DECIMAL, 1));
 }
 
 char	*itoa_b2(long long n)
 {
-	return (ft_itoa_base(n, 2));
+	return (ft_itoa_base(n, BINARY, 0));
 }
 
 char	*itoa_b8(long long n)
 {
-	return (ft_itoa_base(n, 8));
+	return (ft_itoa_base(n, OCTAL, 0));
 }
 
 char	*itoa_bX(long long n)
 {
-	return (ft_itoa_base(n, 16));
+	return (ft_itoa_base(n, HEX_U, 0));
 }
 
-char        *ft_itoa_base(long long value, int base)
+char	*itoa_bx(long long n)
 {
-    char    *s;
-    int     len;
-    unsigned long long value1;
-
-    value1 = (unsigned long long)value;
-    if (value1 == 0)
-        return (ft_strdup("0"));
-    if (base < 2 || base > 16)
-        return (NULL);
-    len = ft_num_len(value1, base);
-    if (!(s = ft_strnew(len + 1)))
-        return (NULL);
-    s[len] = '\0';
-    while (len-- > 0)
-    {
-       s[len] = (value1 % base < 10) ? value1 % base + '0' : value1 % base + 'a' - 10;
-       value1 /= base;
-    }
-    return (s);
+	return (ft_itoa_base(n, HEX_L, 0));
 }

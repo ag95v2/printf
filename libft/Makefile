@@ -14,7 +14,7 @@ ft_lstadd.c	ft_memcpy.c	ft_putstr.c	ft_striter.c	ft_strnequ.c\
 ft_lstdel.c	ft_memdel.c	ft_putstr_fd.c	ft_striteri.c	ft_strnew.c ft_memdup.c\
 ft_lstappend.c ft_del.c ft_swap.c ft_swapint.c ft_minval_int.c ft_maxval_int.c \
 ft_bsort_int.c ft_min_int.c ft_max_int.c ft_print_array.c ft_array_subtract.c \
-ft_bbtree_utils.c get_next_line.c ft_itoa_base.c ft_num_len.c
+ft_bbtree_utils.c get_next_line.c ft_itoa_base.c ft_strrev.c
 
 endef
 

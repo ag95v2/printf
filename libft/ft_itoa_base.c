@@ -1,37 +1,57 @@
 #include "libft.h"
 
+/* Probably, 21 or 20, No problem here */
+#define MAX_DIGITS 22
+
+static int	our_abs(int n)
+{
+	return (n < 0 ? -1 * n : n);
+}
+
 /*
- * -at first we are checking our number with other terms.
- * -note that min int number term is actuall just if base == 10
- * -we are finding discharge of number than to know how many
- * memory should to allocate memory to our string
- * -in cycle we are starting from the end
- *  checking via terminate operator if base is smaller than 10, we don't use letters
- *  therefore starting filling via end of number. 
- *  But if base is more than 10, we are using letters. 
- *  -10 after 'A' because max base is 16 and as a rules we could use just to letter
- *  'F'
+**	Fill string representation	
 */
 
-char        *ft_itoa_base(long long value, int base)
+static void	fill(char *s, long long n, char *base, int sgn)
 {
-    char    *s;
-    int     len;
-    unsigned long long value1;
+	int		b_len;
+	int		pos;
 
-    value1 = (unsigned long long)value;
-    if (value1 == 0)
-        return (ft_strdup("0"));
-    if (base < 2 || base > 16)
-        return (NULL);
-    len = ft_num_len(value1, base);
-    if (!(s = ft_strnew(len + 1)))
-        return (NULL);
-    s[len] = '\0';
-    while (len-- > 0)
-    {
-       s[len] = (value1 % base < 10) ? value1 % base + '0' : value1 % base + 'A' - 10;
-       value1 /= base;
-    }
-    return (s);
+	pos = 0;
+	if (!n)
+	{	
+		*s = base[0];
+		return;
+	}
+	b_len = ft_strlen(base);
+	while (n)
+	{
+		if (sgn)
+		{
+			s[pos++] = base[our_abs(n % b_len)];
+			n = n / b_len;
+		}
+		else
+		{
+			s[pos++] = base[our_abs((unsigned long long)n % b_len)];
+			n = (unsigned long long)n / b_len;
+		}
+	}
+	ft_strrev(s);
+}
+
+/*
+**	Treat characters of base as digits and perform itoa
+**	Cast n as unsigned if sgn == 0
+**	Caller should provide a valid base
+*/
+
+char        *ft_itoa_base(long long n, char *base, int sgn)
+{
+	char	*s;
+
+	if (!(s = ft_strnew(MAX_DIGITS)))
+		return (0);
+	fill((sgn && n < 0 && (*s = '-')) ? s + 1 : s, n, base, sgn);
+	return (s);
 }

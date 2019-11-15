@@ -5,7 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ACTIONS	flags/printf.h	91;"	d
-ACTIONS	printf.h	91;"	d
+ACTIONS	printf.h	98;"	d
+APPLY_SPEC_H	apply_spec.h	2;"	d
 BBTREE_UTILS_H	libft/includes/bbtree_utils.h	14;"	d
 BLI_ACTION_APPEND	pft/src/help_conf.c	17;"	d	file:
 BLI_ACTION_NEW	pft/src/help_conf.c	16;"	d	file:
@@ -22,6 +23,7 @@ DBL_NINF	pft/src/test.h	69;"	d
 DBL_NZERO	pft/src/test.h	72;"	d
 DBL_PZERO	pft/src/test.h	71;"	d
 DEBUG	pft/src/test.h	63;"	d
+DEFAULT_FLOAT_PRECISION	apply_spec.c	2;"	d	file:
 DEPTH	libft/includes/get_next_line.h	31;"	d
 DIM	pft/src/test.h	56;"	d
 FAULT	pft/src/test.h	58;"	d
@@ -85,8 +87,6 @@ RED	pft/src/test.h	49;"	d
 RESET	pft/src/test.h	57;"	d
 SRC	Makefile	/^SRC := arg_extractors.c \\$/;"	m
 SRC	libft/Makefile	/^define SRC $/;"	m
-SRC	tests/printf/Makefile	/^SRC		:= $(addprefix $(P_ROOT)\/,$(SRC))$/;"	m
-SRC	tests/printf/Makefile	/^SRC := arg_extractors.c \\$/;"	m
 SRC_TEST	pft/Makefile	/^SRC_TEST=src\/main.c src\/test.c src\/options.c src\/utils.c \\$/;"	m
 TEST_DEFINES	pft/Makefile	/^TEST_DEFINES=-D OUT_ACTUAL="\\"$(TEST_OUT_ACTUAL)\\"" \\$/;"	m
 TEST_H	pft/src/test.h	14;"	d
@@ -667,7 +667,18 @@ a12	pft/src/unit_tests_indexed.c	/^static void *a12;$/;"	v	file:
 a12	pft/unit_tests.c	/^static void *a12;$/;"	v	file:
 add_index	libft/ft_bbtree_utils.c	/^void					**add_index(t_bbtree_node **tree, int index, int depth)$/;"	f
 add_log_entry	pft/src/history.c	/^void		add_log_entry(const t_test_entry *test, int failed)$/;"	f
+add_prefix	apply_spec.c	/^char	*add_prefix(char *s, char *prefix)$/;"	f
+add_suffix	apply_spec.c	/^char	*add_suffix(char *s, char *suffix)$/;"	f
 add_to_end	libft/ft_lstmap.c	/^static t_list	*add_to_end(t_list *l, t_list *new)$/;"	f	file:
+apply_fdash	apply_spec.c	/^char	*apply_fdash(char *s, t_spec spec)$/;"	f
+apply_fzero	apply_spec.c	/^char	*apply_fzero(char *s, t_spec spec)$/;"	f
+apply_hash	apply_spec.c	/^char	*apply_hash(char *s, t_spec spec)$/;"	f
+apply_numeric_flags	apply_spec.c	/^char	*apply_numeric_flags(char *s, t_spec spec)$/;"	f
+apply_plus	apply_spec.c	/^char	*apply_plus(char *s, t_spec spec)$/;"	f
+apply_precision	apply_spec.c	/^char	*apply_precision(char *s, t_spec spec)$/;"	f
+apply_space	apply_spec.c	/^char	*apply_space(char *s, t_spec spec)$/;"	f
+apply_spec	apply_spec.c	/^char	*apply_spec(char *s, t_spec spec)$/;"	f
+apply_width	apply_spec.c	/^char	*apply_width(char *s, t_spec spec)$/;"	f
 arg_extract	flags/printf.h	/^	void			*(*arg_extract)(t_spec spec, va_list *vl);$/;"	m	struct:s_conv_f
 arg_extract	printf.h	/^	void			*(*arg_extract)(t_spec spec, va_list *vl);$/;"	m	struct:s_conv_f
 argc	pft/src/test.h	/^	int					argc;$/;"	m	struct:s_argsarr
@@ -797,6 +808,7 @@ ch_pos_1	pft/configurations/42fc/unit_tests.42fc.c	/^static char 		ch_pos_1 = 10
 ch_pos_1	pft/src/unit_tests_indexed.c	/^static char 		ch_pos_1 = 100, ch_neg_1 = -87;$/;"	v	file:
 ch_pos_1	pft/unit_tests.c	/^static char 		ch_pos_1 = 100, ch_neg_1 = -87;$/;"	v	file:
 char_extractor	arg_extractors.c	/^void	*char_extractor(t_spec spec, va_list *vl)$/;"	f
+char_n_dup	apply_spec.c	/^char	*char_n_dup(char c, int n)$/;"	f
 cleanup	pft/src/test.h	/^	char				cleanup: 1;$/;"	m	struct:s_pft_options
 cleanup_needed	flags/printf.h	/^	int				cleanup_needed;$/;"	m	struct:s_conv_f
 cleanup_needed	printf.h	/^	int				cleanup_needed;$/;"	m	struct:s_conv_f
@@ -2131,6 +2143,7 @@ disable	pft/src/select_numeric.php	/^						$disable = false;$/;"	v
 disable	pft/src/select_numeric.php	/^				$disable = true;$/;"	v
 disable	pft/src/select_query.php	/^						$disable = false;$/;"	v
 disable	pft/src/select_query.php	/^				$disable = true;$/;"	v
+dummy_extractor	arg_extractors.c	/^void	*dummy_extractor(t_spec spec, va_list *vl)$/;"	f
 enable	pft/src/select_numeric.php	/^						$enable = false;$/;"	v
 enable	pft/src/select_numeric.php	/^				$enable = true;$/;"	v
 enable	pft/src/select_query.php	/^						$enable = false;$/;"	v
@@ -4929,6 +4942,7 @@ flag_space	printf.h	/^	int				flag_space;$/;"	m	struct:s_spec
 flag_zero	flags/printf.h	/^	int				flag_zero;$/;"	m	struct:s_spec
 flag_zero	printf.h	/^	int				flag_zero;$/;"	m	struct:s_spec
 float_extractor	arg_extractors.c	/^void	*float_extractor(t_spec spec, va_list *vl)$/;"	f
+float_precision	apply_spec.c	/^char	*float_precision(char *s, int precision)$/;"	f
 flot	tests/ftoa/ft_ftoa1.c	/^char *flot(float x)$/;"	f
 flush_all_log_entries	pft/src/history.c	/^void		flush_all_log_entries(void)$/;"	f
 fnop	pft/src/select_numeric.php	/^			$fnop = "1111";$/;"	v
@@ -4974,6 +4988,7 @@ ft_isspace	libft/ft_atoi.c	/^static int	ft_isspace(char c)$/;"	f	file:
 ft_isspace	libft/ft_strtrim.c	/^static int	ft_isspace(char c)$/;"	f	file:
 ft_itoa	ft_Itoa_printf.c	/^char				*ft_itoa(int n, int w, int p)$/;"	f
 ft_itoa	libft/ft_itoa.c	/^char				*ft_itoa(int n)$/;"	f
+ft_itoa_base	conv_int.c	/^char        *ft_itoa_base(long long value, int base)$/;"	f
 ft_itoa_base	libft/ft_itoa_base.c	/^char        *ft_itoa_base(long long value, int base)$/;"	f
 ft_itoa_stack	libft/ft_putnbr.c	/^static void			ft_itoa_stack(int n, char *s)$/;"	f	file:
 ft_itoa_stack	libft/ft_putnbr_fd.c	/^static void			ft_itoa_stack(int n, char *s)$/;"	f	file:
@@ -4999,7 +5014,7 @@ ft_memmove	libft/ft_memmove.c	/^void	*ft_memmove(void *dest, const void *src, si
 ft_memset	libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
 ft_min_int	libft/ft_min_int.c	/^int	*ft_min_int(int *arr, int len)$/;"	f
 ft_minval_int	libft/ft_minval_int.c	/^int		ft_minval_int(int *a, unsigned int len)$/;"	f
-ft_num_len	libft/ft_itoa_base.c	/^int         ft_num_len(int num, int base)$/;"	f
+ft_num_len	libft/ft_num_len.c	/^int         ft_num_len(unsigned long long num, int base)$/;"	f
 ft_print_array	libft/ft_print_array.c	/^void	ft_print_array(int *a, int len)$/;"	f
 ft_print_flags	flags/flag.c	/^char        *ft_print_flags(t_spec *spec, double num, char *string)$/;"	f
 ft_printf	flags/printf.c	/^int			ft_printf(const char *format, ...)$/;"	f
@@ -6455,12 +6470,14 @@ inter	flags/printf.h	/^	long long		inter;$/;"	m	struct:varftoa
 inter	printf.h	/^	long long		inter;$/;"	m	struct:varftoa
 inter	tests/ftoa/ft_ftoa.c	/^	long long		inter;$/;"	m	struct:varftoa	file:
 io_err	libft/includes/get_next_line.h	/^	int			io_err;$/;"	m	struct:s_unread_buff
+is_nonfloat_numeric	apply_spec.c	/^int	is_nonfloat_numeric(t_spec spec)$/;"	f
+is_numeric	apply_spec.c	/^int	is_numeric(t_spec spec)$/;"	f
+is_signed_conversion	apply_spec.c	/^int	is_signed_conversion(t_spec spec)$/;"	f
 itoa_b10	conv_int.c	/^char	*itoa_b10(long long n)$/;"	f
 itoa_b10u	conv_int.c	/^char	*itoa_b10u(long long n)$/;"	f
 itoa_b2	conv_int.c	/^char	*itoa_b2(long long n)$/;"	f
 itoa_b8	conv_int.c	/^char	*itoa_b8(long long n)$/;"	f
 itoa_bX	conv_int.c	/^char	*itoa_bX(long long n)$/;"	f
-itoa_bx	conv_int.c	/^char	*itoa_bx(long long value)$/;"	f
 j	pft/src/select_router.php	/^				$j = -2;$/;"	v
 j	pft/src/select_router.php	/^				$j = 0;$/;"	v
 j	pft/src/select_router.php	/^				$j = 1;$/;"	v
@@ -6478,6 +6495,7 @@ l_pos_1	pft/unit_tests.c	/^static long		l_pos_1 = 22337203685477, l_neg_1 = -223
 len_af_dot	flags/printf.h	/^	int				len_af_dot;$/;"	m	struct:varftoa
 len_af_dot	printf.h	/^	int				len_af_dot;$/;"	m	struct:varftoa
 len_af_dot	tests/ftoa/ft_ftoa.c	/^	int				len_af_dot;$/;"	m	struct:varftoa	file:
+len_after_dot	apply_spec.c	/^int	len_after_dot(char *s)$/;"	f
 len_of_next	libft/ft_strsplit.c	/^static size_t			len_of_next(const char *src, char sep)$/;"	f	file:
 len_till_dot	flags/printf.h	/^	int				len_till_dot;$/;"	m	struct:varftoa
 len_till_dot	printf.h	/^	int				len_till_dot;$/;"	m	struct:varftoa
@@ -10270,11 +10288,13 @@ pct_basic	pft/configurations/42fc/unit_tests.42fc.c	/^int		pct_basic(void){retur
 pct_basic	pft/src/unit_tests_indexed.c	/^int		pct_basic(void){return ft_printf("%%");}$/;"	f
 pct_basic	pft/unit_tests.c	/^int		pct_basic(void){return test("%%");}$/;"	f
 pct_basic_bench	pft/src/unit_tests_indexed.c	/^int		pct_basic_bench(void){return printf("%%");}$/;"	f
+percent_to_a	conv_other.c	/^char	*percent_to_a()$/;"	f
 pft_root	pft/configurations/42fc/configure_42fc.php	/^$pft_root = dirname(__FILE__, 3);$/;"	v
 pid	pft/src/test.h	/^	pid_t					pid;$/;"	m	struct:s_timeout_args
 pos	libft/includes/get_next_line.h	/^	int			pos;$/;"	m	struct:s_unread_buff
 precision	flags/printf.h	/^	int				precision;$/;"	m	struct:s_spec
 precision	printf.h	/^	int				precision;$/;"	m	struct:s_spec
+prepend_zeros	apply_spec.c	/^char	*prepend_zeros(char *s, int n)$/;"	f
 print	pft/src/help.h	/^	t_help_func		print;$/;"	m	struct:s_help_entry
 print_configuration_info	pft/src/print.c	/^void		print_configuration_info(const t_pft_options options,$/;"	f
 print_end_test_message	pft/src/print.c	/^void		print_end_test_message(int num_tests, int num_passed)$/;"	f
@@ -10991,6 +11011,8 @@ str_empty	pft/configurations/42fc/unit_tests.42fc.c	/^static char	str_empty[] = 
 str_empty	pft/src/unit_tests_indexed.c	/^static char	str_empty[] = "";$/;"	v	file:
 str_empty	pft/unit_tests.c	/^static char	str_empty[] = "";$/;"	v	file:
 str_extractor	arg_extractors.c	/^void	*str_extractor(t_spec spec, va_list *vl)$/;"	f
+str_insert	apply_spec.c	/^char	*str_insert(char *src, char *dst, int pos)$/;"	f
+str_replace	apply_spec.c	/^char	*str_replace(char *s, char pattern, char replacement)$/;"	f
 str_rev	libft/ft_itoa.c	/^static void			str_rev(char *s)$/;"	f	file:
 str_rev	libft/ft_putnbr.c	/^static void			str_rev(char *s)$/;"	f	file:
 str_rev	libft/ft_putnbr_fd.c	/^static void			str_rev(char *s)$/;"	f	file:
@@ -11361,6 +11383,7 @@ w_itoa_b10u	conv_wrappers_int.c	/^char	*w_itoa_b10u(void *n)$/;"	f
 w_itoa_b2	conv_wrappers_int.c	/^char	*w_itoa_b2(void *n)$/;"	f
 w_itoa_b8	conv_wrappers_int.c	/^char	*w_itoa_b8(void *n)$/;"	f
 w_itoa_x	conv_wrappers_int.c	/^char	*w_itoa_x(void *n)$/;"	f
+w_percent	conv_wrappers_other.c	/^char	*w_percent(void *x)$/;"	f
 w_ptoa	conv_wrappers_other.c	/^char	*w_ptoa(void *x)$/;"	f
 w_stoa	conv_wrappers_other.c	/^char	*w_stoa(void *x)$/;"	f
 width	flags/printf.h	/^	int				width;$/;"	m	struct:s_spec
