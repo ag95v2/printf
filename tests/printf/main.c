@@ -7,8 +7,9 @@ int main()
 	char *s;
 
 	s = NULL;
-	ft_printf("%-16s\n", s);
-	printf("%-16s\n", s);
+	printf("%-16.1s\n", s);
+	ft_printf("%-16.1s\n", s);
+
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
 	ft_printf("Test1 (no format string)\n");

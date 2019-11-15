@@ -57,9 +57,10 @@ void	*str_extractor(t_spec spec, va_list *vl)
 {
 	char *arg;
 
-	(void)spec;
 	arg = va_arg(*vl, char *);	
-	// UB reproduction
+	// UB reproduction (small precision and NULL str)
+	if (!arg && spec.precision > 0 && spec.precision < 6)
+		arg = "";
 	if (!arg)
 		arg = "(null)";
 	return ((void *)arg);
