@@ -70,8 +70,8 @@ const char	*read_precision(const char *f, t_spec *spec)
 {
 	if (ft_isdigit(*f))
 		spec->precision = ft_atoi(f);
-	while (ft_isdigit(*(f++)))
-		;
+	while (ft_isdigit(*f))
+		f++;
 	return (f);
 }
 

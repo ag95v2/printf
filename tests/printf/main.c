@@ -5,7 +5,7 @@
 int main()
 {
 
-	ft_printf("%5%");
+	ft_printf("%.7s", "hello");
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
 	ft_printf("Test1 (no format string)\n");
