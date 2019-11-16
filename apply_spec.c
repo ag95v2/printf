@@ -194,9 +194,10 @@ char	*apply_space(char *s, t_spec spec)
 {
 	if (spec.flag_space != 1 || spec.flag_plus == 1)
 		return (s);
-	if (is_signed_conversion(spec) && s[0] != '-' && ft_strcmp(s, "0"))
+	if (is_signed_conversion(spec) && s[0] != '-' )
 		return (add_prefix(s, " ")); 
 	// Man page says prefix should be added only for POSITIVE numbers
+	// We reproduce bug and consider 0 as positive number
 	return (s);
 }
 
