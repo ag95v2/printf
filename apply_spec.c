@@ -1,6 +1,31 @@
 #include "printf.h"
 #define DEFAULT_FLOAT_PRECISION 6
 
+/*
+**  Return string that contains n chars c
+**	If n <= 0, return nonzero ptr to empty string
+*/
+
+char	*char_n_dup(char c, int n)
+{
+	char	*res;
+
+	res = 0;
+	if (n < 0)
+		n = 0;
+	if (n + 1 < n)
+		return (0);
+	
+	res = ft_memalloc(n > 0 ? n + 1 : 1);
+	if (!res)
+		return (0);
+	if (n <= 0)
+		return (res);
+	while (n--)
+		res[n] = c;
+	return (res);
+}
+
 int	is_signed_conversion(t_spec spec)
 {
 	if (spec.conv == 'i' || spec.conv == 'f' || spec.conv == 'd')
@@ -86,6 +111,33 @@ char	*add_prefix(char *s, char *prefix)
 	return (new);
 }
 
+/*
+**	Insert string src into n-th position of string dst
+**	free src and dst
+*/
+
+char	*str_insert(char *dst, char *src, int pos)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = ft_strnew(ft_strlen(src) + ft_strlen(dst));
+	if (!new)
+		return (0);
+	while (i < pos)
+	{
+		new[i] = src[i];
+		i++;
+	}
+	ft_strcat(new, dst);
+	ft_strcat(new, src + i);
+	free(src);
+	free(dst);
+	return (new);
+}
+
+
 char	*apply_hash(char *s, t_spec spec)
 {
 	if (spec.flag_hash != 1)
@@ -148,28 +200,6 @@ int	len_after_dot(char *s)
 	return	(*s ? ft_strlen(++s) : 0);
 	
 }
-
-/*
-**  Return string that contains n chars c
-*/
-
-char	*char_n_dup(char c, int n)
-{
-	char	*res;
-
-	if (n + 1 < n)
-		return (0);
-	
-	res = ft_memalloc(n > 0 ? n + 1 : 1);
-	if (!res)
-		return (0);
-	if (n <= 0)
-		return (res);
-	while (n--)
-		res[n] = c;
-	return (res);
-}
-
 char	*float_precision(char *s, int precision)
 {
 	int		nchar_after_dot;
@@ -223,6 +253,8 @@ char	*prepend_zeros(char *s, int n)
 
 char	*apply_precision(char *s, t_spec spec)
 {
+	char	*zeros;
+
 	if (spec.precision == 0 && spec.conv == 'f')
 		spec.precision = DEFAULT_FLOAT_PRECISION;
 	if (spec.precision < 0)
@@ -239,35 +271,13 @@ char	*apply_precision(char *s, t_spec spec)
 		return (str_replace(s, '0', 0));
 	if (spec.precision == 0 && spec.conv == 'f')
 		return (str_replace(s, '.', 0));
+	/* Insert zeros from the left to nonfloat numeric (after - if negative) */
 	if (spec.precision > 0 && is_nonfloat_numeric(spec))
-		return (prepend_zeros(s, spec.precision - ft_strlen(s)));
-	return (s);
-}
-
-/*
-**	Insert string src into n-th position of string dst
-**	free src and dst
-*/
-
-char	*str_insert(char *src, char *dst, int pos)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = ft_strnew(ft_strlen(src) + ft_strlen(dst));
-	if (!new)
-		return (0);
-	while (i < pos)
 	{
-		new[i] = src[i];
-		i++;
+		zeros = char_n_dup('0', spec.precision - ft_strlen(s) + (*s == '-'));
+		return (str_insert(zeros, s, (*s == '-')? 1: 0));
 	}
-	ft_strcat(new, dst);
-	ft_strcat(new, src + i);
-	free(src);
-	free(dst);
-	return (new);
+	return (s);
 }
 
 /*
