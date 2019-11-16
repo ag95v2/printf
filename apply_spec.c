@@ -52,6 +52,22 @@ int	is_nonfloat_numeric(t_spec spec)
 	return (0);
 }
 
+/* return initial string */
+char	*str_replace(char *s, char pattern, char replacement)
+{
+	char	*start;
+
+	start = s;
+	while (*s)
+	{
+		if (*s  == pattern)
+			*s = replacement;
+		s++;
+	}
+	return (start);
+}
+
+
 /*
 **  Warning! 
 **  s is always freed. suffix is always not freed
@@ -111,6 +127,17 @@ char	*add_prefix(char *s, char *prefix)
 	return (new);
 }
 
+char	*prepend_zeros(char *s, int n)
+{
+	char	*prefix;
+	
+	if (!(prefix = char_n_dup('0', n)))
+		return (0);
+	s = add_prefix(s, prefix);
+	free(prefix);
+	return (s);
+}
+
 /*
 **	Insert string src into n-th position of string dst
 **	free src and dst
@@ -127,11 +154,11 @@ char	*str_insert(char *dst, char *src, int pos)
 		return (0);
 	while (i < pos)
 	{
-		new[i] = src[i];
+		new[i] = dst[i];
 		i++;
 	}
-	ft_strcat(new, dst);
-	ft_strcat(new, src + i);
+	ft_strcat(new, src);
+	ft_strcat(new, dst + i);
 	free(src);
 	free(dst);
 	return (new);
@@ -219,33 +246,6 @@ char	*float_precision(char *s, int precision)
 	//here dot is always in number if this function is called
 	return (s);
 }
-
-/* return initial string */
-char	*str_replace(char *s, char pattern, char replacement)
-{
-	char	*start;
-
-	start = s;
-	while (*s)
-	{
-		if (*s  == pattern)
-			*s = replacement;
-		s++;
-	}
-	return (start);
-}
-
-char	*prepend_zeros(char *s, int n)
-{
-	char	*prefix;
-	
-	if (!(prefix = char_n_dup('0', n)))
-		return (0);
-	s = add_prefix(s, prefix);
-	free(prefix);
-	return (s);
-}
-
 /*
 **	< 0 => uninitialized
 **	for floats default is 6
@@ -275,7 +275,7 @@ char	*apply_precision(char *s, t_spec spec)
 	if (spec.precision > 0 && is_nonfloat_numeric(spec))
 	{
 		zeros = char_n_dup('0', spec.precision - ft_strlen(s) + (*s == '-'));
-		return (str_insert(zeros, s, (*s == '-')? 1: 0));
+		return (str_insert( s,zeros, (*s == '-')? 1: 0));
 	}
 	return (s);
 }
@@ -298,7 +298,6 @@ char	*apply_fzero(char *s, t_spec spec)
 	if (s[0] == '-')
 		return (str_insert(s, zeros, 1));
 	return (str_insert(s, zeros, 0));
-	return (s);
 }
 
 char	*apply_fdash(char *s, t_spec spec)

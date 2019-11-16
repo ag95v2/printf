@@ -5,8 +5,8 @@
 int main()
 {
 
-	printf("%d\n", -1);
-	ft_printf("%d\n", -1);
+	printf("%05i\n", 43);
+	ft_printf("%05i\n", 43);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
