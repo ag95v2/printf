@@ -296,7 +296,7 @@ char	*apply_fzero(char *s, t_spec spec)
 	zeros = char_n_dup('0', nzeros);
 	if (s[0] != '0' && (s[1] == 'x' || s[1] == 'X'))
 		return (str_insert(s, zeros, 2));
-	if (s[0] == '-' || s[0] == '+')
+	if (s[0] == '-' || s[0] == '+' || spec.flag_space == 1)
 		return (str_insert(s, zeros, 1));
 	return (str_insert(s, zeros, 0));
 }
