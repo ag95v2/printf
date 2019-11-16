@@ -320,7 +320,7 @@ char	*apply_width(char *s, t_spec spec)
 {
 	if (spec.conv == '%')
 		return (s);
-	if (spec.flag_zero == 1)
+	if (spec.flag_zero == 1 && spec.precision <= 0)
 		return (apply_fzero(s, spec));
 	return (apply_fdash(s, spec));
 }
