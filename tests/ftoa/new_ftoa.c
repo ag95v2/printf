@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_inter_len(long long inter)
+typedef struct variablesforfloat
+{
+    char        *string;
+    long long   integer;
+    long double fractional;
+    int         sym;
+    long long   tmp;
+    int         lenbef;
+    int         lenaf;
+    int         i;
+    int         tmp2;
+    int         cp_lenbef;
+    int         cp_lenaf;
+    int         number;
+}               varfloat;
+
+int	ft_inter_len(long long inter, long double fractional)
 {
 	int				i;
 
@@ -19,45 +35,6 @@ int	ft_inter_len(long long inter)
 	return (i);
 }
 
-typedef struct variablesforfloat
-{
-    char        *string;
-    long long   integer;
-    long double fractional;
-    int         sym;
-    long long   tmp;
-    int         lenbef;
-    int         lenaf;
-    int         i;
-    int         tmp2;
-}               varfloat;
-
-/*
-**  at f_p_zero is working if precision
-**  is zero.
-**  we are rounding up if in fractional part
-**  some numbers more or equal to 0.95;
-*/
-
-char        *f_p_zero(varfloat *f)
-{
-    if (f->fractional >= 0.95)
-        f->integer += 1;
-    f->string[f->lenbef--] = '\0';
-    if (f->sym)
-    {
-        f->string[0] = '-';
-        f->i++;
-        f->integer *= -1;
-    }
-    while (f->i <= f->lenbef)
-    {
-        f->string[f->lenbef--] = f->integer % 10 + '0';
-        f->integer /= 10;
-    }
-    return (f->string);
-}
-
 /*
 ** Возьмём для примера число 123.39 с точностью 1 после 
 ** точки. Смотрим остаток - там больше 0.5 осталось?
@@ -67,16 +44,22 @@ char        *f_p_zero(varfloat *f)
 */
 char        *f_rounding_up(varfloat *f)
 {
-    if (f->fractional >= 0.5 && f->string[f->lenaf - 1] != 9)
+    if (f->fractional >= 0.5 && f->string [f->lenaf - 1] != '9')
           f->string[f->lenaf - 1] += 1;
-  if (f->fractional >= 0.5 && f->string[f->lenaf - 1] == 9)
-    {
+    else if (f->fractional >= 0.5 && f->string[f->lenaf - 1] == '9')
         while (f->string[f->lenaf - 1] == '9')
         {
-            f->string[f->lenaf - 1] = '0';
-            f->string[f->lenaf - 3] += 1;
+            if (f->string[f->lenaf - 2] == '.')
+            {
+                f->string[f->lenaf - 1] = '0';
+                f->string[f->lenaf - 3] += 1;
+            }
+            else if (f->string[f->lenaf - 2] != '.')
+            {
+                f->string[f->lenaf - 1] = '0';
+                f->string[f->lenaf - 2] += 1;
+            }
         }
-    }
     f->string[f->lenaf] = '\0';
     return (f->string);
 }
@@ -102,6 +85,46 @@ char        *f_fill_fractional(varfloat *f, int p)
     return (f_rounding_up(f));
 }
 
+char        *f_fill_zero_fractional(varfloat *f, int p)
+{
+    if (f->fractional < 0)
+    {
+        f->string[f->lenbef] = '-';
+        f->string[f->lenbef] = '0';
+    }
+    else
+        f->string[f->lenbef - 1] = '0';
+    return (f_fill_fractional(f, p));
+}
+
+/*
+**  at f_p_zero is working if precision
+**  is zero.
+**  we are rounding up if in fractional part
+**  some numbers more or equal to 0.95;
+*/
+
+char        *f_p_zero(varfloat *f)
+{
+    f->i = 0;
+    if (f->fractional >= 0.95)
+        f->integer += 1;
+    f->string[f->lenbef--] = '\0';
+    if (f->sym)
+    {
+        f->string[0] = '-';
+        f->i++;
+        f->integer *= -1;
+    }
+    while (f->i <= f->lenbef)
+    {
+        f->string[f->lenbef--] = f->integer % 10 + '0';
+        f->integer /= 10;
+    }
+    return (f_rounding_up(f));
+}
+
+
 /*
 **  Our goal fill the string if input number less than 0;
 **  taking module of numbers;
@@ -112,31 +135,11 @@ char        *f_fill_fractional(varfloat *f, int p)
 **  number.
 */
 
-// char        *f_fill_integer_min(varfloat *f, int p)
-// {
-//     f->fractional *= (-1);
-//     f->integer *= (-1);
-//     f->string[f->lenbef--] = '.';
-//     f->string[0] = '-';
-//     while (0 < f->lenbef)
-//     {
-//         f->string[f->lenbef--] = f->integer % 10 + '0';
-//         f->integer /= 10;
-//     }
-//     return (f_fill_fractional(f, p));
-// }
-
 char        *f_fill_integer_min(varfloat *f, int p)
 {
     f->fractional *= -1;
     f->string[f->lenbef--] = '.';
     f->string[0] = '-';
-    if (f->integer == -0)
-    {
-        f->string[1] = '0';
-        f->string[0] = '.';
-        f->lenbef +=2;
-    }
     f->integer *= -1;
     while (0 < f->lenbef)
     {
@@ -146,29 +149,62 @@ char        *f_fill_integer_min(varfloat *f, int p)
     return (f_fill_fractional(f, p));
 }
 
+char        *f_fill_integer(varfloat *f, int p)
+{
+    f->string[f->lenbef--] = '.';
+    while (0 <= f->lenbef)
+    {
+        f->string[f->lenbef--] = f->integer % 10 + '0';
+        f->integer /= 10;
+    }
+    return (f_fill_fractional(f, p));
+}
+
+char        *f_checker_zeroing(char *str, varfloat *f, int p)
+{
+    f->number = 9;
+    f->i = 0;
+    if (f->fractional * 10 == a)
+    {
+        while (f->fractional * 10 == a && p)
+        {
+            p--;
+            f->fractional *= 10;
+            while (f->integer % 10 == a)
+            {
+                f->integer / 10;
+                f->i++;
+            }
+        }
+        while (str[f->i] >= 0)
+        {
+            
+        }
+    }
+}
+
 char        *ft_ftoa(long double num, int p)
 {
     varfloat f;
     char    *string;
 
     f.sym = 0;
-    f.i = 0;
     if (num < 0)
         f.sym = 1;
     f.integer = (long long)num;
     f.fractional = num - f.integer;
-    f.lenbef = ft_inter_len(num);
+    f.lenbef = ft_inter_len(num, f.fractional);
     f.lenaf = f.lenbef + 1;
+    f.cp_lenbef = f.lenbef;
+    f.cp_lenaf = f.lenaf;
     if (!(f.string = (char *)malloc(sizeof(char) * (f.lenbef + p + 2))))
         return (NULL);
     if (p == 0)
-        return (f_p_zero(&f));
+        return (f_checker_zeroing((f_p_zero(&f)), &f, p));
     else if (f.integer < 0 || f.fractional < 0)
-        return (f_fill_integer_min(&f, p));
-    // else if (f.integer == 0)
-    //     return (f_fill_integer_zero(&f, p));
-    // else
-    //     return (f_fill_integer(&f, p));
+        return (f_checker_zeroing((f_fill_integer_min(&f, p)), &f, p));
+    else
+        return (f_checker_zeroing((f_fill_integer(&f, p)), &f, p));
     return (NULL);
 }
 
@@ -177,9 +213,18 @@ int main(void)
     float   a;
     char    *b;
 
-    a = -51.96;
-    printf("GENERAL %0.6f\n", a);
+    a = -9928.99;
+    printf("\033[0;31mTASK 1 - ROUNDING UP OF NEGATIVE NUMBER\nGENERAL %0.1f\n", a);
     b = ft_ftoa(a, 1);
+    printf("MY      %s\n", b);
+    /*Можно решить добавлением цикла при получении строки. В строке смотрим если все равняется
+    многим нулям, а полученная цифра являлась чередой девяток (проверяем integer and fractional),
+    то объединяем строку, содержащую единицу с количеством нулей, которые округлились от 99...999..
+    ? Как понять, что во fractional и integer есть череда девяток
+     */
+    float c = 999.99;
+    printf("\033[0;32mTASK 2 - ZEROING:\nGENERAL %0.f\n", c);
+    b = ft_ftoa(c, 0);
     printf("MY      %s\n", b);
     return (0);
 }
