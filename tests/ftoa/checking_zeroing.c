@@ -162,7 +162,7 @@ char        *f_fill_integer(varfloat *f, int p)
     return (f_fill_fractional(f, p));
 }
 
-char        *f_checker_zeroing(char *str, varfloat *f, int p)
+/*char        *f_checker_zeroing(char *str, varfloat *f, int p)
 {
     f->number = 9;
     f->i = 0;
@@ -177,7 +177,7 @@ char        *f_checker_zeroing(char *str, varfloat *f, int p)
             
         }
     }
-}
+}*/
 
 char        *ft_ftoa(long double num, int p)
 {
@@ -197,11 +197,11 @@ char        *ft_ftoa(long double num, int p)
     if (!(f.string = (char *)malloc(sizeof(char) * (f.lenbef + p + 2))))
         return (NULL);
     if (p == 0)
-        return (f_checker_zeroing((f_p_zero(&f)), &f, p));
+        return (f_p_zero(&f));
     else if (f.integer < 0 || f.fractional < 0)
-        return (f_checker_zeroing((f_fill_integer_min(&f, p)), &f, p));
+        return (f_fill_integer_min(&f, p));
     else
-        return (f_checker_zeroing((f_fill_integer(&f, p)), &f, p));
+        return (f_fill_integer(&f, p));
     return (NULL);
 }
 
@@ -222,12 +222,12 @@ int main(void)
     заново точку и добавляем спереди единицу через ft_strsub или что-то подобное для присоеди
     нения.
      */
-    float c = 999.99;
+    float c = 99999.99;
     printf("\033[0;32mTASK 2 - ZEROING:\nGENERAL %0.f\n", c);
     b = ft_ftoa(c, 0);
     printf("MY      %s\n", b);
     printf("GENERAL TESTING\n");
     printf("LIBS: %f\n", 1444565444646.6465424242242);
-    printf("LIBS: %s\n", ft_ftoa(1444565444646.6465424242242, 0));
+    printf("LIBS: %s\n", ft_ftoa(1444565444646.6465424242242, 6));
     return (0);
 }

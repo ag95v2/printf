@@ -3,21 +3,23 @@
 
 typedef struct variablesforfloat
 {
-    char        *string;
-    long long   integer;
-    long double fractional;
-    long long   cp_integer;
-    long double cp_fractional;
-    int         sym;
-    long double  tmp;
-    long long         lenbef;
-    long long         lenaf;
-    long long          cp_lenbef;
-    long long          cp_lenaf;    
-    int         i;
-    int         tmp2;
-    int         number;
-}               varfloat;
+    char                *string;
+    long long           integer;
+    long double         fractional;
+    long long           cp_integer;
+    long double         cp_fractional;
+    int                 sym;
+    long double         tmp;
+    long long           lenbef;
+    long long           lenaf;
+    long long           cp_lenbef;
+    long long           cp_lenaf;    
+    int                 i;
+    int                 tmp2;
+    int                 number;
+    int                 p;
+    char                *res;
+}                       varfloat;
 
 int	ft_inter_len(long long inter, long double fractional)
 {
@@ -38,59 +40,89 @@ int	ft_inter_len(long long inter, long double fractional)
 }
 
 
-/*
-char        *ft_zeroing(char *str, long int precision, varfloat *f)
-{
-    int     i;
-    int     ii;
-
-    i = 0;
-    ii = 0;
-    if (str[0] == '-')
-        while (str[i] == 9)
-        {
-            i++;
-        }
-    else if (str[0] == '9')
-        while (str[i] == 99)
-            i++;
-    if (i == 1)
-    {
-        //while (str[f->lenbef ])
-    }
-    return (NULL);
-}*/
-
-char        *f_rounding_up(varfloat *f)
-{
-    if (f->fractional >= 0.5 && f->string [f->lenaf - 1] != '9')
-          f->string[f->lenaf - 1] += 1;
-    else if (f->fractional >= 0.5 && f->string[f->lenaf - 1] == '9')
-        while (f->string[f->lenaf - 1] == '9')
-        {
-            if (f->string[f->lenaf - 2] == '.')
-            {
-                f->string[f->lenaf - 1] = '0';
-                f->string[f->lenaf - 3] += 1;
-            }
-            else if (f->string[f->lenaf - 2] != '.')
-            {
-                f->string[f->lenaf - 1] = '0';
-                f->string[f->lenaf - 2] += 1;
-            }
-        }
-    f->string[f->lenaf] = '\0';
-    return (f->string);
-}
 
 /* 
 ** We are filling fractional numbers through
 ** number multiplication to 10 and taking integer
 ** number; After it - recording this number to string
 ** and deleting this integer number.
-*/ 
+*/
 
-char        *f_fill_fractional(varfloat *f)
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	size_t		i;
+	char		*str;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	while (len > i)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char        *ft_rounding_up(varfloat *f, int p)
+{
+    if (f->cp_fractional < 0)
+        f->cp_fractional *= -1;
+    if (f->cp_fractional >= 0.5 && f->res[f->p - 1] != '9')
+        f->res[f->p - 1] += 1;
+    else if (f->cp_fractional >= 0.5 && f->res[f->p - 1] == '9')
+        while (f->res[f->p - 1] == '9')
+        {
+            if (f->res[f->p - 2] == '.')
+            {
+                f->res[f->p - 1] = '0';
+                f->res[f->p - 3] += 1; 
+            }
+            else if (f->res[f->p - 1] != '.')
+            {
+                f->res[f->p - 1] = '0';
+                f->res[f->p - 2] += 1;
+            }
+        }
+    f->res[f->p] = '\0';
+    return (f->res);
+}
+
+/*
+** Cuting our string depending on length of precision;
+** And sending to function for rounding up;
+*/
+
+char        *ft_cut(varfloat *f, int p)
+{
+    if (p == 0)
+    {
+        f->p = p + f->cp_lenbef;
+        f->res = ft_strsub(f->string, 0, f->p);
+    }
+    else
+    {
+        f->p = p + f->cp_lenbef + 1;
+        f->res = ft_strsub(f->string, 0, f->p);        
+    }
+    while (p--)
+    {
+        f->cp_fractional *= 10;
+        f->tmp2 = (int)f->cp_fractional;
+        f->cp_fractional = f->cp_fractional - f->tmp2;
+    }
+    return (ft_rounding_up(f, p));
+}
+
+/*
+** Than to fill string with fractional numbers;
+*/
+
+char        *f_fill_fractional(varfloat *f, int p)
 {
     f->i = 0;
     (f->fractional < 0) ? f->fractional *= -1 : 0;
@@ -102,10 +134,14 @@ char        *f_fill_fractional(varfloat *f)
         f->fractional = f->fractional - f->tmp2;
         f->i++;
     }
-    return (f_rounding_up(f));
+    return (ft_cut(f, p));
 }
 
-char        *f_fill_zero_fractional(varfloat *f)
+/*
+** for integer = 0 and some numbers in fracitonal
+*/
+
+char        *f_fill_zero_fractional(varfloat *f, int p)
 {
     if (f->fractional < 0)
     {
@@ -116,7 +152,7 @@ char        *f_fill_zero_fractional(varfloat *f)
     }
     else
         f->string[f->lenbef - 1] = '0';
-    return (f_fill_fractional(f));
+    return (f_fill_fractional(f, p));
 }
 
 /*
@@ -132,7 +168,7 @@ char        *f_fill_zero_fractional(varfloat *f)
 char        *f_fill_integer_min(varfloat *f, int p)
 {
     if (f->integer == 0 && f->fractional < 0)
-        return (f_fill_zero_fractional(f));
+        return (f_fill_zero_fractional(f, p));
     else
     {
         f->string[f->lenbef--] = '.';
@@ -145,7 +181,7 @@ char        *f_fill_integer_min(varfloat *f, int p)
         f->string[f->lenbef--] = f->integer % 10 + '0';
         f->integer /= 10;
     }
-    return (f_fill_fractional(f));
+    return (f_fill_fractional(f, p));
 }
 
 char        *f_fill_integer(varfloat *f, int p)
@@ -156,10 +192,8 @@ char        *f_fill_integer(varfloat *f, int p)
         f->string[f->lenbef--] = f->integer % 10 + '0';
         f->integer /= 10;
     }
-    return (f_fill_fractional(f));
+    return (f_fill_fractional(f, p));
 }
-
-
 
 char        *ft_ftoa(long double num, int p) //добавить точность для обрезки
 {
@@ -179,8 +213,8 @@ char        *ft_ftoa(long double num, int p) //добавить точность
     f.cp_integer = f.integer;
     if (!(f.string = (char *)malloc(sizeof(char) * (f.lenbef + 2 + 40))))
         return (NULL);
-//    if (p == 0)
-//        return (f_p_zero(&f));
+ //   if (p == 0)
+  //      return (f_p_zero(&f));
     if (f.integer < 0 || f.fractional < 0)
         return (f_fill_integer_min(&f, p));
     else
@@ -190,7 +224,6 @@ char        *ft_ftoa(long double num, int p) //добавить точность
 
 int main(void)
 {
-    float   a;
     char    *b;
 
     /*Можно решить добавлением цикла при получении строки. В строке смотрим если все равняется
@@ -221,15 +254,15 @@ int main(void)
     3. Какая максимальная точность, которая принимается в printf?
     
      */
-    // float c = 999.99;
-    // printf("\033[0;32mTASK 2 - ZEROING:\nGENERAL %0.f\n", c);
-    // b = ft_ftoa(c);
-    // printf("MY      %s\n", b);
-    // printf("GENERAL TESTING\n");
-    long double c = -612312.51231231;
-    printf("LIBS: %.60Lf\n", c);
-    printf("MY:   %s\n", ft_ftoa(c, 6));
-    // printf("LIBS: {%lf}", -1444565444646.6465424242242454654);
-    // printf("\nMY: %s\n", ft_ftoa(-1444565444646.6465424242242454654));
+     float a = -5.99;
+     printf("\033[0;32mTASK 2 - ZEROING:\nGENERAL %0.1f\n", a);
+     b = ft_ftoa(a, 1);
+     printf("MY      %s\n", b);
+    printf("GENERAL TESTING\n");
+    long double c = 999999.99;
+    printf("LIBS: %.1Lf\n", c);
+    printf("MY:   %s\n", ft_ftoa(c, 1));
+    printf("LIBS: {%.10lf}", -1444565444646.6465424242242454654);
+    printf("\nMY: %s\n", ft_ftoa(-1444565444646.6465424242242454654, 10));
     return (0);
 }
