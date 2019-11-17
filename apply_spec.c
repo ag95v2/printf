@@ -164,10 +164,17 @@ char	*str_insert(char *dst, char *src, int pos)
 	return (new);
 }
 
+int		only_zeros(char *s)
+{
+	while (*s)
+		if (*s++ != '0')
+			return (0);
+	return (1);
+}
 
 char	*apply_hash(char *s, t_spec spec)
 {
-	if (spec.flag_hash != 1)
+	if (spec.flag_hash != 1 || only_zeros(s))
 		return (s);
 	if (spec.conv == 'o' && ft_strcmp(s, "0"))
 		return (add_prefix(s, "0"));
