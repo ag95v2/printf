@@ -24,6 +24,7 @@ typedef struct		s_spec
 	enum length		length;
 
 	char			conv;
+	int				stupid_c0_special_case;
 }					t_spec;
 
 /*

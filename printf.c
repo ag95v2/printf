@@ -22,7 +22,7 @@ const char	*print_until_percent(const char *format)
 **	Return its string representation 
 */
 
-char		*get_arg_str(t_spec spec, va_list *vl)
+char		*get_arg_str(t_spec *spec, va_list *vl)
 {
 	void		*arg;
 	char		*res;
@@ -30,13 +30,31 @@ char		*get_arg_str(t_spec spec, va_list *vl)
 	int			error;
 
 	error = 0;
-	if (!(action = find_action(spec)) ||
-		!(arg = action->arg_extract(spec, vl)) ||
+	if (!(action = find_action(*spec)) ||
+		!(arg = action->arg_extract(*spec, vl)) ||
 		!(res = action->to_str(arg)))
 		error = 1;
 	if (action->cleanup_needed)
 		free(arg);
 	return (error || !(res = apply_spec(res, spec)) ? 0 : res);
+}
+
+void		handle_stupid_c0_special_case(char *s, t_spec spec)
+{
+	int	len;
+
+	len = ft_strlen(s);
+	s[len - 1] = 0;
+	if (!spec.flag_dash)
+	{
+		ft_putstr(s);
+		ft_putchar('\0');
+	}
+	else
+	{
+		ft_putchar('\0');
+		ft_putstr(s);
+	}
 }
 
 int			ft_printf(const char *format, ...)
@@ -49,9 +67,13 @@ int			ft_printf(const char *format, ...)
 	while ((format = print_until_percent(format))) 
 	{
 		format = read_spec(format, &spec);
-		if (!format || !(s = get_arg_str(spec, &vl)))
+		if (!format || !(s = get_arg_str(&spec, &vl)))
 			return (-1);
-		ft_putstr(s);
+		/* Stupid special case with %c and 0 char (which HAS to be printed) */
+		if (spec.stupid_c0_special_case)
+			handle_stupid_c0_special_case(s, spec);
+		else
+			ft_putstr(s);
 		if (spec.conv != 's')
 			free(s);
 	}

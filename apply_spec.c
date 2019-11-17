@@ -351,16 +351,18 @@ char	*apply_width(char *s, t_spec spec)
 **	Always return a copy. Copy always MUST be freed.
 */
 
-char	*apply_spec(char *s, t_spec spec)
+char	*apply_spec(char *s, t_spec *spec)
 {
 	char	*new;
 
 	if (\
 		!(new = ft_strdup(s)) ||\
-		!(new = apply_precision(new, spec)) ||\
-		!(new = apply_numeric_flags(new, spec)) ||\
-		!(new = apply_width(new, spec)) \
+		!(new = apply_precision(new, *spec)) ||\
+		!(new = apply_numeric_flags(new, *spec)) ||\
+		!(new = apply_width(new, *spec)) \
 		)
 		return (0);
+	if  (ft_strlen(s) == 0 && spec->conv == 'c')
+		spec->stupid_c0_special_case = 1;
 	return (new);
 }

@@ -15,6 +15,7 @@ void		init_spec(t_spec *spec)
 	spec->precision = -1;
 	spec->length = 0;
 	spec->conv = 0;
+	spec->stupid_c0_special_case = 0;
 }
 
 void read_flag(const char c, t_spec *spec)
