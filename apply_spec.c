@@ -237,6 +237,7 @@ int	len_after_dot(char *s)
 	return	(*s ? ft_strlen(++s) : 0);
 	
 }
+
 char	*float_precision(char *s, int precision)
 {
 	int		nchar_after_dot;
@@ -265,6 +266,11 @@ char	*apply_precision(char *s, t_spec spec)
 {
 	char	*zeros;
 
+	if (spec.conv == 'p' && !ft_strcmp(s, "0"))
+	{
+		free(s);
+		s = ft_strdup("(nil)");
+	}
 	if (spec.precision == 0 && spec.conv == 'f')
 		spec.precision = DEFAULT_FLOAT_PRECISION;
 	if (spec.precision < 0)

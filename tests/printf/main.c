@@ -4,9 +4,11 @@
 
 int main()
 {
+	void	*p;
 
-	printf("%u\n", 4294967295u);
-	ft_printf("%u\n", 4294967295u);
+	p = NULL;
+	printf("%p\n", p);
+	ft_printf("%p\n", p);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
