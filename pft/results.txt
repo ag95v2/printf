@@ -1,66 +1,3 @@
-Test 1224 (o_prec_fits_pos_af) : FAILED.
-    First line of code: {return test("%#.5o", 21);}
-      expected output : "00025"
-      your output     : "000025"
-      expected (nonprintable as hex) : "00025"
-      actual   (nonprintable as hex) : "000025"
-
-Test 1231 (o_prec_width_fit_fit_pos_af) : FAILED.
-    First line of code: {return test("%#8.5o", 34);}
-      expected output : "   00042"
-      your output     : "  000042"
-      expected (nonprintable as hex) : "   00042"
-      actual   (nonprintable as hex) : "  000042"
-
-Test 1234 (o_prec_width_fit_nofit_pos_af) : FAILED.
-    First line of code: {return test("%#2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1236 (o_prec_width_fit_fit_pos_lj_af) : FAILED.
-    First line of code: {return test("%#-8.5o", 34);}
-      expected output : "00042   "
-      your output     : "000042  "
-      expected (nonprintable as hex) : "00042   "
-      actual   (nonprintable as hex) : "000042  "
-
-Test 1239 (o_prec_width_fit_nofit_pos_lj_af) : FAILED.
-    First line of code: {return test("%#-2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1241 (o_prec_width_ff_pos_zp_af) : FAILED.
-    First line of code: {return test("%#08.5o", 34);}
-      expected output : "   00042"
-      your output     : "  000042"
-      expected (nonprintable as hex) : "   00042"
-      actual   (nonprintable as hex) : "  000042"
-
-Test 1244 (o_prec_width_fn_pos_zp_af) : FAILED.
-    First line of code: {return test("%#02.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
-Test 1246 (o_prec_width_ff_pos_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-8.5o", 34);}
-      expected output : "00042   "
-      your output     : "000042  "
-      expected (nonprintable as hex) : "00042   "
-      actual   (nonprintable as hex) : "000042  "
-
-Test 1249 (o_prec_width_fn_pos_ljzpaf_ignoreflag) : FAILED.
-    First line of code: {return test("%#0-2.7o", 3267);}
-      expected output : "0006303"
-      your output     : "00006303"
-      expected (nonprintable as hex) : "0006303"
-      actual   (nonprintable as hex) : "00006303"
-
 Test 1278 (o_prec0val0_af) : FAILED.
     First line of code: {return test("%#.0o", 0);}
       expected output : "0"
@@ -5515,10 +5452,10 @@ Test 2298 (mix_successive_69) : FAILED.
 
 Test 2506 (moul_mix_1) : FAILED.
     First line of code: {int r00 = 0; return test("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p", 100, "Ly", &r00);}
-      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7ffe244110fc"
-      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 244110fc"
-      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7ffe244110fc"
-      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 244110fc"
+      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7ffc2353a9ac"
+      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 2353a9ac"
+      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7ffc2353a9ac"
+      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 2353a9ac"
 
 Test 2510 (moul_c_4) : FAILED.
     First line of code: {return test("%c", -0);}
