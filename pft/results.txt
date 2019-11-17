@@ -1,45 +1,3 @@
-Test 1278 (o_prec0val0_af) : FAILED.
-    First line of code: {return test("%#.0o", 0);}
-      expected output : "0"
-      your output     : ""
-      expected (nonprintable as hex) : "0"
-      actual   (nonprintable as hex) : ""
-
-Test 1279 (o_prec0val0_af_impl) : FAILED.
-    First line of code: {return test("%#.o", 0);}
-      expected output : "0"
-      your output     : ""
-      expected (nonprintable as hex) : "0"
-      actual   (nonprintable as hex) : ""
-
-Test 1280 (o_prec0val0_waf) : FAILED.
-    First line of code: {return test("%#5.0o", 0);}
-      expected output : "    0"
-      your output     : "     "
-      expected (nonprintable as hex) : "    0"
-      actual   (nonprintable as hex) : "     "
-
-Test 1281 (o_prec0val0_waf_impl) : FAILED.
-    First line of code: {return test("%#5.o", 0);}
-      expected output : "    0"
-      your output     : "     "
-      expected (nonprintable as hex) : "    0"
-      actual   (nonprintable as hex) : "     "
-
-Test 1282 (o_prec0val0_waflj) : FAILED.
-    First line of code: {return test("%#-5.0o", 0);}
-      expected output : "0    "
-      your output     : "     "
-      expected (nonprintable as hex) : "0    "
-      actual   (nonprintable as hex) : "     "
-
-Test 1283 (o_prec0val0_waflj_impl) : FAILED.
-    First line of code: {return test("%#-5.o", 0);}
-      expected output : "0    "
-      your output     : "     "
-      expected (nonprintable as hex) : "0    "
-      actual   (nonprintable as hex) : "     "
-
 Test 1284 (p_null) : FAILED.
     First line of code: {return test("%p", NULL);}
       expected output : "(nil)"
@@ -5452,10 +5410,10 @@ Test 2298 (mix_successive_69) : FAILED.
 
 Test 2506 (moul_mix_1) : FAILED.
     First line of code: {int r00 = 0; return test("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p", 100, "Ly", &r00);}
-      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7ffc2353a9ac"
-      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 2353a9ac"
-      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7ffc2353a9ac"
-      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 2353a9ac"
+      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7ffe313f267c"
+      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 313f267c"
+      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7ffe313f267c"
+      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 313f267c"
 
 Test 2510 (moul_c_4) : FAILED.
     First line of code: {return test("%c", -0);}

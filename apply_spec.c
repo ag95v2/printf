@@ -174,6 +174,8 @@ int		only_zeros(char *s)
 
 char	*apply_hash(char *s, t_spec spec)
 {
+	if (spec.flag_hash == 1 && spec.precision == 0 && spec.conv == 'o')
+		return (add_prefix(s, "0"));
 	if (spec.flag_hash != 1 || only_zeros(s))
 		return (s);
 	if (spec.conv == 'o' && s[0] != '0')
