@@ -15,6 +15,8 @@ typedef struct variablesforfloat
     int         cp_lenbef;
     int         cp_lenaf;
     int         number;
+    long long   cp_integer;
+    long double cp_fractional;
 }               varfloat;
 
 int	ft_inter_len(long long inter, long double fractional)
@@ -180,7 +182,6 @@ char        *f_checker_zeroing(char *str, varfloat *f, int p)
 char        *ft_ftoa(long double num, int p)
 {
     varfloat f;
-    char    *string;
 
     f.sym = 0;
     if (num < 0)
@@ -191,6 +192,8 @@ char        *ft_ftoa(long double num, int p)
     f.lenaf = f.lenbef + 1;
     f.cp_lenbef = f.lenbef;
     f.cp_lenaf = f.lenaf;
+    f.cp_fractional = f.fractional;
+    f.cp_integer = f.integer;
     if (!(f.string = (char *)malloc(sizeof(char) * (f.lenbef + p + 2))))
         return (NULL);
     if (p == 0)
@@ -207,10 +210,6 @@ int main(void)
     float   a;
     char    *b;
 
-    a = -9928.99;
-    printf("\033[0;31mTASK 1 - ROUNDING UP OF NEGATIVE NUMBER\nGENERAL %0.1f\n", a);
-    b = ft_ftoa(a, 1);
-    printf("MY      %s\n", b);
     /*Можно решить добавлением цикла при получении строки. В строке смотрим если все равняется
     многим нулям, а полученная цифра являлась чередой девяток (проверяем integer and fractional),
     то объединяем строку, содержащую единицу с количеством нулей, которые округлились от 99...999..
@@ -227,5 +226,8 @@ int main(void)
     printf("\033[0;32mTASK 2 - ZEROING:\nGENERAL %0.f\n", c);
     b = ft_ftoa(c, 0);
     printf("MY      %s\n", b);
+    printf("GENERAL TESTING\n");
+    printf("LIBS: %f\n", 1444565444646.6465424242242);
+    printf("LIBS: %s\n", ft_ftoa(1444565444646.6465424242242, 0));
     return (0);
 }
