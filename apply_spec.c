@@ -172,6 +172,9 @@ int		only_zeros(char *s)
 
 char	*apply_hash(char *s, t_spec spec)
 {
+	if (((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
+		return (add_prefix(s, "0x"));
+
 	if (spec.flag_hash == 1 && spec.precision == 0 && spec.conv == 'o')
 		return (add_prefix(s, "0"));
 	if (spec.flag_hash != 1 || only_zeros(s))
@@ -216,6 +219,8 @@ char	*apply_space(char *s, t_spec spec)
 
 char	*apply_numeric_flags(char *s, t_spec spec)
 {
+	if (spec.conv == 'p')
+		return ((s = apply_hash(s, spec)));
 	if (is_numeric(spec) &&\
 		(s = apply_hash(s, spec)) &&\
 		(s = apply_plus(s, spec)) &&\

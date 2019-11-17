@@ -4,11 +4,10 @@
 
 int main()
 {
-	void	*p;
+	int	x;
 
-	p = NULL;
-	printf("%p\n", p);
-	ft_printf("%p\n", p);
+	printf("%p\n", &x);
+	ft_printf("%p\n", &x);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
