@@ -1,6 +1,30 @@
 #include "printf.h"
 #define DEFAULT_FLOAT_PRECISION 6
 
+/*
+**  Return string that contains n chars c
+**	If n <= 0, return nonzero ptr to empty string
+*/
+
+char	*char_n_dup(char c, int n)
+{
+	char	*res;
+
+	res = 0;
+	if (n < 0)
+		n = 0;
+	if (n + 1 < n)
+		return (0);
+	res = ft_memalloc(n > 0 ? n + 1 : 1);
+	if (!res)
+		return (0);
+	if (n <= 0)
+		return (res);
+	while (n--)
+		res[n] = c;
+	return (res);
+}
+
 int	is_signed_conversion(t_spec spec)
 {
 	if (spec.conv == 'i' || spec.conv == 'f' || spec.conv == 'd')
@@ -25,6 +49,21 @@ int	is_nonfloat_numeric(t_spec spec)
 	if (is_numeric(spec) || spec.conv != 'f')
 		return (1);
 	return (0);
+}
+
+/* return initial string */
+char	*str_replace(char *s, char pattern, char replacement)
+{
+	char	*start;
+
+	start = s;
+	while (*s)
+	{
+		if (*s  == pattern)
+			*s = replacement;
+		s++;
+	}
+	return (start);
 }
 
 /*
@@ -86,13 +125,65 @@ char	*add_prefix(char *s, char *prefix)
 	return (new);
 }
 
+char	*prepend_zeros(char *s, int n)
+{
+	char	*prefix;
+	
+	if (!(prefix = char_n_dup('0', n)))
+		return (0);
+	s = add_prefix(s, prefix);
+	free(prefix);
+	return (s);
+}
+
+/*
+**	Insert string src into n-th position of string dst
+**	free src and dst
+*/
+
+char	*str_insert(char *dst, char *src, int pos)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = ft_strnew(ft_strlen(src) + ft_strlen(dst));
+	if (!new)
+		return (0);
+	while (i < pos)
+	{
+		new[i] = dst[i];
+		i++;
+	}
+	ft_strcat(new, src);
+	ft_strcat(new, dst + i);
+	free(src);
+	free(dst);
+	return (new);
+}
+
+int		only_zeros(char *s)
+{
+	while (*s)
+		if (*s++ != '0')
+			return (0);
+	return (1);
+}
+
 char	*apply_hash(char *s, t_spec spec)
 {
-	if (spec.flag_hash != 1)
-		return (s);
-	if (spec.conv == 'o' && ft_strcmp(s, "0"))
+	if (((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
+		return (add_prefix(s, "0x"));
+
+	if (spec.flag_hash == 1 && spec.precision == 0 && spec.conv == 'o')
 		return (add_prefix(s, "0"));
-	if (spec.conv == 'x' && ft_strcmp(s, "0"))
+	if (spec.flag_hash != 1 || only_zeros(s))
+		return (s);
+	if (spec.conv == 'o' && s[0] != '0')
+		return (add_prefix(s, "0"));
+	if (\
+			(spec.conv == 'x' && ft_strcmp(s, "0")) ||\
+			((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
 		return (add_prefix(s, "0x"));
 	if (spec.conv == 'X' && ft_strcmp(s, "0"))
 		return (add_prefix(s, "0X"));
@@ -115,9 +206,10 @@ char	*apply_space(char *s, t_spec spec)
 {
 	if (spec.flag_space != 1 || spec.flag_plus == 1)
 		return (s);
-	if (is_signed_conversion(spec) && s[0] != '-' && ft_strcmp(s, "0"))
+	if (is_signed_conversion(spec) && s[0] != '-' )
 		return (add_prefix(s, " ")); 
 	// Man page says prefix should be added only for POSITIVE numbers
+	// We reproduce bug and consider 0 as positive number
 	return (s);
 }
 
@@ -127,6 +219,8 @@ char	*apply_space(char *s, t_spec spec)
 
 char	*apply_numeric_flags(char *s, t_spec spec)
 {
+	if (spec.conv == 'p')
+		return ((s = apply_hash(s, spec)));
 	if (is_numeric(spec) &&\
 		(s = apply_hash(s, spec)) &&\
 		(s = apply_plus(s, spec)) &&\
@@ -149,27 +243,6 @@ int	len_after_dot(char *s)
 	
 }
 
-/*
-**  Return string that contains n chars c
-*/
-
-char	*char_n_dup(char c, int n)
-{
-	char	*res;
-
-	if (n + 1 < n)
-		return (0);
-	
-	res = ft_memalloc(n > 0 ? n + 1 : 1);
-	if (!res)
-		return (0);
-	if (n <= 0)
-		return (res);
-	while (n--)
-		res[n] = c;
-	return (res);
-}
-
 char	*float_precision(char *s, int precision)
 {
 	int		nchar_after_dot;
@@ -189,33 +262,6 @@ char	*float_precision(char *s, int precision)
 	//here dot is always in number if this function is called
 	return (s);
 }
-
-/* return initial string */
-char	*str_replace(char *s, char pattern, char replacement)
-{
-	char	*start;
-
-	start = s;
-	while (*s)
-	{
-		if (*s  == pattern)
-			*s = replacement;
-		s++;
-	}
-	return (start);
-}
-
-char	*prepend_zeros(char *s, int n)
-{
-	char	*prefix;
-	
-	if (!(prefix = char_n_dup('0', n)))
-		return (0);
-	s = add_prefix(s, prefix);
-	free(prefix);
-	return (s);
-}
-
 /*
 **	< 0 => uninitialized
 **	for floats default is 6
@@ -223,6 +269,13 @@ char	*prepend_zeros(char *s, int n)
 
 char	*apply_precision(char *s, t_spec spec)
 {
+	char	*zeros;
+
+	if (spec.conv == 'p' && !ft_strcmp(s, "0"))
+	{
+		free(s);
+		s = ft_strdup("(nil)");
+	}
 	if (spec.precision == 0 && spec.conv == 'f')
 		spec.precision = DEFAULT_FLOAT_PRECISION;
 	if (spec.precision < 0)
@@ -239,35 +292,13 @@ char	*apply_precision(char *s, t_spec spec)
 		return (str_replace(s, '0', 0));
 	if (spec.precision == 0 && spec.conv == 'f')
 		return (str_replace(s, '.', 0));
+	/* Insert zeros from the left to nonfloat numeric (after - if negative) */
 	if (spec.precision > 0 && is_nonfloat_numeric(spec))
-		return (prepend_zeros(s, spec.precision - ft_strlen(s)));
-	return (s);
-}
-
-/*
-**	Insert string src into n-th position of string dst
-**	free src and dst
-*/
-
-char	*str_insert(char *src, char *dst, int pos)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = ft_strnew(ft_strlen(src) + ft_strlen(dst));
-	if (!new)
-		return (0);
-	while (i < pos)
 	{
-		new[i] = src[i];
-		i++;
+		zeros = char_n_dup('0', spec.precision - ft_strlen(s) + (*s == '-'));
+		return (str_insert( s,zeros, (*s == '-')? 1: 0));
 	}
-	ft_strcat(new, dst);
-	ft_strcat(new, src + i);
-	free(src);
-	free(dst);
-	return (new);
+	return (s);
 }
 
 /*
@@ -283,11 +314,11 @@ char	*apply_fzero(char *s, t_spec spec)
 	if (nzeros <= 0 || !is_numeric(spec))
 		return (s);
 	zeros = char_n_dup('0', nzeros);
-	if (s[0] != '0' && (s[1] == 'x' || s[1] == 'X'))
+	if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
 		return (str_insert(s, zeros, 2));
-	if (s[0] != '-')
+	if (s[0] == '-' || s[0] == '+' || spec.flag_space == 1)
 		return (str_insert(s, zeros, 1));
-	return (s);
+	return (str_insert(s, zeros, 0));
 }
 
 char	*apply_fdash(char *s, t_spec spec)
@@ -310,7 +341,7 @@ char	*apply_width(char *s, t_spec spec)
 {
 	if (spec.conv == '%')
 		return (s);
-	if (spec.flag_zero == 1)
+	if (spec.flag_zero == 1 && spec.precision <= 0)
 		return (apply_fzero(s, spec));
 	return (apply_fdash(s, spec));
 }
@@ -320,16 +351,18 @@ char	*apply_width(char *s, t_spec spec)
 **	Always return a copy. Copy always MUST be freed.
 */
 
-char	*apply_spec(char *s, t_spec spec)
+char	*apply_spec(char *s, t_spec *spec)
 {
 	char	*new;
 
 	if (\
 		!(new = ft_strdup(s)) ||\
-		!(new = apply_precision(new, spec)) ||\
-		!(new = apply_numeric_flags(new, spec)) ||\
-		!(new = apply_width(new, spec)) \
+		!(new = apply_precision(new, *spec)) ||\
+		!(new = apply_numeric_flags(new, *spec)) ||\
+		!(new = apply_width(new, *spec)) \
 		)
 		return (0);
+	if  (ft_strlen(s) == 0 && spec->conv == 'c')
+		spec->stupid_c0_special_case = 1;
 	return (new);
 }

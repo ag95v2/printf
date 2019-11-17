@@ -1,4 +1,5 @@
 */*.o
 *.a
+libftprintf.a
 .*.swp
 *.gch

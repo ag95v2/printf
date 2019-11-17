@@ -4,9 +4,10 @@
 
 int main()
 {
+	int	x;
 
-	printf("%d\n", -1);
-	ft_printf("%d\n", -1);
+	printf("%c\n", '\0');
+	ft_printf("%c\n", '\0');
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
