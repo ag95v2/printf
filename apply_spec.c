@@ -15,7 +15,6 @@ char	*char_n_dup(char c, int n)
 		n = 0;
 	if (n + 1 < n)
 		return (0);
-	
 	res = ft_memalloc(n > 0 ? n + 1 : 1);
 	if (!res)
 		return (0);
@@ -66,7 +65,6 @@ char	*str_replace(char *s, char pattern, char replacement)
 	}
 	return (start);
 }
-
 
 /*
 **  Warning! 
@@ -180,7 +178,9 @@ char	*apply_hash(char *s, t_spec spec)
 		return (s);
 	if (spec.conv == 'o' && s[0] != '0')
 		return (add_prefix(s, "0"));
-	if (spec.conv == 'x' && ft_strcmp(s, "0"))
+	if (\
+			(spec.conv == 'x' && ft_strcmp(s, "0")) ||\
+			((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
 		return (add_prefix(s, "0x"));
 	if (spec.conv == 'X' && ft_strcmp(s, "0"))
 		return (add_prefix(s, "0X"));
