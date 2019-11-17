@@ -1,24 +1,62 @@
 
 #include "printf.h"
+#include "fp_type.h"
 
-/*
-**	If we understand rules of C language correctly, :-) this conversions 
-**  do not lead to data corruption.
-*/
-
-void	*int_extractor(t_spec spec, va_list *vl)
+int		is_usgn(t_spec spec)
 {
-	long long	*p;
-	
-	if ((p = ft_memalloc(sizeof(long long))))
-	{
+	if (\
+			spec.conv == 'u' ||\
+			spec.conv == 'o' ||\
+			spec.conv == 'x' ||\
+			spec.conv == 'X'\
+		)
+		return (1);
+	return (0);
+}
+
+void	*extr_sint(t_spec spec, va_list *vl, long long *p)
+{
 		if (spec.length == ll)
 			*p += va_arg(*vl, long long);
 		else if (spec.length == l)
 			*p += va_arg(*vl, long);
 		else
 			*p += va_arg(*vl, int);
-	}
+		return ((void *)p);
+}
+
+void	*extr_uint(t_spec spec, va_list *vl, long long *p)
+{
+		if (spec.length == ll)
+			*p += va_arg(*vl, unsigned long long);
+		else if (spec.length == l)
+			*p += va_arg(*vl, unsigned long);
+		else
+			*p += va_arg(*vl, unsigned int);
+		return ((void *)p);
+}
+
+/*
+**	Choose integer extractor depending on signed/unsigned
+*/
+
+i_extr_fun	choose_i_extr(t_spec spec)
+{
+	return (is_usgn(spec) ? &extr_uint : &extr_sint);
+}
+
+/*
+**	If we understand rules of C language correctly, :-) this conversions 
+**  do not lead to data corruption.
+**	Now we may have UB (signed overflow).
+*/
+
+void	*int_extractor(t_spec spec, va_list *vl)
+{
+	long long	*p;
+
+	if ((p = ft_memalloc(sizeof(long long))))
+		return (choose_i_extr(spec)(spec, vl, p));
 	return ((void *)p);
 }
 

@@ -1,24 +1,3 @@
-Test 822 (u_uintmax) : FAILED.
-    First line of code: {return test("%u", 4294967295u);}
-      expected output : "4294967295"
-      your output     : "18446744073709551615"
-      expected (nonprintable as hex) : "4294967295"
-      actual   (nonprintable as hex) : "18446744073709551615"
-
-Test 891 (x_hexlmax) : FAILED.
-    First line of code: {return test("%x", 4294967295u);}
-      expected output : "ffffffff"
-      your output     : "ffffffffffffffff"
-      expected (nonprintable as hex) : "ffffffff"
-      actual   (nonprintable as hex) : "ffffffffffffffff"
-
-Test 951 (x_hexlmax_af) : FAILED.
-    First line of code: {return test("%#x", 4294967295u);}
-      expected output : "0xffffffff"
-      your output     : "0xffffffffffffffff"
-      expected (nonprintable as hex) : "0xffffffff"
-      actual   (nonprintable as hex) : "0xffffffffffffffff"
-
 Test 961 (x_prec_fits_zero_af) : FAILED.
     First line of code: {return test("%#.3x", 0);}
       expected output : "000"
@@ -110,20 +89,6 @@ Test 1019 (x_prec0val0_waflj_impl) : FAILED.
       expected (nonprintable as hex) : "     "
       actual   (nonprintable as hex) : "0x   "
 
-Test 1023 (X_hexumax) : FAILED.
-    First line of code: {return test("%X", 4294967295u);}
-      expected output : "FFFFFFFF"
-      your output     : "FFFFFFFFFFFFFFFF"
-      expected (nonprintable as hex) : "FFFFFFFF"
-      actual   (nonprintable as hex) : "FFFFFFFFFFFFFFFF"
-
-Test 1083 (X_hexumax_af) : FAILED.
-    First line of code: {return test("%#X", 4294967295u);}
-      expected output : "0XFFFFFFFF"
-      your output     : "0XFFFFFFFFFFFFFFFF"
-      expected (nonprintable as hex) : "0XFFFFFFFF"
-      actual   (nonprintable as hex) : "0XFFFFFFFFFFFFFFFF"
-
 Test 1093 (X_prec_fits_zero_af) : FAILED.
     First line of code: {return test("%#.3X", 0);}
       expected output : "000"
@@ -214,20 +179,6 @@ Test 1151 (X_prec0val0_waflj_impl) : FAILED.
       your output     : "0X   "
       expected (nonprintable as hex) : "     "
       actual   (nonprintable as hex) : "0X   "
-
-Test 1155 (o_octlmax) : FAILED.
-    First line of code: {return test("%o", 4294967295u);}
-      expected output : "37777777777"
-      your output     : "1777777777777777777777"
-      expected (nonprintable as hex) : "37777777777"
-      actual   (nonprintable as hex) : "1777777777777777777777"
-
-Test 1215 (o_octlmax_af) : FAILED.
-    First line of code: {return test("%#o", 4294967295u);}
-      expected output : "037777777777"
-      your output     : "01777777777777777777777"
-      expected (nonprintable as hex) : "037777777777"
-      actual   (nonprintable as hex) : "01777777777777777777777"
 
 Test 1224 (o_prec_fits_pos_af) : FAILED.
     First line of code: {return test("%#.5o", 21);}
@@ -343,72 +294,72 @@ Test 1289 (p_ftfc_5w_throwswarning) : FAILED.
 
 Test 1290 (p_basic) : FAILED.
     First line of code: {return test("%p%p%p%p%p%p%p%p%p%p%p%p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);}
-      expected output : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      your output     : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
-      expected (nonprintable as hex) : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      actual   (nonprintable as hex) : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
+      expected output : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      your output     : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
+      expected (nonprintable as hex) : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      actual   (nonprintable as hex) : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
 
 Test 1291 (p_width_fit) : FAILED.
-    First line of code: {return test("%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                                                              0x6d5859                                                              0x6d585a          "
-      your output     : "                                                                6d5859                                                                6d585a          "
-      expected (nonprintable as hex) : "                                                              0x6d5859                                                              0x6d585a          "
-      actual   (nonprintable as hex) : "                                                                6d5859                                                                6d585a          "
+    First line of code: {return test("%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                                                              0x6d6859                                                              0x6d685a          "
+      your output     : "                                                                6d6859                                                                6d685a          "
+      expected (nonprintable as hex) : "                                                              0x6d6859                                                              0x6d685a          "
+      actual   (nonprintable as hex) : "                                                                6d6859                                                                6d685a          "
 
 Test 1292 (p_width_nofit) : FAILED.
     First line of code: {return test("%5p%5p%5p%5p%5p%5p%5p%5p%5p%5p%5p%5p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);}
-      expected output : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      your output     : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
-      expected (nonprintable as hex) : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      actual   (nonprintable as hex) : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
+      expected output : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      your output     : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
+      expected (nonprintable as hex) : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      actual   (nonprintable as hex) : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
 
 Test 1293 (p_width_16) : FAILED.
-    First line of code: {return test("%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "        0x6d5859        0x6d585a        0x6d585c        0x6d585e        0x6d5860        0x6d5864        0x6d5868        0x6d5870        0x6d5878      "
-      your output     : "          6d5859          6d585a          6d585c          6d585e          6d5860          6d5864          6d5868          6d5870          6d5878      "
-      expected (nonprintable as hex) : "        0x6d5859        0x6d585a        0x6d585c        0x6d585e        0x6d5860        0x6d5864        0x6d5868        0x6d5870        0x6d5878      "
-      actual   (nonprintable as hex) : "          6d5859          6d585a          6d585c          6d585e          6d5860          6d5864          6d5868          6d5870          6d5878      "
+    First line of code: {return test("%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "        0x6d6859        0x6d685a        0x6d685c        0x6d685e        0x6d6860        0x6d6864        0x6d6868        0x6d6870        0x6d6878      "
+      your output     : "          6d6859          6d685a          6d685c          6d685e          6d6860          6d6864          6d6868          6d6870          6d6878      "
+      expected (nonprintable as hex) : "        0x6d6859        0x6d685a        0x6d685c        0x6d685e        0x6d6860        0x6d6864        0x6d6868        0x6d6870        0x6d6878      "
+      actual   (nonprintable as hex) : "          6d6859          6d685a          6d685c          6d685e          6d6860          6d6864          6d6868          6d6870          6d6878      "
 
 Test 1294 (p_width_8) : FAILED.
     First line of code: {return test("%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);}
-      expected output : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      your output     : "  6d5859  6d585a  6d585c  6d585e  6d5860  6d5864  6d5868  6d5870  6d5878  6d5880  6d5888  6d5890"
-      expected (nonprintable as hex) : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      actual   (nonprintable as hex) : "  6d5859  6d585a  6d585c  6d585e  6d5860  6d5864  6d5868  6d5870  6d5878  6d5880  6d5888  6d5890"
+      expected output : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      your output     : "  6d6859  6d685a  6d685c  6d685e  6d6860  6d6864  6d6868  6d6870  6d6878  6d6880  6d6888  6d6890"
+      expected (nonprintable as hex) : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      actual   (nonprintable as hex) : "  6d6859  6d685a  6d685c  6d685e  6d6860  6d6864  6d6868  6d6870  6d6878  6d6880  6d6888  6d6890"
 
 Test 1295 (p_width_32) : FAILED.
-    First line of code: {return test("%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                        0x6d5859                        0x6d585a                        0x6d585c                        0x6d585e                      "
-      your output     : "                          6d5859                          6d585a                          6d585c                          6d585e                      "
-      expected (nonprintable as hex) : "                        0x6d5859                        0x6d585a                        0x6d585c                        0x6d585e                      "
-      actual   (nonprintable as hex) : "                          6d5859                          6d585a                          6d585c                          6d585e                      "
+    First line of code: {return test("%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                        0x6d6859                        0x6d685a                        0x6d685c                        0x6d685e                      "
+      your output     : "                          6d6859                          6d685a                          6d685c                          6d685e                      "
+      expected (nonprintable as hex) : "                        0x6d6859                        0x6d685a                        0x6d685c                        0x6d685e                      "
+      actual   (nonprintable as hex) : "                          6d6859                          6d685a                          6d685c                          6d685e                      "
 
 Test 1296 (p_width_fit_lj) : FAILED.
-    First line of code: {return test("%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d5859                                                              0x6d585a                                                              0x6d585c  "
-      your output     : "6d5859                                                                6d585a                                                                6d585c    "
-      expected (nonprintable as hex) : "0x6d5859                                                              0x6d585a                                                              0x6d585c  "
-      actual   (nonprintable as hex) : "6d5859                                                                6d585a                                                                6d585c    "
+    First line of code: {return test("%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d6859                                                              0x6d685a                                                              0x6d685c  "
+      your output     : "6d6859                                                                6d685a                                                                6d685c    "
+      expected (nonprintable as hex) : "0x6d6859                                                              0x6d685a                                                              0x6d685c  "
+      actual   (nonprintable as hex) : "6d6859                                                                6d685a                                                                6d685c    "
 
 Test 1297 (p_width_nofit_lj) : FAILED.
-    First line of code: {return test("%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      your output     : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
-      expected (nonprintable as hex) : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      actual   (nonprintable as hex) : "6d58596d585a6d585c6d585e6d58606d58646d58686d58706d58786d58806d58886d5890"
+    First line of code: {return test("%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p%-5p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      your output     : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
+      expected (nonprintable as hex) : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      actual   (nonprintable as hex) : "6d68596d685a6d685c6d685e6d68606d68646d68686d68706d68786d68806d68886d6890"
 
 Test 1298 (p_width_16_lj) : FAILED.
-    First line of code: {return test("%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d5859        0x6d585a        0x6d585c        0x6d585e        0x6d5860        0x6d5864        0x6d5868        0x6d5870        0x6d5878        0x6d58"
-      your output     : "6d5859          6d585a          6d585c          6d585e          6d5860          6d5864          6d5868          6d5870          6d5878          6d5880"
-      expected (nonprintable as hex) : "0x6d5859        0x6d585a        0x6d585c        0x6d585e        0x6d5860        0x6d5864        0x6d5868        0x6d5870        0x6d5878        0x6d58"
-      actual   (nonprintable as hex) : "6d5859          6d585a          6d585c          6d585e          6d5860          6d5864          6d5868          6d5870          6d5878          6d5880"
+    First line of code: {return test("%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d6859        0x6d685a        0x6d685c        0x6d685e        0x6d6860        0x6d6864        0x6d6868        0x6d6870        0x6d6878        0x6d68"
+      your output     : "6d6859          6d685a          6d685c          6d685e          6d6860          6d6864          6d6868          6d6870          6d6878          6d6880"
+      expected (nonprintable as hex) : "0x6d6859        0x6d685a        0x6d685c        0x6d685e        0x6d6860        0x6d6864        0x6d6868        0x6d6870        0x6d6878        0x6d68"
+      actual   (nonprintable as hex) : "6d6859          6d685a          6d685c          6d685e          6d6860          6d6864          6d6868          6d6870          6d6878          6d6880"
 
 Test 1299 (p_width_8_lj) : FAILED.
-    First line of code: {return test("%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      your output     : "6d5859  6d585a  6d585c  6d585e  6d5860  6d5864  6d5868  6d5870  6d5878  6d5880  6d5888  6d5890  "
-      expected (nonprintable as hex) : "0x6d58590x6d585a0x6d585c0x6d585e0x6d58600x6d58640x6d58680x6d58700x6d58780x6d58800x6d58880x6d5890"
-      actual   (nonprintable as hex) : "6d5859  6d585a  6d585c  6d585e  6d5860  6d5864  6d5868  6d5870  6d5878  6d5880  6d5888  6d5890  "
+    First line of code: {return test("%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p%-8p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      your output     : "6d6859  6d685a  6d685c  6d685e  6d6860  6d6864  6d6868  6d6870  6d6878  6d6880  6d6888  6d6890  "
+      expected (nonprintable as hex) : "0x6d68590x6d685a0x6d685c0x6d685e0x6d68600x6d68640x6d68680x6d68700x6d68780x6d68800x6d68880x6d6890"
+      actual   (nonprintable as hex) : "6d6859  6d685a  6d685c  6d685e  6d6860  6d6864  6d6868  6d6870  6d6878  6d6880  6d6888  6d6890  "
 
 Test 1300 (p_width_32_lj) : FAILED.
-    First line of code: {return test("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d5859                        0x6d585a                        0x6d585c                        0x6d585e                        0x6d5860              "
-      your output     : "6d5859                          6d585a                          6d585c                          6d585e                          6d5860                "
-      expected (nonprintable as hex) : "0x6d5859                        0x6d585a                        0x6d585c                        0x6d585e                        0x6d5860              "
-      actual   (nonprintable as hex) : "6d5859                          6d585a                          6d585c                          6d585e                          6d5860                "
+    First line of code: {return test("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x6d6859                        0x6d685a                        0x6d685c                        0x6d685e                        0x6d6860              "
+      your output     : "6d6859                          6d685a                          6d685c                          6d685e                          6d6860                "
+      expected (nonprintable as hex) : "0x6d6859                        0x6d685a                        0x6d685c                        0x6d685e                        0x6d6860              "
+      actual   (nonprintable as hex) : "6d6859                          6d685a                          6d685c                          6d685e                          6d6860                "
 
 Test 1310 (c_nullterm_basic) : FAILED.
     First line of code: {return test("%c", '
@@ -4402,38 +4353,38 @@ Test 2020 (mix_test_1) : FAILED.
 
 Test 2021 (mix_test_2) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    0x6d5410    42    4223372036854775800    3223372036654775200    Hello, World!  "
-      your output     : "  123.45    6d5410    42    4223372036854775800    3223372036654775200    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    0x6d5410    42    4223372036854775800    3223372036654775200    Hello, World!  "
-      actual   (nonprintable as hex) : "  123.45    6d5410    42    4223372036854775800    3223372036654775200    Hello, World!  "
+      expected output : "  0.375000    0x6d6410    42    4223372036854775800    3223372036654775200    Hello, World!  "
+      your output     : "  123.45    6d6410    42    4223372036854775800    3223372036654775200    Hello, World!  "
+      expected (nonprintable as hex) : "  0.375000    0x6d6410    42    4223372036854775800    3223372036654775200    Hello, World!  "
+      actual   (nonprintable as hex) : "  123.45    6d6410    42    4223372036854775800    3223372036654775200    Hello, World!  "
 
 Test 2022 (mix_test_3) : FAILED.
     First line of code: {return test(
-      expected output : "  eb    Hello, World!    42    0x6d5410    EB    0.375000  "
-      your output     : "  eb    Hello, World!    42    6d5410    EB    123.45  "
-      expected (nonprintable as hex) : "  eb    Hello, World!    42    0x6d5410    EB    0.375000  "
-      actual   (nonprintable as hex) : "  eb    Hello, World!    42    6d5410    EB    123.45  "
+      expected output : "  eb    Hello, World!    42    0x6d6410    EB    0.375000  "
+      your output     : "  eb    Hello, World!    42    6d6410    EB    123.45  "
+      expected (nonprintable as hex) : "  eb    Hello, World!    42    0x6d6410    EB    0.375000  "
+      actual   (nonprintable as hex) : "  eb    Hello, World!    42    6d6410    EB    123.45  "
 
 Test 2023 (mix_test_4) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    71    0x6d5410    353    %    0.375000  "
-      your output     : "  4223372036854775800    71    6d5410    353    %    123.45  "
-      expected (nonprintable as hex) : "  4223372036854775800    71    0x6d5410    353    %    0.375000  "
-      actual   (nonprintable as hex) : "  4223372036854775800    71    6d5410    353    %    123.45  "
+      expected output : "  4223372036854775800    71    0x6d6410    353    %    0.375000  "
+      your output     : "  4223372036854775800    71    6d6410    353    %    123.45  "
+      expected (nonprintable as hex) : "  4223372036854775800    71    0x6d6410    353    %    0.375000  "
+      actual   (nonprintable as hex) : "  4223372036854775800    71    6d6410    353    %    123.45  "
 
 Test 2025 (mix_test_6) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    4223372036854775800    42    0x6d5410    235    -3244  "
-      your output     : "  123.45    4223372036854775800    42    6d5410    235    -3244  "
-      expected (nonprintable as hex) : "  0.625000    4223372036854775800    42    0x6d5410    235    -3244  "
-      actual   (nonprintable as hex) : "  123.45    4223372036854775800    42    6d5410    235    -3244  "
+      expected output : "  0.625000    4223372036854775800    42    0x6d6410    235    -3244  "
+      your output     : "  123.45    4223372036854775800    42    6d6410    235    -3244  "
+      expected (nonprintable as hex) : "  0.625000    4223372036854775800    42    0x6d6410    235    -3244  "
+      actual   (nonprintable as hex) : "  123.45    4223372036854775800    42    6d6410    235    -3244  "
 
 Test 2026 (mix_test_7) : FAILED.
     First line of code: {return test(
-      expected output : "  235    71    0x6d5410    4223372036854775800    0.375000    EB  "
-      your output     : "  235    71    6d5410    4223372036854775800    123.45    EB  "
-      expected (nonprintable as hex) : "  235    71    0x6d5410    4223372036854775800    0.375000    EB  "
-      actual   (nonprintable as hex) : "  235    71    6d5410    4223372036854775800    123.45    EB  "
+      expected output : "  235    71    0x6d6410    4223372036854775800    0.375000    EB  "
+      your output     : "  235    71    6d6410    4223372036854775800    123.45    EB  "
+      expected (nonprintable as hex) : "  235    71    0x6d6410    4223372036854775800    0.375000    EB  "
+      actual   (nonprintable as hex) : "  235    71    6d6410    4223372036854775800    123.45    EB  "
 
 Test 2027 (mix_test_8) : FAILED.
     First line of code: {return test(
@@ -4444,10 +4395,10 @@ Test 2027 (mix_test_8) : FAILED.
 
 Test 2028 (mix_test_9) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    4223372036854775800    Hello, World!    0x6d5410    eb    353  "
-      your output     : "  123.45    4223372036854775800    Hello, World!    6d5410    eb    353  "
-      expected (nonprintable as hex) : "  0.375000    4223372036854775800    Hello, World!    0x6d5410    eb    353  "
-      actual   (nonprintable as hex) : "  123.45    4223372036854775800    Hello, World!    6d5410    eb    353  "
+      expected output : "  0.375000    4223372036854775800    Hello, World!    0x6d6410    eb    353  "
+      your output     : "  123.45    4223372036854775800    Hello, World!    6d6410    eb    353  "
+      expected (nonprintable as hex) : "  0.375000    4223372036854775800    Hello, World!    0x6d6410    eb    353  "
+      actual   (nonprintable as hex) : "  123.45    4223372036854775800    Hello, World!    6d6410    eb    353  "
 
 Test 2030 (mix_test_11) : FAILED.
     First line of code: {return test(
@@ -4479,38 +4430,38 @@ Test 2034 (mix_test_15) : FAILED.
 
 Test 2035 (mix_test_16) : FAILED.
     First line of code: {return test(
-      expected output : "  71    EB    235    0x6d5410    eb    353  "
-      your output     : "  71    EB    235    6d5410    eb    353  "
-      expected (nonprintable as hex) : "  71    EB    235    0x6d5410    eb    353  "
-      actual   (nonprintable as hex) : "  71    EB    235    6d5410    eb    353  "
+      expected output : "  71    EB    235    0x6d6410    eb    353  "
+      your output     : "  71    EB    235    6d6410    eb    353  "
+      expected (nonprintable as hex) : "  71    EB    235    0x6d6410    eb    353  "
+      actual   (nonprintable as hex) : "  71    EB    235    6d6410    eb    353  "
 
 Test 2036 (mix_test_17) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    42    G    3223372036654775200    353    0x6d5410  "
-      your output     : "  EB    42    G    3223372036654775200    353    6d5410  "
-      expected (nonprintable as hex) : "  EB    42    G    3223372036654775200    353    0x6d5410  "
-      actual   (nonprintable as hex) : "  EB    42    G    3223372036654775200    353    6d5410  "
+      expected output : "  EB    42    G    3223372036654775200    353    0x6d6410  "
+      your output     : "  EB    42    G    3223372036654775200    353    6d6410  "
+      expected (nonprintable as hex) : "  EB    42    G    3223372036654775200    353    0x6d6410  "
+      actual   (nonprintable as hex) : "  EB    42    G    3223372036654775200    353    6d6410  "
 
 Test 2039 (mix_test_20) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    0x6d5410    3223372036654775200    71    G    0.625000  "
-      your output     : "  123.45    6d5410    3223372036654775200    71    G    123.45  "
-      expected (nonprintable as hex) : "  0.375000    0x6d5410    3223372036654775200    71    G    0.625000  "
-      actual   (nonprintable as hex) : "  123.45    6d5410    3223372036654775200    71    G    123.45  "
+      expected output : "  0.375000    0x6d6410    3223372036654775200    71    G    0.625000  "
+      your output     : "  123.45    6d6410    3223372036654775200    71    G    123.45  "
+      expected (nonprintable as hex) : "  0.375000    0x6d6410    3223372036654775200    71    G    0.625000  "
+      actual   (nonprintable as hex) : "  123.45    6d6410    3223372036654775200    71    G    123.45  "
 
 Test 2040 (mix_test_21) : FAILED.
     First line of code: {return test(
-      expected output : "  -3244    Hello, World!    71    0x6d5410    3223372036654775200    235  "
-      your output     : "  -3244    Hello, World!    71    6d5410    3223372036654775200    235  "
-      expected (nonprintable as hex) : "  -3244    Hello, World!    71    0x6d5410    3223372036654775200    235  "
-      actual   (nonprintable as hex) : "  -3244    Hello, World!    71    6d5410    3223372036654775200    235  "
+      expected output : "  -3244    Hello, World!    71    0x6d6410    3223372036654775200    235  "
+      your output     : "  -3244    Hello, World!    71    6d6410    3223372036654775200    235  "
+      expected (nonprintable as hex) : "  -3244    Hello, World!    71    0x6d6410    3223372036654775200    235  "
+      actual   (nonprintable as hex) : "  -3244    Hello, World!    71    6d6410    3223372036654775200    235  "
 
 Test 2041 (mix_test_22) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    3223372036654775200    Hello, World!    EB    235    71  "
-      your output     : "  6d5410    3223372036654775200    Hello, World!    EB    235    71  "
-      expected (nonprintable as hex) : "  0x6d5410    3223372036654775200    Hello, World!    EB    235    71  "
-      actual   (nonprintable as hex) : "  6d5410    3223372036654775200    Hello, World!    EB    235    71  "
+      expected output : "  0x6d6410    3223372036654775200    Hello, World!    EB    235    71  "
+      your output     : "  6d6410    3223372036654775200    Hello, World!    EB    235    71  "
+      expected (nonprintable as hex) : "  0x6d6410    3223372036654775200    Hello, World!    EB    235    71  "
+      actual   (nonprintable as hex) : "  6d6410    3223372036654775200    Hello, World!    EB    235    71  "
 
 Test 2042 (mix_test_23) : FAILED.
     First line of code: {return test(
@@ -4521,31 +4472,31 @@ Test 2042 (mix_test_23) : FAILED.
 
 Test 2044 (mix_test_25) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    0.375000    0x6d5410    G    EB    eb  "
-      your output     : "  Hello, World!    123.45    6d5410    G    EB    eb  "
-      expected (nonprintable as hex) : "  Hello, World!    0.375000    0x6d5410    G    EB    eb  "
-      actual   (nonprintable as hex) : "  Hello, World!    123.45    6d5410    G    EB    eb  "
+      expected output : "  Hello, World!    0.375000    0x6d6410    G    EB    eb  "
+      your output     : "  Hello, World!    123.45    6d6410    G    EB    eb  "
+      expected (nonprintable as hex) : "  Hello, World!    0.375000    0x6d6410    G    EB    eb  "
+      actual   (nonprintable as hex) : "  Hello, World!    123.45    6d6410    G    EB    eb  "
 
 Test 2045 (mix_test_26) : FAILED.
     First line of code: {return test(
-      expected output : "  3223372036654775200    42    235    0x6d5410    353    G  "
-      your output     : "  3223372036654775200    42    235    6d5410    353    G  "
-      expected (nonprintable as hex) : "  3223372036654775200    42    235    0x6d5410    353    G  "
-      actual   (nonprintable as hex) : "  3223372036654775200    42    235    6d5410    353    G  "
+      expected output : "  3223372036654775200    42    235    0x6d6410    353    G  "
+      your output     : "  3223372036654775200    42    235    6d6410    353    G  "
+      expected (nonprintable as hex) : "  3223372036654775200    42    235    0x6d6410    353    G  "
+      actual   (nonprintable as hex) : "  3223372036654775200    42    235    6d6410    353    G  "
 
 Test 2046 (mix_test_27) : FAILED.
     First line of code: {return test(
-      expected output : "  42    0x6d5410    71    EB    0.375000    3223372036654775200  "
-      your output     : "  42    6d5410    71    EB    123.45    3223372036654775200  "
-      expected (nonprintable as hex) : "  42    0x6d5410    71    EB    0.375000    3223372036654775200  "
-      actual   (nonprintable as hex) : "  42    6d5410    71    EB    123.45    3223372036654775200  "
+      expected output : "  42    0x6d6410    71    EB    0.375000    3223372036654775200  "
+      your output     : "  42    6d6410    71    EB    123.45    3223372036654775200  "
+      expected (nonprintable as hex) : "  42    0x6d6410    71    EB    0.375000    3223372036654775200  "
+      actual   (nonprintable as hex) : "  42    6d6410    71    EB    123.45    3223372036654775200  "
 
 Test 2047 (mix_test_28) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    42    0x6d5410    4223372036854775800    353    eb  "
-      your output     : "  123.45    42    6d5410    4223372036854775800    353    eb  "
-      expected (nonprintable as hex) : "  0.625000    42    0x6d5410    4223372036854775800    353    eb  "
-      actual   (nonprintable as hex) : "  123.45    42    6d5410    4223372036854775800    353    eb  "
+      expected output : "  0.625000    42    0x6d6410    4223372036854775800    353    eb  "
+      your output     : "  123.45    42    6d6410    4223372036854775800    353    eb  "
+      expected (nonprintable as hex) : "  0.625000    42    0x6d6410    4223372036854775800    353    eb  "
+      actual   (nonprintable as hex) : "  123.45    42    6d6410    4223372036854775800    353    eb  "
 
 Test 2048 (mix_test_29) : FAILED.
     First line of code: {return test(
@@ -4556,10 +4507,10 @@ Test 2048 (mix_test_29) : FAILED.
 
 Test 2049 (mix_test_30) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    -3244    0x6d5410    71    4223372036854775800    235  "
-      your output     : "  123.45    -3244    6d5410    71    4223372036854775800    235  "
-      expected (nonprintable as hex) : "  0.625000    -3244    0x6d5410    71    4223372036854775800    235  "
-      actual   (nonprintable as hex) : "  123.45    -3244    6d5410    71    4223372036854775800    235  "
+      expected output : "  0.625000    -3244    0x6d6410    71    4223372036854775800    235  "
+      your output     : "  123.45    -3244    6d6410    71    4223372036854775800    235  "
+      expected (nonprintable as hex) : "  0.625000    -3244    0x6d6410    71    4223372036854775800    235  "
+      actual   (nonprintable as hex) : "  123.45    -3244    6d6410    71    4223372036854775800    235  "
 
 Test 2051 (mix_test_32) : FAILED.
     First line of code: {return test(
@@ -4577,38 +4528,38 @@ Test 2053 (mix_test_34) : FAILED.
 
 Test 2054 (mix_test_35) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    0x6d5410    353    -3244    Hello, World!    3223372036654775200  "
-      your output     : "  EB    6d5410    353    -3244    Hello, World!    3223372036654775200  "
-      expected (nonprintable as hex) : "  EB    0x6d5410    353    -3244    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  EB    6d5410    353    -3244    Hello, World!    3223372036654775200  "
+      expected output : "  EB    0x6d6410    353    -3244    Hello, World!    3223372036654775200  "
+      your output     : "  EB    6d6410    353    -3244    Hello, World!    3223372036654775200  "
+      expected (nonprintable as hex) : "  EB    0x6d6410    353    -3244    Hello, World!    3223372036654775200  "
+      actual   (nonprintable as hex) : "  EB    6d6410    353    -3244    Hello, World!    3223372036654775200  "
 
 Test 2055 (mix_test_36) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    0x6d5410    0.625000    0.375000    eb    3223372036654775200  "
-      your output     : "  4223372036854775800    6d5410    123.45    123.45    eb    3223372036654775200  "
-      expected (nonprintable as hex) : "  4223372036854775800    0x6d5410    0.625000    0.375000    eb    3223372036654775200  "
-      actual   (nonprintable as hex) : "  4223372036854775800    6d5410    123.45    123.45    eb    3223372036654775200  "
+      expected output : "  4223372036854775800    0x6d6410    0.625000    0.375000    eb    3223372036654775200  "
+      your output     : "  4223372036854775800    6d6410    123.45    123.45    eb    3223372036654775200  "
+      expected (nonprintable as hex) : "  4223372036854775800    0x6d6410    0.625000    0.375000    eb    3223372036654775200  "
+      actual   (nonprintable as hex) : "  4223372036854775800    6d6410    123.45    123.45    eb    3223372036654775200  "
 
 Test 2056 (mix_test_37) : FAILED.
     First line of code: {return test(
-      expected output : "  42    4223372036854775800    EB    0x6d5410    -3244    353  "
-      your output     : "  42    4223372036854775800    EB    6d5410    -3244    353  "
-      expected (nonprintable as hex) : "  42    4223372036854775800    EB    0x6d5410    -3244    353  "
-      actual   (nonprintable as hex) : "  42    4223372036854775800    EB    6d5410    -3244    353  "
+      expected output : "  42    4223372036854775800    EB    0x6d6410    -3244    353  "
+      your output     : "  42    4223372036854775800    EB    6d6410    -3244    353  "
+      expected (nonprintable as hex) : "  42    4223372036854775800    EB    0x6d6410    -3244    353  "
+      actual   (nonprintable as hex) : "  42    4223372036854775800    EB    6d6410    -3244    353  "
 
 Test 2057 (mix_test_38) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    235    0x6d5410    -3244    71    Hello, World!  "
-      your output     : "  123.45    235    6d5410    -3244    71    Hello, World!  "
-      expected (nonprintable as hex) : "  0.625000    235    0x6d5410    -3244    71    Hello, World!  "
-      actual   (nonprintable as hex) : "  123.45    235    6d5410    -3244    71    Hello, World!  "
+      expected output : "  0.625000    235    0x6d6410    -3244    71    Hello, World!  "
+      your output     : "  123.45    235    6d6410    -3244    71    Hello, World!  "
+      expected (nonprintable as hex) : "  0.625000    235    0x6d6410    -3244    71    Hello, World!  "
+      actual   (nonprintable as hex) : "  123.45    235    6d6410    -3244    71    Hello, World!  "
 
 Test 2058 (mix_test_39) : FAILED.
     First line of code: {return test(
-      expected output : "  353    G    4223372036854775800    0x6d5410    -3244    0.625000  "
-      your output     : "  353    G    4223372036854775800    6d5410    -3244    123.45  "
-      expected (nonprintable as hex) : "  353    G    4223372036854775800    0x6d5410    -3244    0.625000  "
-      actual   (nonprintable as hex) : "  353    G    4223372036854775800    6d5410    -3244    123.45  "
+      expected output : "  353    G    4223372036854775800    0x6d6410    -3244    0.625000  "
+      your output     : "  353    G    4223372036854775800    6d6410    -3244    123.45  "
+      expected (nonprintable as hex) : "  353    G    4223372036854775800    0x6d6410    -3244    0.625000  "
+      actual   (nonprintable as hex) : "  353    G    4223372036854775800    6d6410    -3244    123.45  "
 
 Test 2059 (mix_test_40) : FAILED.
     First line of code: {return test(
@@ -4640,17 +4591,17 @@ Test 2065 (mix_test_46) : FAILED.
 
 Test 2066 (mix_test_47) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    G    3223372036654775200    Hello, World!    71    0x6d5410  "
-      your output     : "  123.45    G    3223372036654775200    Hello, World!    71    6d5410  "
-      expected (nonprintable as hex) : "  0.625000    G    3223372036654775200    Hello, World!    71    0x6d5410  "
-      actual   (nonprintable as hex) : "  123.45    G    3223372036654775200    Hello, World!    71    6d5410  "
+      expected output : "  0.625000    G    3223372036654775200    Hello, World!    71    0x6d6410  "
+      your output     : "  123.45    G    3223372036654775200    Hello, World!    71    6d6410  "
+      expected (nonprintable as hex) : "  0.625000    G    3223372036654775200    Hello, World!    71    0x6d6410  "
+      actual   (nonprintable as hex) : "  123.45    G    3223372036654775200    Hello, World!    71    6d6410  "
 
 Test 2067 (mix_test_48) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x6d5410  "
-      your output     : "  123.45    71    4223372036854775800    3223372036654775200    eb    6d5410  "
-      expected (nonprintable as hex) : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x6d5410  "
-      actual   (nonprintable as hex) : "  123.45    71    4223372036854775800    3223372036654775200    eb    6d5410  "
+      expected output : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x6d6410  "
+      your output     : "  123.45    71    4223372036854775800    3223372036654775200    eb    6d6410  "
+      expected (nonprintable as hex) : "  0.625000    71    4223372036854775800    3223372036654775200    eb    0x6d6410  "
+      actual   (nonprintable as hex) : "  123.45    71    4223372036854775800    3223372036654775200    eb    6d6410  "
 
 Test 2068 (mix_test_49) : FAILED.
     First line of code: {return test(
@@ -4682,17 +4633,17 @@ Test 2071 (mix_test_52) : FAILED.
 
 Test 2072 (mix_test_53) : FAILED.
     First line of code: {return test(
-      expected output : "  353    G    0.375000    -3244    Hello, World!    0x6d5410  "
-      your output     : "  353    G    123.45    -3244    Hello, World!    6d5410  "
-      expected (nonprintable as hex) : "  353    G    0.375000    -3244    Hello, World!    0x6d5410  "
-      actual   (nonprintable as hex) : "  353    G    123.45    -3244    Hello, World!    6d5410  "
+      expected output : "  353    G    0.375000    -3244    Hello, World!    0x6d6410  "
+      your output     : "  353    G    123.45    -3244    Hello, World!    6d6410  "
+      expected (nonprintable as hex) : "  353    G    0.375000    -3244    Hello, World!    0x6d6410  "
+      actual   (nonprintable as hex) : "  353    G    123.45    -3244    Hello, World!    6d6410  "
 
 Test 2077 (mix_test_58) : FAILED.
     First line of code: {return test(
-      expected output : "  G    EB    4223372036854775800    -3244    0.375000    0x6d5410  "
-      your output     : "  G    EB    4223372036854775800    -3244    123.45    6d5410  "
-      expected (nonprintable as hex) : "  G    EB    4223372036854775800    -3244    0.375000    0x6d5410  "
-      actual   (nonprintable as hex) : "  G    EB    4223372036854775800    -3244    123.45    6d5410  "
+      expected output : "  G    EB    4223372036854775800    -3244    0.375000    0x6d6410  "
+      your output     : "  G    EB    4223372036854775800    -3244    123.45    6d6410  "
+      expected (nonprintable as hex) : "  G    EB    4223372036854775800    -3244    0.375000    0x6d6410  "
+      actual   (nonprintable as hex) : "  G    EB    4223372036854775800    -3244    123.45    6d6410  "
 
 Test 2078 (mix_test_59) : FAILED.
     First line of code: {return test(
@@ -4703,10 +4654,10 @@ Test 2078 (mix_test_59) : FAILED.
 
 Test 2079 (mix_test_60) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    0x6d5410    Hello, World!    -3244    235    3223372036654775200  "
-      your output     : "  4223372036854775800    6d5410    Hello, World!    -3244    235    3223372036654775200  "
-      expected (nonprintable as hex) : "  4223372036854775800    0x6d5410    Hello, World!    -3244    235    3223372036654775200  "
-      actual   (nonprintable as hex) : "  4223372036854775800    6d5410    Hello, World!    -3244    235    3223372036654775200  "
+      expected output : "  4223372036854775800    0x6d6410    Hello, World!    -3244    235    3223372036654775200  "
+      your output     : "  4223372036854775800    6d6410    Hello, World!    -3244    235    3223372036654775200  "
+      expected (nonprintable as hex) : "  4223372036854775800    0x6d6410    Hello, World!    -3244    235    3223372036654775200  "
+      actual   (nonprintable as hex) : "  4223372036854775800    6d6410    Hello, World!    -3244    235    3223372036654775200  "
 
 Test 2080 (mix_test_61) : FAILED.
     First line of code: {return test(
@@ -4738,10 +4689,10 @@ Test 2083 (mix_test_64) : FAILED.
 
 Test 2085 (mix_test_66) : FAILED.
     First line of code: {return test(
-      expected output : "  -3244    0.625000    71    235    42    0x6d5410  "
-      your output     : "  -3244    123.45    71    235    42    6d5410  "
-      expected (nonprintable as hex) : "  -3244    0.625000    71    235    42    0x6d5410  "
-      actual   (nonprintable as hex) : "  -3244    123.45    71    235    42    6d5410  "
+      expected output : "  -3244    0.625000    71    235    42    0x6d6410  "
+      your output     : "  -3244    123.45    71    235    42    6d6410  "
+      expected (nonprintable as hex) : "  -3244    0.625000    71    235    42    0x6d6410  "
+      actual   (nonprintable as hex) : "  -3244    123.45    71    235    42    6d6410  "
 
 Test 2086 (mix_test_67) : FAILED.
     First line of code: {return test(
@@ -4752,17 +4703,17 @@ Test 2086 (mix_test_67) : FAILED.
 
 Test 2087 (mix_test_68) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    Hello, World!    0x6d5410    0.625000    0.375000    EB  "
-      your output     : "  4223372036854775800    Hello, World!    6d5410    123.45    123.45    EB  "
-      expected (nonprintable as hex) : "  4223372036854775800    Hello, World!    0x6d5410    0.625000    0.375000    EB  "
-      actual   (nonprintable as hex) : "  4223372036854775800    Hello, World!    6d5410    123.45    123.45    EB  "
+      expected output : "  4223372036854775800    Hello, World!    0x6d6410    0.625000    0.375000    EB  "
+      your output     : "  4223372036854775800    Hello, World!    6d6410    123.45    123.45    EB  "
+      expected (nonprintable as hex) : "  4223372036854775800    Hello, World!    0x6d6410    0.625000    0.375000    EB  "
+      actual   (nonprintable as hex) : "  4223372036854775800    Hello, World!    6d6410    123.45    123.45    EB  "
 
 Test 2088 (mix_test_69) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    0x6d5410    0.375000    3223372036654775200    eb    353  "
-      your output     : "  Hello, World!    6d5410    123.45    3223372036654775200    eb    353  "
-      expected (nonprintable as hex) : "  Hello, World!    0x6d5410    0.375000    3223372036654775200    eb    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    6d5410    123.45    3223372036654775200    eb    353  "
+      expected output : "  Hello, World!    0x6d6410    0.375000    3223372036654775200    eb    353  "
+      your output     : "  Hello, World!    6d6410    123.45    3223372036654775200    eb    353  "
+      expected (nonprintable as hex) : "  Hello, World!    0x6d6410    0.375000    3223372036654775200    eb    353  "
+      actual   (nonprintable as hex) : "  Hello, World!    6d6410    123.45    3223372036654775200    eb    353  "
 
 Test 2089 (mix_test_70) : FAILED.
     First line of code: {return test(
@@ -4773,31 +4724,31 @@ Test 2089 (mix_test_70) : FAILED.
 
 Test 2090 (mix_test_71) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    235    3223372036654775200    G    0.375000    EB  "
-      your output     : "  6d5410    235    3223372036654775200    G    123.45    EB  "
-      expected (nonprintable as hex) : "  0x6d5410    235    3223372036654775200    G    0.375000    EB  "
-      actual   (nonprintable as hex) : "  6d5410    235    3223372036654775200    G    123.45    EB  "
+      expected output : "  0x6d6410    235    3223372036654775200    G    0.375000    EB  "
+      your output     : "  6d6410    235    3223372036654775200    G    123.45    EB  "
+      expected (nonprintable as hex) : "  0x6d6410    235    3223372036654775200    G    0.375000    EB  "
+      actual   (nonprintable as hex) : "  6d6410    235    3223372036654775200    G    123.45    EB  "
 
 Test 2091 (mix_test_72) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    0x6d5410    0.625000    G    353    4223372036854775800  "
-      your output     : "  EB    6d5410    123.45    G    353    4223372036854775800  "
-      expected (nonprintable as hex) : "  EB    0x6d5410    0.625000    G    353    4223372036854775800  "
-      actual   (nonprintable as hex) : "  EB    6d5410    123.45    G    353    4223372036854775800  "
+      expected output : "  EB    0x6d6410    0.625000    G    353    4223372036854775800  "
+      your output     : "  EB    6d6410    123.45    G    353    4223372036854775800  "
+      expected (nonprintable as hex) : "  EB    0x6d6410    0.625000    G    353    4223372036854775800  "
+      actual   (nonprintable as hex) : "  EB    6d6410    123.45    G    353    4223372036854775800  "
 
 Test 2092 (mix_test_73) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    G    4223372036854775800    3223372036654775200    eb    0.625000  "
-      your output     : "  6d5410    G    4223372036854775800    3223372036654775200    eb    123.45  "
-      expected (nonprintable as hex) : "  0x6d5410    G    4223372036854775800    3223372036654775200    eb    0.625000  "
-      actual   (nonprintable as hex) : "  6d5410    G    4223372036854775800    3223372036654775200    eb    123.45  "
+      expected output : "  0x6d6410    G    4223372036854775800    3223372036654775200    eb    0.625000  "
+      your output     : "  6d6410    G    4223372036854775800    3223372036654775200    eb    123.45  "
+      expected (nonprintable as hex) : "  0x6d6410    G    4223372036854775800    3223372036654775200    eb    0.625000  "
+      actual   (nonprintable as hex) : "  6d6410    G    4223372036854775800    3223372036654775200    eb    123.45  "
 
 Test 2093 (mix_test_74) : FAILED.
     First line of code: {return test(
-      expected output : "  235    G    4223372036854775800    0x6d5410    353    Hello, World!  "
-      your output     : "  235    G    4223372036854775800    6d5410    353    Hello, World!  "
-      expected (nonprintable as hex) : "  235    G    4223372036854775800    0x6d5410    353    Hello, World!  "
-      actual   (nonprintable as hex) : "  235    G    4223372036854775800    6d5410    353    Hello, World!  "
+      expected output : "  235    G    4223372036854775800    0x6d6410    353    Hello, World!  "
+      your output     : "  235    G    4223372036854775800    6d6410    353    Hello, World!  "
+      expected (nonprintable as hex) : "  235    G    4223372036854775800    0x6d6410    353    Hello, World!  "
+      actual   (nonprintable as hex) : "  235    G    4223372036854775800    6d6410    353    Hello, World!  "
 
 Test 2096 (mix_test_77) : FAILED.
     First line of code: {return test(
@@ -4808,17 +4759,17 @@ Test 2096 (mix_test_77) : FAILED.
 
 Test 2097 (mix_test_78) : FAILED.
     First line of code: {return test(
-      expected output : "  235    42    G    0x6d5410    353    0.625000  "
-      your output     : "  235    42    G    6d5410    353    123.45  "
-      expected (nonprintable as hex) : "  235    42    G    0x6d5410    353    0.625000  "
-      actual   (nonprintable as hex) : "  235    42    G    6d5410    353    123.45  "
+      expected output : "  235    42    G    0x6d6410    353    0.625000  "
+      your output     : "  235    42    G    6d6410    353    123.45  "
+      expected (nonprintable as hex) : "  235    42    G    0x6d6410    353    0.625000  "
+      actual   (nonprintable as hex) : "  235    42    G    6d6410    353    123.45  "
 
 Test 2098 (mix_test_79) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    EB    0x6d5410    71    G    Hello, World!  "
-      your output     : "  123.45    EB    6d5410    71    G    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    EB    0x6d5410    71    G    Hello, World!  "
-      actual   (nonprintable as hex) : "  123.45    EB    6d5410    71    G    Hello, World!  "
+      expected output : "  0.375000    EB    0x6d6410    71    G    Hello, World!  "
+      your output     : "  123.45    EB    6d6410    71    G    Hello, World!  "
+      expected (nonprintable as hex) : "  0.375000    EB    0x6d6410    71    G    Hello, World!  "
+      actual   (nonprintable as hex) : "  123.45    EB    6d6410    71    G    Hello, World!  "
 
 Test 2099 (mix_test_80) : FAILED.
     First line of code: {return test(
@@ -4829,10 +4780,10 @@ Test 2099 (mix_test_80) : FAILED.
 
 Test 2100 (mix_test_81) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    0x6d5410    235    0.375000    71    4223372036854775800  "
-      your output     : "  Hello, World!    6d5410    235    123.45    71    4223372036854775800  "
-      expected (nonprintable as hex) : "  Hello, World!    0x6d5410    235    0.375000    71    4223372036854775800  "
-      actual   (nonprintable as hex) : "  Hello, World!    6d5410    235    123.45    71    4223372036854775800  "
+      expected output : "  Hello, World!    0x6d6410    235    0.375000    71    4223372036854775800  "
+      your output     : "  Hello, World!    6d6410    235    123.45    71    4223372036854775800  "
+      expected (nonprintable as hex) : "  Hello, World!    0x6d6410    235    0.375000    71    4223372036854775800  "
+      actual   (nonprintable as hex) : "  Hello, World!    6d6410    235    123.45    71    4223372036854775800  "
 
 Test 2101 (mix_test_82) : FAILED.
     First line of code: {return test(
@@ -4871,10 +4822,10 @@ Test 2106 (mix_test_87) : FAILED.
 
 Test 2107 (mix_test_88) : FAILED.
     First line of code: {return test(
-      expected output : "  235    G    eb    0.625000    0x6d5410    EB  "
-      your output     : "  235    G    eb    123.45    6d5410    EB  "
-      expected (nonprintable as hex) : "  235    G    eb    0.625000    0x6d5410    EB  "
-      actual   (nonprintable as hex) : "  235    G    eb    123.45    6d5410    EB  "
+      expected output : "  235    G    eb    0.625000    0x6d6410    EB  "
+      your output     : "  235    G    eb    123.45    6d6410    EB  "
+      expected (nonprintable as hex) : "  235    G    eb    0.625000    0x6d6410    EB  "
+      actual   (nonprintable as hex) : "  235    G    eb    123.45    6d6410    EB  "
 
 Test 2108 (mix_test_89) : FAILED.
     First line of code: {return test(
@@ -4885,17 +4836,17 @@ Test 2108 (mix_test_89) : FAILED.
 
 Test 2109 (mix_test_90) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    353    0.625000    4223372036854775800    0x6d5410    Hello, World!  "
-      your output     : "  123.45    353    123.45    4223372036854775800    6d5410    Hello, World!  "
-      expected (nonprintable as hex) : "  0.375000    353    0.625000    4223372036854775800    0x6d5410    Hello, World!  "
-      actual   (nonprintable as hex) : "  123.45    353    123.45    4223372036854775800    6d5410    Hello, World!  "
+      expected output : "  0.375000    353    0.625000    4223372036854775800    0x6d6410    Hello, World!  "
+      your output     : "  123.45    353    123.45    4223372036854775800    6d6410    Hello, World!  "
+      expected (nonprintable as hex) : "  0.375000    353    0.625000    4223372036854775800    0x6d6410    Hello, World!  "
+      actual   (nonprintable as hex) : "  123.45    353    123.45    4223372036854775800    6d6410    Hello, World!  "
 
 Test 2110 (mix_test_91) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    G    0x6d5410    Hello, World!    42    0.625000  "
-      your output     : "  EB    G    6d5410    Hello, World!    42    123.45  "
-      expected (nonprintable as hex) : "  EB    G    0x6d5410    Hello, World!    42    0.625000  "
-      actual   (nonprintable as hex) : "  EB    G    6d5410    Hello, World!    42    123.45  "
+      expected output : "  EB    G    0x6d6410    Hello, World!    42    0.625000  "
+      your output     : "  EB    G    6d6410    Hello, World!    42    123.45  "
+      expected (nonprintable as hex) : "  EB    G    0x6d6410    Hello, World!    42    0.625000  "
+      actual   (nonprintable as hex) : "  EB    G    6d6410    Hello, World!    42    123.45  "
 
 Test 2112 (mix_test_93) : FAILED.
     First line of code: {return test(
@@ -4934,10 +4885,10 @@ Test 2117 (mix_test_98) : FAILED.
 
 Test 2118 (mix_test_99) : FAILED.
     First line of code: {return test(
-      expected output : "  235    0.625000    EB    G    3223372036654775200    0x6d5410  "
-      your output     : "  235    123.45    EB    G    3223372036654775200    6d5410  "
-      expected (nonprintable as hex) : "  235    0.625000    EB    G    3223372036654775200    0x6d5410  "
-      actual   (nonprintable as hex) : "  235    123.45    EB    G    3223372036654775200    6d5410  "
+      expected output : "  235    0.625000    EB    G    3223372036654775200    0x6d6410  "
+      your output     : "  235    123.45    EB    G    3223372036654775200    6d6410  "
+      expected (nonprintable as hex) : "  235    0.625000    EB    G    3223372036654775200    0x6d6410  "
+      actual   (nonprintable as hex) : "  235    123.45    EB    G    3223372036654775200    6d6410  "
 
 Test 2119 (mix_test_100) : FAILED.
     First line of code: {return test(
@@ -4948,10 +4899,10 @@ Test 2119 (mix_test_100) : FAILED.
 
 Test 2120 (mix_test_101) : FAILED.
     First line of code: {return test(
-      expected output : "  353    0x6d5410    Hello, World!    0.625000    EB    eb  "
-      your output     : "  353    6d5410    Hello, World!    123.45    EB    eb  "
-      expected (nonprintable as hex) : "  353    0x6d5410    Hello, World!    0.625000    EB    eb  "
-      actual   (nonprintable as hex) : "  353    6d5410    Hello, World!    123.45    EB    eb  "
+      expected output : "  353    0x6d6410    Hello, World!    0.625000    EB    eb  "
+      your output     : "  353    6d6410    Hello, World!    123.45    EB    eb  "
+      expected (nonprintable as hex) : "  353    0x6d6410    Hello, World!    0.625000    EB    eb  "
+      actual   (nonprintable as hex) : "  353    6d6410    Hello, World!    123.45    EB    eb  "
 
 Test 2121 (mix_test_102) : FAILED.
     First line of code: {return test(
@@ -4962,24 +4913,24 @@ Test 2121 (mix_test_102) : FAILED.
 
 Test 2122 (mix_test_103) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    0.375000    eb    EB    0.625000    Hello, World!  "
-      your output     : "  6d5410    123.45    eb    EB    123.45    Hello, World!  "
-      expected (nonprintable as hex) : "  0x6d5410    0.375000    eb    EB    0.625000    Hello, World!  "
-      actual   (nonprintable as hex) : "  6d5410    123.45    eb    EB    123.45    Hello, World!  "
+      expected output : "  0x6d6410    0.375000    eb    EB    0.625000    Hello, World!  "
+      your output     : "  6d6410    123.45    eb    EB    123.45    Hello, World!  "
+      expected (nonprintable as hex) : "  0x6d6410    0.375000    eb    EB    0.625000    Hello, World!  "
+      actual   (nonprintable as hex) : "  6d6410    123.45    eb    EB    123.45    Hello, World!  "
 
 Test 2123 (mix_test_104) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    eb    3223372036654775200    42    353    0x6d5410  "
-      your output     : "  Hello, World!    eb    3223372036654775200    42    353    6d5410  "
-      expected (nonprintable as hex) : "  Hello, World!    eb    3223372036654775200    42    353    0x6d5410  "
-      actual   (nonprintable as hex) : "  Hello, World!    eb    3223372036654775200    42    353    6d5410  "
+      expected output : "  Hello, World!    eb    3223372036654775200    42    353    0x6d6410  "
+      your output     : "  Hello, World!    eb    3223372036654775200    42    353    6d6410  "
+      expected (nonprintable as hex) : "  Hello, World!    eb    3223372036654775200    42    353    0x6d6410  "
+      actual   (nonprintable as hex) : "  Hello, World!    eb    3223372036654775200    42    353    6d6410  "
 
 Test 2124 (mix_test_105) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    Hello, World!    0.375000    0x6d5410    3223372036654775200    eb  "
-      your output     : "  EB    Hello, World!    123.45    6d5410    3223372036654775200    eb  "
-      expected (nonprintable as hex) : "  EB    Hello, World!    0.375000    0x6d5410    3223372036654775200    eb  "
-      actual   (nonprintable as hex) : "  EB    Hello, World!    123.45    6d5410    3223372036654775200    eb  "
+      expected output : "  EB    Hello, World!    0.375000    0x6d6410    3223372036654775200    eb  "
+      your output     : "  EB    Hello, World!    123.45    6d6410    3223372036654775200    eb  "
+      expected (nonprintable as hex) : "  EB    Hello, World!    0.375000    0x6d6410    3223372036654775200    eb  "
+      actual   (nonprintable as hex) : "  EB    Hello, World!    123.45    6d6410    3223372036654775200    eb  "
 
 Test 2126 (mix_test_107) : FAILED.
     First line of code: {return test(
@@ -4990,10 +4941,10 @@ Test 2126 (mix_test_107) : FAILED.
 
 Test 2127 (mix_test_108) : FAILED.
     First line of code: {return test(
-      expected output : "  235    71    Hello, World!    G    0x6d5410    0.625000  "
-      your output     : "  235    71    Hello, World!    G    6d5410    123.45  "
-      expected (nonprintable as hex) : "  235    71    Hello, World!    G    0x6d5410    0.625000  "
-      actual   (nonprintable as hex) : "  235    71    Hello, World!    G    6d5410    123.45  "
+      expected output : "  235    71    Hello, World!    G    0x6d6410    0.625000  "
+      your output     : "  235    71    Hello, World!    G    6d6410    123.45  "
+      expected (nonprintable as hex) : "  235    71    Hello, World!    G    0x6d6410    0.625000  "
+      actual   (nonprintable as hex) : "  235    71    Hello, World!    G    6d6410    123.45  "
 
 Test 2128 (mix_test_109) : FAILED.
     First line of code: {return test(
@@ -5004,17 +4955,17 @@ Test 2128 (mix_test_109) : FAILED.
 
 Test 2129 (mix_test_110) : FAILED.
     First line of code: {return test(
-      expected output : "  42    0x6d5410    -3244    G    0.625000    Hello, World!  "
-      your output     : "  42    6d5410    -3244    G    123.45    Hello, World!  "
-      expected (nonprintable as hex) : "  42    0x6d5410    -3244    G    0.625000    Hello, World!  "
-      actual   (nonprintable as hex) : "  42    6d5410    -3244    G    123.45    Hello, World!  "
+      expected output : "  42    0x6d6410    -3244    G    0.625000    Hello, World!  "
+      your output     : "  42    6d6410    -3244    G    123.45    Hello, World!  "
+      expected (nonprintable as hex) : "  42    0x6d6410    -3244    G    0.625000    Hello, World!  "
+      actual   (nonprintable as hex) : "  42    6d6410    -3244    G    123.45    Hello, World!  "
 
 Test 2130 (mix_test_111) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    EB    3223372036654775200    -3244    0.375000    0.625000  "
-      your output     : "  6d5410    EB    3223372036654775200    -3244    123.45    123.45  "
-      expected (nonprintable as hex) : "  0x6d5410    EB    3223372036654775200    -3244    0.375000    0.625000  "
-      actual   (nonprintable as hex) : "  6d5410    EB    3223372036654775200    -3244    123.45    123.45  "
+      expected output : "  0x6d6410    EB    3223372036654775200    -3244    0.375000    0.625000  "
+      your output     : "  6d6410    EB    3223372036654775200    -3244    123.45    123.45  "
+      expected (nonprintable as hex) : "  0x6d6410    EB    3223372036654775200    -3244    0.375000    0.625000  "
+      actual   (nonprintable as hex) : "  6d6410    EB    3223372036654775200    -3244    123.45    123.45  "
 
 Test 2131 (mix_test_112) : FAILED.
     First line of code: {return test(
@@ -5025,24 +4976,24 @@ Test 2131 (mix_test_112) : FAILED.
 
 Test 2132 (mix_test_113) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    42    eb    G    0x6d5410    Hello, World!  "
-      your output     : "  EB    42    eb    G    6d5410    Hello, World!  "
-      expected (nonprintable as hex) : "  EB    42    eb    G    0x6d5410    Hello, World!  "
-      actual   (nonprintable as hex) : "  EB    42    eb    G    6d5410    Hello, World!  "
+      expected output : "  EB    42    eb    G    0x6d6410    Hello, World!  "
+      your output     : "  EB    42    eb    G    6d6410    Hello, World!  "
+      expected (nonprintable as hex) : "  EB    42    eb    G    0x6d6410    Hello, World!  "
+      actual   (nonprintable as hex) : "  EB    42    eb    G    6d6410    Hello, World!  "
 
 Test 2133 (mix_test_114) : FAILED.
     First line of code: {return test(
-      expected output : "  eb    0x6d5410    0.625000    235    -3244    353  "
-      your output     : "  eb    6d5410    123.45    235    -3244    353  "
-      expected (nonprintable as hex) : "  eb    0x6d5410    0.625000    235    -3244    353  "
-      actual   (nonprintable as hex) : "  eb    6d5410    123.45    235    -3244    353  "
+      expected output : "  eb    0x6d6410    0.625000    235    -3244    353  "
+      your output     : "  eb    6d6410    123.45    235    -3244    353  "
+      expected (nonprintable as hex) : "  eb    0x6d6410    0.625000    235    -3244    353  "
+      actual   (nonprintable as hex) : "  eb    6d6410    123.45    235    -3244    353  "
 
 Test 2134 (mix_test_115) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    71    3223372036654775200    0x6d5410    4223372036854775800    -3244  "
-      your output     : "  EB    71    3223372036654775200    6d5410    4223372036854775800    -3244  "
-      expected (nonprintable as hex) : "  EB    71    3223372036654775200    0x6d5410    4223372036854775800    -3244  "
-      actual   (nonprintable as hex) : "  EB    71    3223372036654775200    6d5410    4223372036854775800    -3244  "
+      expected output : "  EB    71    3223372036654775200    0x6d6410    4223372036854775800    -3244  "
+      your output     : "  EB    71    3223372036654775200    6d6410    4223372036854775800    -3244  "
+      expected (nonprintable as hex) : "  EB    71    3223372036654775200    0x6d6410    4223372036854775800    -3244  "
+      actual   (nonprintable as hex) : "  EB    71    3223372036654775200    6d6410    4223372036854775800    -3244  "
 
 Test 2135 (mix_test_116) : FAILED.
     First line of code: {return test(
@@ -5060,24 +5011,24 @@ Test 2136 (mix_test_117) : FAILED.
 
 Test 2137 (mix_test_118) : FAILED.
     First line of code: {return test(
-      expected output : "  353    0.625000    0.375000    eb    0x6d5410    71  "
-      your output     : "  353    123.45    123.45    eb    6d5410    71  "
-      expected (nonprintable as hex) : "  353    0.625000    0.375000    eb    0x6d5410    71  "
-      actual   (nonprintable as hex) : "  353    123.45    123.45    eb    6d5410    71  "
+      expected output : "  353    0.625000    0.375000    eb    0x6d6410    71  "
+      your output     : "  353    123.45    123.45    eb    6d6410    71  "
+      expected (nonprintable as hex) : "  353    0.625000    0.375000    eb    0x6d6410    71  "
+      actual   (nonprintable as hex) : "  353    123.45    123.45    eb    6d6410    71  "
 
 Test 2138 (mix_test_119) : FAILED.
     First line of code: {return test(
-      expected output : "  71    0x6d5410    42    -3244    353    G  "
-      your output     : "  71    6d5410    42    -3244    353    G  "
-      expected (nonprintable as hex) : "  71    0x6d5410    42    -3244    353    G  "
-      actual   (nonprintable as hex) : "  71    6d5410    42    -3244    353    G  "
+      expected output : "  71    0x6d6410    42    -3244    353    G  "
+      your output     : "  71    6d6410    42    -3244    353    G  "
+      expected (nonprintable as hex) : "  71    0x6d6410    42    -3244    353    G  "
+      actual   (nonprintable as hex) : "  71    6d6410    42    -3244    353    G  "
 
 Test 2139 (mix_test_120) : FAILED.
     First line of code: {return test(
-      expected output : "  EB    3223372036654775200    353    4223372036854775800    eb    0x6d5410  "
-      your output     : "  EB    3223372036654775200    353    4223372036854775800    eb    6d5410  "
-      expected (nonprintable as hex) : "  EB    3223372036654775200    353    4223372036854775800    eb    0x6d5410  "
-      actual   (nonprintable as hex) : "  EB    3223372036654775200    353    4223372036854775800    eb    6d5410  "
+      expected output : "  EB    3223372036654775200    353    4223372036854775800    eb    0x6d6410  "
+      your output     : "  EB    3223372036654775200    353    4223372036854775800    eb    6d6410  "
+      expected (nonprintable as hex) : "  EB    3223372036654775200    353    4223372036854775800    eb    0x6d6410  "
+      actual   (nonprintable as hex) : "  EB    3223372036654775200    353    4223372036854775800    eb    6d6410  "
 
 Test 2141 (mix_test_122) : FAILED.
     First line of code: {return test(
@@ -5088,10 +5039,10 @@ Test 2141 (mix_test_122) : FAILED.
 
 Test 2142 (mix_test_123) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    3223372036654775200    eb    0.375000    353    0x6d5410  "
-      your output     : "  123.45    3223372036654775200    eb    123.45    353    6d5410  "
-      expected (nonprintable as hex) : "  0.625000    3223372036654775200    eb    0.375000    353    0x6d5410  "
-      actual   (nonprintable as hex) : "  123.45    3223372036654775200    eb    123.45    353    6d5410  "
+      expected output : "  0.625000    3223372036654775200    eb    0.375000    353    0x6d6410  "
+      your output     : "  123.45    3223372036654775200    eb    123.45    353    6d6410  "
+      expected (nonprintable as hex) : "  0.625000    3223372036654775200    eb    0.375000    353    0x6d6410  "
+      actual   (nonprintable as hex) : "  123.45    3223372036654775200    eb    123.45    353    6d6410  "
 
 Test 2143 (mix_test_124) : FAILED.
     First line of code: {return test(
@@ -5102,10 +5053,10 @@ Test 2143 (mix_test_124) : FAILED.
 
 Test 2144 (mix_test_125) : FAILED.
     First line of code: {return test(
-      expected output : "  G    eb    71    42    0.375000    0x6d5410  "
-      your output     : "  G    eb    71    42    123.45    6d5410  "
-      expected (nonprintable as hex) : "  G    eb    71    42    0.375000    0x6d5410  "
-      actual   (nonprintable as hex) : "  G    eb    71    42    123.45    6d5410  "
+      expected output : "  G    eb    71    42    0.375000    0x6d6410  "
+      your output     : "  G    eb    71    42    123.45    6d6410  "
+      expected (nonprintable as hex) : "  G    eb    71    42    0.375000    0x6d6410  "
+      actual   (nonprintable as hex) : "  G    eb    71    42    123.45    6d6410  "
 
 Test 2145 (mix_test_126) : FAILED.
     First line of code: {return test(
@@ -5116,31 +5067,31 @@ Test 2145 (mix_test_126) : FAILED.
 
 Test 2146 (mix_test_127) : FAILED.
     First line of code: {return test(
-      expected output : "  42    0x6d5410    0.625000    353    4223372036854775800    0.375000  "
-      your output     : "  42    6d5410    123.45    353    4223372036854775800    123.45  "
-      expected (nonprintable as hex) : "  42    0x6d5410    0.625000    353    4223372036854775800    0.375000  "
-      actual   (nonprintable as hex) : "  42    6d5410    123.45    353    4223372036854775800    123.45  "
+      expected output : "  42    0x6d6410    0.625000    353    4223372036854775800    0.375000  "
+      your output     : "  42    6d6410    123.45    353    4223372036854775800    123.45  "
+      expected (nonprintable as hex) : "  42    0x6d6410    0.625000    353    4223372036854775800    0.375000  "
+      actual   (nonprintable as hex) : "  42    6d6410    123.45    353    4223372036854775800    123.45  "
 
 Test 2147 (mix_test_128) : FAILED.
     First line of code: {return test(
-      expected output : "  -3244    353    42    0.375000    3223372036654775200    0x6d5410  "
-      your output     : "  -3244    353    42    123.45    3223372036654775200    6d5410  "
-      expected (nonprintable as hex) : "  -3244    353    42    0.375000    3223372036654775200    0x6d5410  "
-      actual   (nonprintable as hex) : "  -3244    353    42    123.45    3223372036654775200    6d5410  "
+      expected output : "  -3244    353    42    0.375000    3223372036654775200    0x6d6410  "
+      your output     : "  -3244    353    42    123.45    3223372036654775200    6d6410  "
+      expected (nonprintable as hex) : "  -3244    353    42    0.375000    3223372036654775200    0x6d6410  "
+      actual   (nonprintable as hex) : "  -3244    353    42    123.45    3223372036654775200    6d6410  "
 
 Test 2149 (mix_test_130) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    0.625000    0x6d5410    71    42    235  "
-      your output     : "  4223372036854775800    123.45    6d5410    71    42    235  "
-      expected (nonprintable as hex) : "  4223372036854775800    0.625000    0x6d5410    71    42    235  "
-      actual   (nonprintable as hex) : "  4223372036854775800    123.45    6d5410    71    42    235  "
+      expected output : "  4223372036854775800    0.625000    0x6d6410    71    42    235  "
+      your output     : "  4223372036854775800    123.45    6d6410    71    42    235  "
+      expected (nonprintable as hex) : "  4223372036854775800    0.625000    0x6d6410    71    42    235  "
+      actual   (nonprintable as hex) : "  4223372036854775800    123.45    6d6410    71    42    235  "
 
 Test 2150 (mix_test_131) : FAILED.
     First line of code: {return test(
-      expected output : "  235    G    0x6d5410    353    71    0.625000  "
-      your output     : "  235    G    6d5410    353    71    123.45  "
-      expected (nonprintable as hex) : "  235    G    0x6d5410    353    71    0.625000  "
-      actual   (nonprintable as hex) : "  235    G    6d5410    353    71    123.45  "
+      expected output : "  235    G    0x6d6410    353    71    0.625000  "
+      your output     : "  235    G    6d6410    353    71    123.45  "
+      expected (nonprintable as hex) : "  235    G    0x6d6410    353    71    0.625000  "
+      actual   (nonprintable as hex) : "  235    G    6d6410    353    71    123.45  "
 
 Test 2151 (mix_test_132) : FAILED.
     First line of code: {return test(
@@ -5158,45 +5109,45 @@ Test 2152 (mix_test_133) : FAILED.
 
 Test 2153 (mix_test_134) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    0x6d5410    353    -3244    eb    4223372036854775800  "
-      your output     : "  123.45    6d5410    353    -3244    eb    4223372036854775800  "
-      expected (nonprintable as hex) : "  0.625000    0x6d5410    353    -3244    eb    4223372036854775800  "
-      actual   (nonprintable as hex) : "  123.45    6d5410    353    -3244    eb    4223372036854775800  "
+      expected output : "  0.625000    0x6d6410    353    -3244    eb    4223372036854775800  "
+      your output     : "  123.45    6d6410    353    -3244    eb    4223372036854775800  "
+      expected (nonprintable as hex) : "  0.625000    0x6d6410    353    -3244    eb    4223372036854775800  "
+      actual   (nonprintable as hex) : "  123.45    6d6410    353    -3244    eb    4223372036854775800  "
 
 Test 2154 (mix_test_135) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    EB    Hello, World!    4223372036854775800    235    G  "
-      your output     : "  6d5410    EB    Hello, World!    4223372036854775800    235    G  "
-      expected (nonprintable as hex) : "  0x6d5410    EB    Hello, World!    4223372036854775800    235    G  "
-      actual   (nonprintable as hex) : "  6d5410    EB    Hello, World!    4223372036854775800    235    G  "
+      expected output : "  0x6d6410    EB    Hello, World!    4223372036854775800    235    G  "
+      your output     : "  6d6410    EB    Hello, World!    4223372036854775800    235    G  "
+      expected (nonprintable as hex) : "  0x6d6410    EB    Hello, World!    4223372036854775800    235    G  "
+      actual   (nonprintable as hex) : "  6d6410    EB    Hello, World!    4223372036854775800    235    G  "
 
 Test 2155 (mix_test_136) : FAILED.
     First line of code: {return test(
-      expected output : "  71    353    EB    0x6d5410    Hello, World!    4223372036854775800  "
-      your output     : "  71    353    EB    6d5410    Hello, World!    4223372036854775800  "
-      expected (nonprintable as hex) : "  71    353    EB    0x6d5410    Hello, World!    4223372036854775800  "
-      actual   (nonprintable as hex) : "  71    353    EB    6d5410    Hello, World!    4223372036854775800  "
+      expected output : "  71    353    EB    0x6d6410    Hello, World!    4223372036854775800  "
+      your output     : "  71    353    EB    6d6410    Hello, World!    4223372036854775800  "
+      expected (nonprintable as hex) : "  71    353    EB    0x6d6410    Hello, World!    4223372036854775800  "
+      actual   (nonprintable as hex) : "  71    353    EB    6d6410    Hello, World!    4223372036854775800  "
 
 Test 2156 (mix_test_137) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    71    42    eb    EB    0.625000  "
-      your output     : "  6d5410    71    42    eb    EB    123.45  "
-      expected (nonprintable as hex) : "  0x6d5410    71    42    eb    EB    0.625000  "
-      actual   (nonprintable as hex) : "  6d5410    71    42    eb    EB    123.45  "
+      expected output : "  0x6d6410    71    42    eb    EB    0.625000  "
+      your output     : "  6d6410    71    42    eb    EB    123.45  "
+      expected (nonprintable as hex) : "  0x6d6410    71    42    eb    EB    0.625000  "
+      actual   (nonprintable as hex) : "  6d6410    71    42    eb    EB    123.45  "
 
 Test 2157 (mix_test_138) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    4223372036854775800    42    eb    0x6d5410    353  "
-      your output     : "  Hello, World!    4223372036854775800    42    eb    6d5410    353  "
-      expected (nonprintable as hex) : "  Hello, World!    4223372036854775800    42    eb    0x6d5410    353  "
-      actual   (nonprintable as hex) : "  Hello, World!    4223372036854775800    42    eb    6d5410    353  "
+      expected output : "  Hello, World!    4223372036854775800    42    eb    0x6d6410    353  "
+      your output     : "  Hello, World!    4223372036854775800    42    eb    6d6410    353  "
+      expected (nonprintable as hex) : "  Hello, World!    4223372036854775800    42    eb    0x6d6410    353  "
+      actual   (nonprintable as hex) : "  Hello, World!    4223372036854775800    42    eb    6d6410    353  "
 
 Test 2159 (mix_test_140) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    G    eb    -3244    3223372036654775200    235  "
-      your output     : "  6d5410    G    eb    -3244    3223372036654775200    235  "
-      expected (nonprintable as hex) : "  0x6d5410    G    eb    -3244    3223372036654775200    235  "
-      actual   (nonprintable as hex) : "  6d5410    G    eb    -3244    3223372036654775200    235  "
+      expected output : "  0x6d6410    G    eb    -3244    3223372036654775200    235  "
+      your output     : "  6d6410    G    eb    -3244    3223372036654775200    235  "
+      expected (nonprintable as hex) : "  0x6d6410    G    eb    -3244    3223372036654775200    235  "
+      actual   (nonprintable as hex) : "  6d6410    G    eb    -3244    3223372036654775200    235  "
 
 Test 2160 (mix_test_141) : FAILED.
     First line of code: {return test(
@@ -5207,38 +5158,38 @@ Test 2160 (mix_test_141) : FAILED.
 
 Test 2162 (mix_test_143) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    71    3223372036654775200    Hello, World!    G    235  "
-      your output     : "  6d5410    71    3223372036654775200    Hello, World!    G    235  "
-      expected (nonprintable as hex) : "  0x6d5410    71    3223372036654775200    Hello, World!    G    235  "
-      actual   (nonprintable as hex) : "  6d5410    71    3223372036654775200    Hello, World!    G    235  "
+      expected output : "  0x6d6410    71    3223372036654775200    Hello, World!    G    235  "
+      your output     : "  6d6410    71    3223372036654775200    Hello, World!    G    235  "
+      expected (nonprintable as hex) : "  0x6d6410    71    3223372036654775200    Hello, World!    G    235  "
+      actual   (nonprintable as hex) : "  6d6410    71    3223372036654775200    Hello, World!    G    235  "
 
 Test 2163 (mix_test_144) : FAILED.
     First line of code: {return test(
-      expected output : "  eb    0x6d5410    42    0.375000    235    Hello, World!  "
-      your output     : "  eb    6d5410    42    123.45    235    Hello, World!  "
-      expected (nonprintable as hex) : "  eb    0x6d5410    42    0.375000    235    Hello, World!  "
-      actual   (nonprintable as hex) : "  eb    6d5410    42    123.45    235    Hello, World!  "
+      expected output : "  eb    0x6d6410    42    0.375000    235    Hello, World!  "
+      your output     : "  eb    6d6410    42    123.45    235    Hello, World!  "
+      expected (nonprintable as hex) : "  eb    0x6d6410    42    0.375000    235    Hello, World!  "
+      actual   (nonprintable as hex) : "  eb    6d6410    42    123.45    235    Hello, World!  "
 
 Test 2165 (mix_test_146) : FAILED.
     First line of code: {return test(
-      expected output : "  235    G    0x6d5410    71    EB    0.625000  "
-      your output     : "  235    G    6d5410    71    EB    123.45  "
-      expected (nonprintable as hex) : "  235    G    0x6d5410    71    EB    0.625000  "
-      actual   (nonprintable as hex) : "  235    G    6d5410    71    EB    123.45  "
+      expected output : "  235    G    0x6d6410    71    EB    0.625000  "
+      your output     : "  235    G    6d6410    71    EB    123.45  "
+      expected (nonprintable as hex) : "  235    G    0x6d6410    71    EB    0.625000  "
+      actual   (nonprintable as hex) : "  235    G    6d6410    71    EB    123.45  "
 
 Test 2166 (mix_test_147) : FAILED.
     First line of code: {return test(
-      expected output : "  71    4223372036854775800    0x6d5410    Hello, World!    0.375000    353  "
-      your output     : "  71    4223372036854775800    6d5410    Hello, World!    123.45    353  "
-      expected (nonprintable as hex) : "  71    4223372036854775800    0x6d5410    Hello, World!    0.375000    353  "
-      actual   (nonprintable as hex) : "  71    4223372036854775800    6d5410    Hello, World!    123.45    353  "
+      expected output : "  71    4223372036854775800    0x6d6410    Hello, World!    0.375000    353  "
+      your output     : "  71    4223372036854775800    6d6410    Hello, World!    123.45    353  "
+      expected (nonprintable as hex) : "  71    4223372036854775800    0x6d6410    Hello, World!    0.375000    353  "
+      actual   (nonprintable as hex) : "  71    4223372036854775800    6d6410    Hello, World!    123.45    353  "
 
 Test 2168 (mix_test_149) : FAILED.
     First line of code: {return test(
-      expected output : "  G    0x6d5410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
-      your output     : "  G    6d5410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
-      expected (nonprintable as hex) : "  G    0x6d5410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
-      actual   (nonprintable as hex) : "  G    6d5410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
+      expected output : "  G    0x6d6410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
+      your output     : "  G    6d6410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
+      expected (nonprintable as hex) : "  G    0x6d6410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
+      actual   (nonprintable as hex) : "  G    6d6410    4223372036854775800    EB    Hello, World!    3223372036654775200  "
 
 Test 2169 (mix_test_150) : FAILED.
     First line of code: {return test(
@@ -5256,17 +5207,17 @@ Test 2170 (mix_test_151) : FAILED.
 
 Test 2172 (mix_test_153) : FAILED.
     First line of code: {return test(
-      expected output : "  0.375000    4223372036854775800    71    Hello, World!    0x6d5410    G  "
-      your output     : "  123.45    4223372036854775800    71    Hello, World!    6d5410    G  "
-      expected (nonprintable as hex) : "  0.375000    4223372036854775800    71    Hello, World!    0x6d5410    G  "
-      actual   (nonprintable as hex) : "  123.45    4223372036854775800    71    Hello, World!    6d5410    G  "
+      expected output : "  0.375000    4223372036854775800    71    Hello, World!    0x6d6410    G  "
+      your output     : "  123.45    4223372036854775800    71    Hello, World!    6d6410    G  "
+      expected (nonprintable as hex) : "  0.375000    4223372036854775800    71    Hello, World!    0x6d6410    G  "
+      actual   (nonprintable as hex) : "  123.45    4223372036854775800    71    Hello, World!    6d6410    G  "
 
 Test 2173 (mix_test_154) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    EB    353    235    3223372036654775200    4223372036854775800  "
-      your output     : "  6d5410    EB    353    235    3223372036654775200    4223372036854775800  "
-      expected (nonprintable as hex) : "  0x6d5410    EB    353    235    3223372036654775200    4223372036854775800  "
-      actual   (nonprintable as hex) : "  6d5410    EB    353    235    3223372036654775200    4223372036854775800  "
+      expected output : "  0x6d6410    EB    353    235    3223372036654775200    4223372036854775800  "
+      your output     : "  6d6410    EB    353    235    3223372036654775200    4223372036854775800  "
+      expected (nonprintable as hex) : "  0x6d6410    EB    353    235    3223372036654775200    4223372036854775800  "
+      actual   (nonprintable as hex) : "  6d6410    EB    353    235    3223372036654775200    4223372036854775800  "
 
 Test 2174 (mix_test_155) : FAILED.
     First line of code: {return test(
@@ -5284,17 +5235,17 @@ Test 2175 (mix_test_156) : FAILED.
 
 Test 2176 (mix_test_157) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    42    0.375000    G    4223372036854775800    EB  "
-      your output     : "  6d5410    42    123.45    G    4223372036854775800    EB  "
-      expected (nonprintable as hex) : "  0x6d5410    42    0.375000    G    4223372036854775800    EB  "
-      actual   (nonprintable as hex) : "  6d5410    42    123.45    G    4223372036854775800    EB  "
+      expected output : "  0x6d6410    42    0.375000    G    4223372036854775800    EB  "
+      your output     : "  6d6410    42    123.45    G    4223372036854775800    EB  "
+      expected (nonprintable as hex) : "  0x6d6410    42    0.375000    G    4223372036854775800    EB  "
+      actual   (nonprintable as hex) : "  6d6410    42    123.45    G    4223372036854775800    EB  "
 
 Test 2177 (mix_test_158) : FAILED.
     First line of code: {return test(
-      expected output : "  42    0x6d5410    G    0.625000    eb    4223372036854775800  "
-      your output     : "  42    6d5410    G    123.45    eb    4223372036854775800  "
-      expected (nonprintable as hex) : "  42    0x6d5410    G    0.625000    eb    4223372036854775800  "
-      actual   (nonprintable as hex) : "  42    6d5410    G    123.45    eb    4223372036854775800  "
+      expected output : "  42    0x6d6410    G    0.625000    eb    4223372036854775800  "
+      your output     : "  42    6d6410    G    123.45    eb    4223372036854775800  "
+      expected (nonprintable as hex) : "  42    0x6d6410    G    0.625000    eb    4223372036854775800  "
+      actual   (nonprintable as hex) : "  42    6d6410    G    123.45    eb    4223372036854775800  "
 
 Test 2178 (mix_test_159) : FAILED.
     First line of code: {return test(
@@ -5305,10 +5256,10 @@ Test 2178 (mix_test_159) : FAILED.
 
 Test 2179 (mix_test_160) : FAILED.
     First line of code: {return test(
-      expected output : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x6d5410  "
-      your output     : "  4223372036854775800    -3244    71    3223372036654775200    123.45    6d5410  "
-      expected (nonprintable as hex) : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x6d5410  "
-      actual   (nonprintable as hex) : "  4223372036854775800    -3244    71    3223372036654775200    123.45    6d5410  "
+      expected output : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x6d6410  "
+      your output     : "  4223372036854775800    -3244    71    3223372036654775200    123.45    6d6410  "
+      expected (nonprintable as hex) : "  4223372036854775800    -3244    71    3223372036654775200    0.375000    0x6d6410  "
+      actual   (nonprintable as hex) : "  4223372036854775800    -3244    71    3223372036654775200    123.45    6d6410  "
 
 Test 2180 (mix_test_161) : FAILED.
     First line of code: {return test(
@@ -5326,73 +5277,73 @@ Test 2182 (mix_test_163) : FAILED.
 
 Test 2183 (mix_test_164) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
-      your output     : "  6d5410    3223372036654775200    -3244    eb    4223372036854775800    123.45  "
-      expected (nonprintable as hex) : "  0x6d5410    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
-      actual   (nonprintable as hex) : "  6d5410    3223372036654775200    -3244    eb    4223372036854775800    123.45  "
+      expected output : "  0x6d6410    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
+      your output     : "  6d6410    3223372036654775200    -3244    eb    4223372036854775800    123.45  "
+      expected (nonprintable as hex) : "  0x6d6410    3223372036654775200    -3244    eb    4223372036854775800    0.375000  "
+      actual   (nonprintable as hex) : "  6d6410    3223372036654775200    -3244    eb    4223372036854775800    123.45  "
 
 Test 2184 (mix_test_165) : FAILED.
     First line of code: {return test(
-      expected output : "  235    71    0x6d5410    3223372036654775200    -3244    eb  "
-      your output     : "  235    71    6d5410    3223372036654775200    -3244    eb  "
-      expected (nonprintable as hex) : "  235    71    0x6d5410    3223372036654775200    -3244    eb  "
-      actual   (nonprintable as hex) : "  235    71    6d5410    3223372036654775200    -3244    eb  "
+      expected output : "  235    71    0x6d6410    3223372036654775200    -3244    eb  "
+      your output     : "  235    71    6d6410    3223372036654775200    -3244    eb  "
+      expected (nonprintable as hex) : "  235    71    0x6d6410    3223372036654775200    -3244    eb  "
+      actual   (nonprintable as hex) : "  235    71    6d6410    3223372036654775200    -3244    eb  "
 
 Test 2185 (mix_test_166) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    71    Hello, World!    4223372036854775800    0.375000    -3244  "
-      your output     : "  6d5410    71    Hello, World!    4223372036854775800    123.45    -3244  "
-      expected (nonprintable as hex) : "  0x6d5410    71    Hello, World!    4223372036854775800    0.375000    -3244  "
-      actual   (nonprintable as hex) : "  6d5410    71    Hello, World!    4223372036854775800    123.45    -3244  "
+      expected output : "  0x6d6410    71    Hello, World!    4223372036854775800    0.375000    -3244  "
+      your output     : "  6d6410    71    Hello, World!    4223372036854775800    123.45    -3244  "
+      expected (nonprintable as hex) : "  0x6d6410    71    Hello, World!    4223372036854775800    0.375000    -3244  "
+      actual   (nonprintable as hex) : "  6d6410    71    Hello, World!    4223372036854775800    123.45    -3244  "
 
 Test 2186 (mix_test_167) : FAILED.
     First line of code: {return test(
-      expected output : "  Hello, World!    3223372036654775200    0x6d5410    42    235    71  "
-      your output     : "  Hello, World!    3223372036654775200    6d5410    42    235    71  "
-      expected (nonprintable as hex) : "  Hello, World!    3223372036654775200    0x6d5410    42    235    71  "
-      actual   (nonprintable as hex) : "  Hello, World!    3223372036654775200    6d5410    42    235    71  "
+      expected output : "  Hello, World!    3223372036654775200    0x6d6410    42    235    71  "
+      your output     : "  Hello, World!    3223372036654775200    6d6410    42    235    71  "
+      expected (nonprintable as hex) : "  Hello, World!    3223372036654775200    0x6d6410    42    235    71  "
+      actual   (nonprintable as hex) : "  Hello, World!    3223372036654775200    6d6410    42    235    71  "
 
 Test 2187 (mix_test_168) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    353    0.375000    EB    G    235  "
-      your output     : "  6d5410    353    123.45    EB    G    235  "
-      expected (nonprintable as hex) : "  0x6d5410    353    0.375000    EB    G    235  "
-      actual   (nonprintable as hex) : "  6d5410    353    123.45    EB    G    235  "
+      expected output : "  0x6d6410    353    0.375000    EB    G    235  "
+      your output     : "  6d6410    353    123.45    EB    G    235  "
+      expected (nonprintable as hex) : "  0x6d6410    353    0.375000    EB    G    235  "
+      actual   (nonprintable as hex) : "  6d6410    353    123.45    EB    G    235  "
 
 Test 2188 (mix_test_169) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    42    EB    3223372036654775200    G    71  "
-      your output     : "  6d5410    42    EB    3223372036654775200    G    71  "
-      expected (nonprintable as hex) : "  0x6d5410    42    EB    3223372036654775200    G    71  "
-      actual   (nonprintable as hex) : "  6d5410    42    EB    3223372036654775200    G    71  "
+      expected output : "  0x6d6410    42    EB    3223372036654775200    G    71  "
+      your output     : "  6d6410    42    EB    3223372036654775200    G    71  "
+      expected (nonprintable as hex) : "  0x6d6410    42    EB    3223372036654775200    G    71  "
+      actual   (nonprintable as hex) : "  6d6410    42    EB    3223372036654775200    G    71  "
 
 Test 2189 (mix_test_170) : FAILED.
     First line of code: {return test(
-      expected output : "  42    3223372036654775200    0x6d5410    353    EB    0.625000  "
-      your output     : "  42    3223372036654775200    6d5410    353    EB    123.45  "
-      expected (nonprintable as hex) : "  42    3223372036654775200    0x6d5410    353    EB    0.625000  "
-      actual   (nonprintable as hex) : "  42    3223372036654775200    6d5410    353    EB    123.45  "
+      expected output : "  42    3223372036654775200    0x6d6410    353    EB    0.625000  "
+      your output     : "  42    3223372036654775200    6d6410    353    EB    123.45  "
+      expected (nonprintable as hex) : "  42    3223372036654775200    0x6d6410    353    EB    0.625000  "
+      actual   (nonprintable as hex) : "  42    3223372036654775200    6d6410    353    EB    123.45  "
 
 Test 2190 (mix_test_171) : FAILED.
     First line of code: {return test(
-      expected output : "  0.625000    0x6d5410    G    -3244    4223372036854775800    42  "
-      your output     : "  123.45    6d5410    G    -3244    4223372036854775800    42  "
-      expected (nonprintable as hex) : "  0.625000    0x6d5410    G    -3244    4223372036854775800    42  "
-      actual   (nonprintable as hex) : "  123.45    6d5410    G    -3244    4223372036854775800    42  "
+      expected output : "  0.625000    0x6d6410    G    -3244    4223372036854775800    42  "
+      your output     : "  123.45    6d6410    G    -3244    4223372036854775800    42  "
+      expected (nonprintable as hex) : "  0.625000    0x6d6410    G    -3244    4223372036854775800    42  "
+      actual   (nonprintable as hex) : "  123.45    6d6410    G    -3244    4223372036854775800    42  "
 
 Test 2192 (mix_test_173) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    -3244    3223372036654775200    EB    eb    353  "
-      your output     : "  6d5410    -3244    3223372036654775200    EB    eb    353  "
-      expected (nonprintable as hex) : "  0x6d5410    -3244    3223372036654775200    EB    eb    353  "
-      actual   (nonprintable as hex) : "  6d5410    -3244    3223372036654775200    EB    eb    353  "
+      expected output : "  0x6d6410    -3244    3223372036654775200    EB    eb    353  "
+      your output     : "  6d6410    -3244    3223372036654775200    EB    eb    353  "
+      expected (nonprintable as hex) : "  0x6d6410    -3244    3223372036654775200    EB    eb    353  "
+      actual   (nonprintable as hex) : "  6d6410    -3244    3223372036654775200    EB    eb    353  "
 
 Test 2193 (mix_test_174) : FAILED.
     First line of code: {return test(
-      expected output : "  71    EB    235    0x6d5410    eb    3223372036654775200  "
-      your output     : "  71    EB    235    6d5410    eb    3223372036654775200  "
-      expected (nonprintable as hex) : "  71    EB    235    0x6d5410    eb    3223372036654775200  "
-      actual   (nonprintable as hex) : "  71    EB    235    6d5410    eb    3223372036654775200  "
+      expected output : "  71    EB    235    0x6d6410    eb    3223372036654775200  "
+      your output     : "  71    EB    235    6d6410    eb    3223372036654775200  "
+      expected (nonprintable as hex) : "  71    EB    235    0x6d6410    eb    3223372036654775200  "
+      actual   (nonprintable as hex) : "  71    EB    235    6d6410    eb    3223372036654775200  "
 
 Test 2194 (mix_test_175) : FAILED.
     First line of code: {return test(
@@ -5410,10 +5361,10 @@ Test 2195 (mix_test_176) : FAILED.
 
 Test 2196 (mix_test_177) : FAILED.
     First line of code: {return test(
-      expected output : "  235    71    0x6d5410    353    EB    eb  "
-      your output     : "  235    71    6d5410    353    EB    eb  "
-      expected (nonprintable as hex) : "  235    71    0x6d5410    353    EB    eb  "
-      actual   (nonprintable as hex) : "  235    71    6d5410    353    EB    eb  "
+      expected output : "  235    71    0x6d6410    353    EB    eb  "
+      your output     : "  235    71    6d6410    353    EB    eb  "
+      expected (nonprintable as hex) : "  235    71    0x6d6410    353    EB    eb  "
+      actual   (nonprintable as hex) : "  235    71    6d6410    353    EB    eb  "
 
 Test 2197 (mix_test_178) : FAILED.
     First line of code: {return test(
@@ -5424,10 +5375,10 @@ Test 2197 (mix_test_178) : FAILED.
 
 Test 2198 (mix_test_179) : FAILED.
     First line of code: {return test(
-      expected output : "  3223372036654775200    353    4223372036854775800    EB    0x6d5410    G  "
-      your output     : "  3223372036654775200    353    4223372036854775800    EB    6d5410    G  "
-      expected (nonprintable as hex) : "  3223372036654775200    353    4223372036854775800    EB    0x6d5410    G  "
-      actual   (nonprintable as hex) : "  3223372036654775200    353    4223372036854775800    EB    6d5410    G  "
+      expected output : "  3223372036654775200    353    4223372036854775800    EB    0x6d6410    G  "
+      your output     : "  3223372036654775200    353    4223372036854775800    EB    6d6410    G  "
+      expected (nonprintable as hex) : "  3223372036654775200    353    4223372036854775800    EB    0x6d6410    G  "
+      actual   (nonprintable as hex) : "  3223372036654775200    353    4223372036854775800    EB    6d6410    G  "
 
 Test 2201 (mix_test_182) : FAILED.
     First line of code: {return test(
@@ -5515,10 +5466,10 @@ Test 2216 (mix_test_197) : FAILED.
 
 Test 2217 (mix_test_198) : FAILED.
     First line of code: {return test(
-      expected output : "  0x6d5410    42    eb    0.375000    235    353  "
-      your output     : "  6d5410    42    eb    123.45    235    353  "
-      expected (nonprintable as hex) : "  0x6d5410    42    eb    0.375000    235    353  "
-      actual   (nonprintable as hex) : "  6d5410    42    eb    123.45    235    353  "
+      expected output : "  0x6d6410    42    eb    0.375000    235    353  "
+      your output     : "  6d6410    42    eb    123.45    235    353  "
+      expected (nonprintable as hex) : "  0x6d6410    42    eb    0.375000    235    353  "
+      actual   (nonprintable as hex) : "  6d6410    42    eb    123.45    235    353  "
 
 Test 2218 (mix_test_199) : FAILED.
     First line of code: {return test(
@@ -5578,10 +5529,10 @@ Test 2225 (mix_test_extra_7) : FAILED.
 
 Test 2228 (mix_test_extra_10) : FAILED.
     First line of code: {return test(
-      expected output : "  G    %    70    0x6d5414    -3244    eb  "
-      your output     : "  G    %    70    6d5414    -3244    eb  "
-      expected (nonprintable as hex) : "  G    %    70    0x6d5414    -3244    eb  "
-      actual   (nonprintable as hex) : "  G    %    70    6d5414    -3244    eb  "
+      expected output : "  G    %    70    0x6d6414    -3244    eb  "
+      your output     : "  G    %    70    6d6414    -3244    eb  "
+      expected (nonprintable as hex) : "  G    %    70    0x6d6414    -3244    eb  "
+      actual   (nonprintable as hex) : "  G    %    70    6d6414    -3244    eb  "
 
 Test 2231 (mix_successive_2) : FAILED.
     First line of code: {return ( test("%s", mx_s) + test("%Lf", mx_Lf));}
@@ -5599,24 +5550,24 @@ Test 2232 (mix_successive_3) : FAILED.
 
 Test 2236 (mix_successive_7) : FAILED.
     First line of code: {return ( test("%p", &mx_i) + test("%hi", mx_hi));}
-      expected output : "0x6d5410-3244"
-      your output     : "6d5410-3244"
-      expected (nonprintable as hex) : "0x6d5410-3244"
-      actual   (nonprintable as hex) : "6d5410-3244"
+      expected output : "0x6d6410-3244"
+      your output     : "6d6410-3244"
+      expected (nonprintable as hex) : "0x6d6410-3244"
+      actual   (nonprintable as hex) : "6d6410-3244"
 
 Test 2237 (mix_successive_8) : FAILED.
     First line of code: {return ( test("%f", mx_f) + test("%p", &mx_i));}
-      expected output : "0.6250000x6d5410"
-      your output     : "123.456d5410"
-      expected (nonprintable as hex) : "0.6250000x6d5410"
-      actual   (nonprintable as hex) : "123.456d5410"
+      expected output : "0.6250000x6d6410"
+      your output     : "123.456d6410"
+      expected (nonprintable as hex) : "0.6250000x6d6410"
+      actual   (nonprintable as hex) : "123.456d6410"
 
 Test 2240 (mix_successive_11) : FAILED.
     First line of code: {return ( test("%Lf", mx_Lf) + test("%p", &mx_i));}
-      expected output : "0.3750000x6d5410"
-      your output     : "123.456d5410"
-      expected (nonprintable as hex) : "0.3750000x6d5410"
-      actual   (nonprintable as hex) : "123.456d5410"
+      expected output : "0.3750000x6d6410"
+      your output     : "123.456d6410"
+      expected (nonprintable as hex) : "0.3750000x6d6410"
+      actual   (nonprintable as hex) : "123.456d6410"
 
 Test 2241 (mix_successive_12) : FAILED.
     First line of code: {return ( test("%f", mx_f) + test("%hhi", mx_c));}
@@ -5634,17 +5585,17 @@ Test 2243 (mix_successive_14) : FAILED.
 
 Test 2249 (mix_successive_20) : FAILED.
     First line of code: {return ( test("%p", &mx_i) + test("%s", mx_s));}
-      expected output : "0x6d5410Hello, World!"
-      your output     : "6d5410Hello, World!"
-      expected (nonprintable as hex) : "0x6d5410Hello, World!"
-      actual   (nonprintable as hex) : "6d5410Hello, World!"
+      expected output : "0x6d6410Hello, World!"
+      your output     : "6d6410Hello, World!"
+      expected (nonprintable as hex) : "0x6d6410Hello, World!"
+      actual   (nonprintable as hex) : "6d6410Hello, World!"
 
 Test 2251 (mix_successive_22) : FAILED.
     First line of code: {return ( test("%p", &mx_i) + test("%lli", mx_lli));}
-      expected output : "0x6d54103223372036654775200"
-      your output     : "6d54103223372036654775200"
-      expected (nonprintable as hex) : "0x6d54103223372036654775200"
-      actual   (nonprintable as hex) : "6d54103223372036654775200"
+      expected output : "0x6d64103223372036654775200"
+      your output     : "6d64103223372036654775200"
+      expected (nonprintable as hex) : "0x6d64103223372036654775200"
+      actual   (nonprintable as hex) : "6d64103223372036654775200"
 
 Test 2252 (mix_successive_23) : FAILED.
     First line of code: {return ( test("%s", mx_s) + test("%f", mx_f));}
@@ -5676,10 +5627,10 @@ Test 2262 (mix_successive_33) : FAILED.
 
 Test 2264 (mix_successive_35) : FAILED.
     First line of code: {return ( test("%p", &mx_i) + test("%f", mx_f));}
-      expected output : "0x6d54100.625000"
-      your output     : "6d5410123.45"
-      expected (nonprintable as hex) : "0x6d54100.625000"
-      actual   (nonprintable as hex) : "6d5410123.45"
+      expected output : "0x6d64100.625000"
+      your output     : "6d6410123.45"
+      expected (nonprintable as hex) : "0x6d64100.625000"
+      actual   (nonprintable as hex) : "6d6410123.45"
 
 Test 2273 (mix_successive_44) : FAILED.
     First line of code: {return ( test("%i", mx_i) + test("%f", mx_f));}
@@ -5718,10 +5669,10 @@ Test 2287 (mix_successive_58) : FAILED.
 
 Test 2290 (mix_successive_61) : FAILED.
     First line of code: {return ( test("%p", &mx_i) + test("%c", mx_c));}
-      expected output : "0x6d5410G"
-      your output     : "6d5410G"
-      expected (nonprintable as hex) : "0x6d5410G"
-      actual   (nonprintable as hex) : "6d5410G"
+      expected output : "0x6d6410G"
+      your output     : "6d6410G"
+      expected (nonprintable as hex) : "0x6d6410G"
+      actual   (nonprintable as hex) : "6d6410G"
 
 Test 2295 (mix_successive_66) : FAILED.
     First line of code: {return ( test("%li", mx_li) + test("%Lf", mx_Lf));}
@@ -5739,10 +5690,10 @@ Test 2298 (mix_successive_69) : FAILED.
 
 Test 2506 (moul_mix_1) : FAILED.
     First line of code: {int r00 = 0; return test("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p", 100, "Ly", &r00);}
-      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7ffd4ee55ffc"
-      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 4ee55ffc"
-      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7ffd4ee55ffc"
-      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 4ee55ffc"
+      expected output : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. 0x7fff8600f2ec"
+      your output     : "Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. ffffffff8600f2ec"
+      expected (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. 0x7fff8600f2ec"
+      actual   (nonprintable as hex) : "Lalalala, 100% des gens qui parlent \xc3\xa0 Ly adorent Ly. Ou Presque. ffffffff8600f2ec"
 
 Test 2510 (moul_c_4) : FAILED.
     First line of code: {return test("%c", -0);}
@@ -5863,116 +5814,4 @@ Test 2584 (moul_f_12) : FAILED.
 "
       expected (nonprintable as hex) : "%f 42.42 == |42.420000|\x0a"
       actual   (nonprintable as hex) : "%f 42.42 == |123.45|\x0a"
-
-Test 2601 (moul_o_3) : FAILED.
-    First line of code: {return test("Il fait au moins %o
-", -8000);}
-      expected output : "Il fait au moins 37777760300
-"
-      your output     : "Il fait au moins 1777777777777777760300
-"
-      expected (nonprintable as hex) : "Il fait au moins 37777760300\x0a"
-      actual   (nonprintable as hex) : "Il fait au moins 1777777777777777760300\x0a"
-
-Test 2605 (moul_o_7) : FAILED.
-    First line of code: {return test("%o", INT_MIN);}
-      expected output : "20000000000"
-      your output     : "1777777777760000000000"
-      expected (nonprintable as hex) : "20000000000"
-      actual   (nonprintable as hex) : "1777777777760000000000"
-
-Test 2607 (moul_o_9) : FAILED.
-    First line of code: {return test("%o", INT_MAX + 1);}
-      expected output : "20000000000"
-      your output     : "1777777777760000000000"
-      expected (nonprintable as hex) : "20000000000"
-      actual   (nonprintable as hex) : "1777777777760000000000"
-
-Test 2613 (moul_u_3) : FAILED.
-    First line of code: {return test("Il fait au moins %u
-", -8000);}
-      expected output : "Il fait au moins 4294959296
-"
-      your output     : "Il fait au moins 18446744073709543616
-"
-      expected (nonprintable as hex) : "Il fait au moins 4294959296\x0a"
-      actual   (nonprintable as hex) : "Il fait au moins 18446744073709543616\x0a"
-
-Test 2617 (moul_u_7) : FAILED.
-    First line of code: {return test("%u", INT_MIN);}
-      expected output : "2147483648"
-      your output     : "18446744071562067968"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "18446744071562067968"
-
-Test 2619 (moul_u_9) : FAILED.
-    First line of code: {return test("%u", INT_MAX + 1);}
-      expected output : "2147483648"
-      your output     : "18446744071562067968"
-      expected (nonprintable as hex) : "2147483648"
-      actual   (nonprintable as hex) : "18446744071562067968"
-
-Test 2625 (moul_x_3) : FAILED.
-    First line of code: {return test("Il fait au moins %x
-", -8000);}
-      expected output : "Il fait au moins ffffe0c0
-"
-      your output     : "Il fait au moins ffffffffffffe0c0
-"
-      expected (nonprintable as hex) : "Il fait au moins ffffe0c0\x0a"
-      actual   (nonprintable as hex) : "Il fait au moins ffffffffffffe0c0\x0a"
-
-Test 2629 (moul_x_7) : FAILED.
-    First line of code: {return test("%x", INT_MIN);}
-      expected output : "80000000"
-      your output     : "ffffffff80000000"
-      expected (nonprintable as hex) : "80000000"
-      actual   (nonprintable as hex) : "ffffffff80000000"
-
-Test 2631 (moul_x_9) : FAILED.
-    First line of code: {return test("%x", INT_MAX + 1);}
-      expected output : "80000000"
-      your output     : "ffffffff80000000"
-      expected (nonprintable as hex) : "80000000"
-      actual   (nonprintable as hex) : "ffffffff80000000"
-
-Test 2641 (moul_hash_7) : FAILED.
-    First line of code: {return test("%%#o INT_MIN ==  %#o
-", INT_MIN);}
-      expected output : "%#o INT_MIN ==  020000000000
-"
-      your output     : "%#o INT_MIN ==  01777777777760000000000
-"
-      expected (nonprintable as hex) : "%#o INT_MIN ==  020000000000\x0a"
-      actual   (nonprintable as hex) : "%#o INT_MIN ==  01777777777760000000000\x0a"
-
-Test 2642 (moul_hash_8) : FAILED.
-    First line of code: {return test("%%o INT_MIN ==  %o
-", INT_MIN);}
-      expected output : "%o INT_MIN ==  20000000000
-"
-      your output     : "%o INT_MIN ==  1777777777760000000000
-"
-      expected (nonprintable as hex) : "%o INT_MIN ==  20000000000\x0a"
-      actual   (nonprintable as hex) : "%o INT_MIN ==  1777777777760000000000\x0a"
-
-Test 2643 (moul_hash_9) : FAILED.
-    First line of code: {return test("%%#X INT_MIN ==  %#X
-", INT_MIN);}
-      expected output : "%#X INT_MIN ==  0X80000000
-"
-      your output     : "%#X INT_MIN ==  0XFFFFFFFF80000000
-"
-      expected (nonprintable as hex) : "%#X INT_MIN ==  0X80000000\x0a"
-      actual   (nonprintable as hex) : "%#X INT_MIN ==  0XFFFFFFFF80000000\x0a"
-
-Test 2644 (moul_hash_10) : FAILED.
-    First line of code: {return test("%%X INT_MIN ==  %X
-", INT_MIN);}
-      expected output : "%X INT_MIN ==  80000000
-"
-      your output     : "%X INT_MIN ==  FFFFFFFF80000000
-"
-      expected (nonprintable as hex) : "%X INT_MIN ==  80000000\x0a"
-      actual   (nonprintable as hex) : "%X INT_MIN ==  FFFFFFFF80000000\x0a"
 
