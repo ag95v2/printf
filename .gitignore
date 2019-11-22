@@ -3,3 +3,6 @@
 libftprintf.a
 .*.swp
 *.gch
+.idea
+.vscode
+.DS_Store
