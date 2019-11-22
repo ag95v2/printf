@@ -243,11 +243,50 @@ int	len_after_dot(char *s)
 	
 }
 
-char	*float_precision(char *s, int precision)
+/* 
+**  Caller must provide a precision > than number of chars after dot
+*/
+
+char	*round_float(char *s, int precision)
 {
+	int		carry_bit;
+	char	*digit;
+
+	carry_bit = 0;
+	digit = ft_strchr(s, '.') + precision + 1;
+	if (*digit >= '5')
+		carry_bit++;
+	*digit = 0;
+	while (carry_bit && digit != s)
+	{
+		digit--;
+		if (*digit == '+' || *digit == '-' || *digit == '.')
+			continue;
+		if (*digit == '9') 
+		{
+			carry_bit = 1;
+			*digit = '0';
+		}
+		else
+		{
+			(*digit)++;
+			carry_bit = 0;
+		}
+	}
+	if (carry_bit && digit == s)
+		s = str_insert(s, ft_strdup("1"), ft_isdigit(*s) ? 0 : 1);
+	if (precision == 0)
+		return (str_replace(s, '.', 0));
+	return (s);
+}
+
+char	*float_precision(char *s, t_spec spec)
+{
+	int		precision;
 	int		nchar_after_dot;
 	char	*suffix;
 
+	precision = spec.precision;
 	nchar_after_dot = len_after_dot(s);
 	if (precision > nchar_after_dot)
 	{
@@ -258,7 +297,10 @@ char	*float_precision(char *s, int precision)
 		return(add_suffix(s, suffix));
 	}
 	if (precision < nchar_after_dot)
-		ft_strchr(s, '.')[precision + 1] = 0;
+		s = round_float(s, precision);
+	
+	if (precision == 0 && spec.flag_hash)
+		s = add_suffix(s, ".");
 	//here dot is always in number if this function is called
 	return (s);
 }
@@ -276,7 +318,7 @@ char	*apply_precision(char *s, t_spec spec)
 		free(s);
 		s = ft_strdup("(nil)");
 	}
-	if (spec.precision == 0 && spec.conv == 'f')
+	if (spec.precision < 0 && spec.conv == 'f')
 		spec.precision = DEFAULT_FLOAT_PRECISION;
 	if (spec.precision < 0)
 		return (s);
@@ -285,13 +327,11 @@ char	*apply_precision(char *s, t_spec spec)
 		s[spec.precision] = 0;
 		return (s);
 	}
-	if (spec.precision > 0 && spec.conv == 'f')
-		return (float_precision(s, spec.precision));
+	if (spec.conv == 'f')
+		return (float_precision(s, spec));
 	/* PRINT NOTHING IN THAT CASE */
 	if (spec.precision == 0 && !ft_strcmp(s, "0"))
 		return (str_replace(s, '0', 0));
-	if (spec.precision == 0 && spec.conv == 'f')
-		return (str_replace(s, '.', 0));
 	/* Insert zeros from the left to nonfloat numeric (after - if negative) */
 	if (spec.precision > 0 && is_nonfloat_numeric(spec))
 	{
@@ -341,7 +381,8 @@ char	*apply_width(char *s, t_spec spec)
 {
 	if (spec.conv == '%')
 		return (s);
-	if (spec.flag_zero == 1 && spec.precision <= 0)
+	if (spec.flag_zero == 1 && (spec.precision <= 0 || spec.conv == 'f') \
+			&& !spec.flag_dash)
 		return (apply_fzero(s, spec));
 	return (apply_fdash(s, spec));
 }

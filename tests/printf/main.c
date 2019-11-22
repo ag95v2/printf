@@ -6,8 +6,8 @@ int main()
 {
 	int	x;
 
-	printf("%c\n", '\0');
-	ft_printf("%c\n", '\0');
+	printf("%f\n", 9.9999999);
+	ft_printf("%f\n", 9.9999999);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
