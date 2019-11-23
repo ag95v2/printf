@@ -30,10 +30,10 @@ typedef struct ft_printf    s_spec
 
 typedef struct s_conv_f
 {
-    char    *specifiers;
-    char    *(*to_str)(void *arg);
-    void    *(*arg_extract_)(t_spec spec, va_list *vl);
-    int     cleanup_needed;
+    char    *specifiers; // все спецификаторы
+    void    *(*arg_extract_)(t_spec spec, va_list *vl); //вытаскивает аргумент
+    char    *(*to_str)(void *arg); //превращает аргумент в строку
+    int     cleanup_needed;//
 };          t_conv_f;
 
 char    *itoa_b10u(long long n);
@@ -79,6 +79,7 @@ void    *dummy_extractor(t_spec spec, va_list *vl);
     {"c", &w_ctoa, &char_extractor, 1},\
     {"s", &w_stoa, &str_extractor, 0},\
     {"%", &w_percent, &dummy_extractor, 0},\
+    {"b", &w_binary, &binary_extractor, 1},\
     {0, 0, 0, 0}\
 }
 

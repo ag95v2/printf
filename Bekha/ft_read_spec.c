@@ -12,7 +12,7 @@ void        init_spec(t_spec *spec)
     spec->flag_dash = 0;
     spec->flage_space = 0;
     spec->width = 0;
-    spec->precision = -1;
+    spec->precision = -1; //чтобы не перепутать когда подают нулевую точность;
     spec->length = 0;
     spec->conv = 0;
     spec->stupid_c0_special_case = 0;
@@ -54,11 +54,6 @@ const char *read_flags(const char *f, t_spec *spec)
 Читается ширина после флагов и здесь сразу определяется
 цифра ли это? 
 Если это цифра, то вводится в ширину. 
-
-?? А что, если ширина больше 9? Ведь запоминается только
-простое число.
-
-Дальше пока идёт число - пропускается. Почему?
 */
 
 const char  *read_width(const char *f, t_spec *spec)
