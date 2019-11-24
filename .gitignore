@@ -6,3 +6,4 @@ libftprintf.a
 .idea
 .vscode
 .DS_Store
+pft/*

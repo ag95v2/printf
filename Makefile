@@ -12,7 +12,7 @@ SRC := arg_extractors.c \
 	   ftoa.c
 all:
 	make -C libft
-	gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes -L libft -lft
+	gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes  -DMAC_OS
 	ar rc libftprintf.a *.o ./libft/*.o
 
 clean:
