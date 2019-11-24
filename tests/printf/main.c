@@ -5,10 +5,11 @@
 int main()
 {
 	char	*s;
+	char	c;
 
-	s = 0;
-	printf("%.03s\n", s);
-	ft_printf("%.03s\n", s);
+	s = &c;
+	printf("%p\n", s);
+	ft_printf("%p\n", s);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
