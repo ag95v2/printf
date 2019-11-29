@@ -14,7 +14,7 @@
 #include "apply_spec.h"
 
 /*
-**  Warning! 
+**  Warning!
 **  s is always freed. prefix is always not freed
 **	In case of NULL argument return NULL
 */
@@ -26,7 +26,7 @@ char	*add_prefix(char *s, char *prefix)
 
 	if (!s || !prefix)
 	{
-		free (s);
+		free(s);
 		return (0);
 	}
 	len = ft_strlen(prefix);
@@ -45,7 +45,7 @@ char	*add_prefix(char *s, char *prefix)
 char	*prepend_zeros(char *s, int n)
 {
 	char	*prefix;
-	
+
 	if (!(prefix = char_n_dup('0', n)))
 		return (0);
 	s = add_prefix(s, prefix);
@@ -89,9 +89,8 @@ int		only_zeros(char *s)
 
 char	*apply_hash(char *s, t_spec spec)
 {
-	if (((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
+	if (((spec.conv == 'p') && ft_strcmp(s, "(nil)")))
 		return (add_prefix(s, "0x"));
-
 	if (spec.flag_hash == 1 && spec.precision == 0 && spec.conv == 'o')
 		return (add_prefix(s, "0"));
 	if (spec.flag_hash != 1 || only_zeros(s))
@@ -100,7 +99,7 @@ char	*apply_hash(char *s, t_spec spec)
 		return (add_prefix(s, "0"));
 	if (\
 			(spec.conv == 'x' && ft_strcmp(s, "0")) ||\
-			((spec.conv == 'p')&& ft_strcmp(s, "(nil)")))
+			((spec.conv == 'p') && ft_strcmp(s, "(nil)")))
 		return (add_prefix(s, "0x"));
 	if (spec.conv == 'X' && ft_strcmp(s, "0"))
 		return (add_prefix(s, "0X"));

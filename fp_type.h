@@ -6,14 +6,14 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:54:51 by dpenney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FP_TYPE_H
-#define FP_TYPE_H
+# define FP_TYPE_H
 
-#include "printf.h"
+# include "printf.h"
 
 typedef	void	*(*i_extr_fun)(t_spec, va_list *, long long *);
 

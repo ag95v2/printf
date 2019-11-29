@@ -13,24 +13,30 @@
 #include "printf.h"
 #include "apply_spec.h"
 
+/*
+** Man page says sign should always be + or -. How about 0??
+*/
+
 char	*apply_plus(char *s, t_spec spec)
 {
 	if (spec.flag_plus != 1)
 		return (s);
 	if (is_signed_conversion(spec) && s[0] != '-')
-		return (add_prefix(s, "+")); 
-	// Man page says sign should always be + or -. How about 0??
+		return (add_prefix(s, "+"));
 	return (s);
 }
+
+/*
+** Man page says prefix should be added only for POSITIVE numbers
+** We reproduce bug and consider 0 as positive number
+*/
 
 char	*apply_space(char *s, t_spec spec)
 {
 	if (spec.flag_space != 1 || spec.flag_plus == 1)
 		return (s);
-	if (is_signed_conversion(spec) && s[0] != '-' )
-		return (add_prefix(s, " ")); 
-	// Man page says prefix should be added only for POSITIVE numbers
-	// We reproduce bug and consider 0 as positive number
+	if (is_signed_conversion(spec) && s[0] != '-')
+		return (add_prefix(s, " "));
 	return (s);
 }
 
@@ -43,10 +49,9 @@ char	*apply_numeric_flags(char *s, t_spec spec)
 	if (spec.conv == 'p')
 		return ((s = apply_hash(s, spec)));
 	if (is_numeric(spec) &&\
-		(s = apply_hash(s, spec)) &&\
-		(s = apply_plus(s, spec)) &&\
-		(s = apply_space(s, spec))\
-	   )
+		(s = apply_hash(s, spec)) && \
+		(s = apply_plus(s, spec)) && \
+		(s = apply_space(s, spec)))
 		return (s);
 	return (s);
 }
@@ -56,15 +61,14 @@ char	*apply_numeric_flags(char *s, t_spec spec)
 **	or 0 if no dot in char
 */
 
-int	len_after_dot(char *s)
+int		len_after_dot(char *s)
 {
 	while (*s && *s != '.')
 		s++;
-	return	(*s ? ft_strlen(++s) : 0);
-	
+	return (*s ? ft_strlen(++s) : 0);
 }
 
-/* 
+/*
 **  Caller must provide a precision > than number of chars after dot
 */
 
@@ -83,7 +87,7 @@ char	*round_float(char *s, int precision)
 		digit--;
 		if (*digit == '+' || *digit == '-' || *digit == '.')
 			continue;
-		if (*digit == '9') 
+		if (*digit == '9')
 		{
 			carry_bit = 1;
 			*digit = '0';

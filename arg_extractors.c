@@ -6,7 +6,7 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:21:50 by dpenney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,13 @@ void	*str_extractor(t_spec spec, va_list *vl)
 	char *arg;
 
 	arg = va_arg(*vl, char *);
-	#ifdef MAC_OS
+#ifdef MAC_OS
 	(void)spec;
-	#endif
-
-	#ifndef MAC_OS
+#endif
+#ifndef MAC_OS
 	if (!arg && spec.precision > 0 && spec.precision < 6)
 		arg = "";
-	#endif
+#endif
 	if (!arg)
 		arg = "(null)";
 	return ((void *)arg);

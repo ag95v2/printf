@@ -13,41 +13,43 @@
 #include "printf.h"
 #include "apply_spec.h"
 
-int	is_signed_conversion(t_spec spec)
+int			is_signed_conversion(t_spec spec)
 {
 	if (spec.conv == 'i' || spec.conv == 'f' || spec.conv == 'd')
 		return (1);
 	return (0);
 }
 
-int	is_numeric(t_spec spec)
+int			is_numeric(t_spec spec)
 {
 	if (\
 		spec.conv == 'd' || spec.conv == 'i' || \
 		spec.conv == 'o' || spec.conv == 'u' || \
 		spec.conv == 'x' || spec.conv == 'X' || \
-		spec.conv == 'f' \
-	   )
+		spec.conv == 'f')
 		return (1);
 	return (0);
 }
 
-int	is_nonfloat_numeric(t_spec spec)
+int			is_nonfloat_numeric(t_spec spec)
 {
 	if (is_numeric(spec) || spec.conv != 'f')
 		return (1);
 	return (0);
 }
 
-/* return initial string */
-char	*str_replace(char *s, char pattern, char replacement)
+/*
+** return initial string
+*/
+
+char		*str_replace(char *s, char pattern, char replacement)
 {
 	char	*start;
 
 	start = s;
 	while (*s)
 	{
-		if (*s  == pattern)
+		if (*s == pattern)
 			*s = replacement;
 		s++;
 	}
@@ -55,12 +57,12 @@ char	*str_replace(char *s, char pattern, char replacement)
 }
 
 /*
-**  Warning! 
+**  Warning!
 **  s is always freed. suffix is always not freed
 **	In case of NULL argument return NULL
 */
 
-char	*add_suffix(char *s, char *suffix)
+char		*add_suffix(char *s, char *suffix)
 {
 	int		len;
 	char	*new;
