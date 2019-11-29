@@ -11,20 +11,25 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "libft.h"
 
-/*
-**	Return appropritate action according to spec if such exists else 0
-*/
+#define BINARY "01"
+#define OCTAL "01234567"
+#define DECIMAL "0123456789"
+#define HEX_L "0123456789abcdef"
+#define HEX_U "0123456789ABCDEF"
 
-t_conv_f	*find_action(t_spec spec)
+char	*itoa_b8(long long n)
 {
-	static t_conv_f	actions[] = ACTIONS;
-	static t_conv_f	action;
-	int				i;
+	return (ft_itoa_base(n, OCTAL, 0));
+}
 
-	i = 0;
-	while ((action = actions[i++]).specifiers)
-		if (ft_strchr(action.specifiers, spec.conv))
-			return (&action);
-	return (0);
+char	*itoa_bxx(long long n)
+{
+	return (ft_itoa_base(n, HEX_U, 0));
+}
+
+char	*itoa_bx(long long n)
+{
+	return (ft_itoa_base(n, HEX_L, 0));
 }

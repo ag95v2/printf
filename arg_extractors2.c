@@ -11,20 +11,51 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "fp_type.h"
+
+int			is_usgn(t_spec spec)
+{
+	if (\
+			spec.conv == 'u' || \
+			spec.conv == 'p' || \
+			spec.conv == 'o' || \
+			spec.conv == 'x' || \
+			spec.conv == 'X')
+		return (1);
+	return (0);
+}
+
+void		*extr_sint(t_spec spec, va_list *vl, long long *p)
+{
+	if (spec.length == ll)
+		*p += va_arg(*vl, long long);
+	else if (spec.length == l)
+		*p += va_arg(*vl, long);
+	else
+		*p += va_arg(*vl, int);
+	return ((void *)p);
+}
 
 /*
-**	Return appropritate action according to spec if such exists else 0
+**	// pointer is actually an unsigned long in 64bit systems
 */
 
-t_conv_f	*find_action(t_spec spec)
+void		*extr_uint(t_spec spec, va_list *vl, long long *p)
 {
-	static t_conv_f	actions[] = ACTIONS;
-	static t_conv_f	action;
-	int				i;
+	if (spec.length == ll)
+		*p += va_arg(*vl, unsigned long long);
+	else if (spec.length == l || spec.conv == 'p')
+		*p += va_arg(*vl, unsigned long);
+	else
+		*p += va_arg(*vl, unsigned int);
+	return ((void *)p);
+}
 
-	i = 0;
-	while ((action = actions[i++]).specifiers)
-		if (ft_strchr(action.specifiers, spec.conv))
-			return (&action);
-	return (0);
+/*
+**	Choose integer extractor depending on signed/unsigned
+*/
+
+i_extr_fun	choose_i_extr(t_spec spec)
+{
+	return (is_usgn(spec) ? &extr_uint : &extr_sint);
 }

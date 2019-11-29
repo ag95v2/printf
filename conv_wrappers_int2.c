@@ -12,19 +12,17 @@
 
 #include "printf.h"
 
-/*
-**	Return appropritate action according to spec if such exists else 0
-*/
-
-t_conv_f	*find_action(t_spec spec)
+char	*w_itoa_b8(void *n)
 {
-	static t_conv_f	actions[] = ACTIONS;
-	static t_conv_f	action;
-	int				i;
+	return (itoa_b8(*(long long *)n));
+}
 
-	i = 0;
-	while ((action = actions[i++]).specifiers)
-		if (ft_strchr(action.specifiers, spec.conv))
-			return (&action);
-	return (0);
+char	*w_itoa_xx(void *n)
+{
+	return (itoa_bxx(*(long long *)n));
+}
+
+char	*w_itoa_x(void *n)
+{
+	return (itoa_bx(*(long long *)n));
 }

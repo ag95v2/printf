@@ -1,44 +1,17 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   apply_spec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
+/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "printf.h"
-
-typedef struct variablesforfloat
-{
-    char                *string;
-    long long           integer;
-    long double         fractional;
-    long long           cp_integer;
-    long double         cp_fractional;
-    int                 sym;
-    long double         tmp;
-    long long           lenbef;
-    long long           lenaf;
-    long long           cp_lenbef;
-    long long           cp_lenaf;    
-    int                 i;
-    int                 tmp2;
-    int                 number;
-    int                 p;
-    char                *res;
-}                       varfloat;
-
-int	ft_inter_len(long long inter)
-{
-	int				i;
-
-	i = 0;
-	if (inter <= 0)
-	{
-		inter = inter * (-1);
-		i++;
-	}
-	while (inter > 0)
-	{
-		inter = inter / 10;
-		i++;
-	}
-	return (i);
-}
 
 /*
 ** Than to fill string with fractional numbers;

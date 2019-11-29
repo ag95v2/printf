@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   apply_spec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
+/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 #include "read_spec.h"
 #include "apply_spec.h"
 
 /*
 **	Print all normal chars until % or '\0'
-**	Return: 
-**	-pointer to first '%' if string contains '%' 
+**	Return:
+**	-pointer to first '%' if string contains '%'
 **	-0 otherwise
 */
 
@@ -19,7 +31,7 @@ const char	*print_until_percent(const char *format)
 /*
 **	Determine type of next arg according to spec
 **	Extract argument from original vl
-**	Return its string representation 
+**	Return its string representation
 */
 
 char		*get_arg_str(t_spec *spec, va_list *vl)
@@ -57,19 +69,22 @@ void		handle_stupid_c0_special_case(char *s, t_spec spec)
 	}
 }
 
+/*
+** Stupid special case with %c and 0 char (which HAS to be printed)
+*/
+
 int			ft_printf(const char *format, ...)
 {
 	va_list vl;
 	t_spec	spec;
 	char	*s;
 
-	va_start(vl, format); 
-	while ((format = print_until_percent(format))) 
+	va_start(vl, format);
+	while ((format = print_until_percent(format)))
 	{
 		format = read_spec(format, &spec);
 		if (!format || !(s = get_arg_str(&spec, &vl)))
 			return (-1);
-		/* Stupid special case with %c and 0 char (which HAS to be printed) */
 		if (spec.stupid_c0_special_case)
 			handle_stupid_c0_special_case(s, spec);
 		else

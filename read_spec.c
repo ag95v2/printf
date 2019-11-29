@@ -1,65 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   apply_spec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
+/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
-
-/*
-**	Fill all fields of structure with zeros.
-*/
-
-void		init_spec(t_spec *spec)
-{
-	spec->flag_zero = 0;
-	spec->flag_hash = 0;
-	spec->flag_plus = 0;
-	spec->flag_dash = 0;
-	spec->flag_space = 0;
-	spec->width = 0;
-	spec->precision = -1;
-	spec->length = 0;
-	spec->conv = 0;
-	spec->stupid_c0_special_case = 0;
-}
-
-void read_flag(const char c, t_spec *spec)
-{
-	if (c == '+')
-		spec->flag_plus = 1;
-	if (c == '-')
-		spec->flag_dash = 1;
-	if (c == ' ')
-		spec->flag_space = 1;
-	if (c == '#')
-		spec->flag_hash = 1;
-	if (c == '0')
-		spec->flag_zero = 1;
-}
-
-/*
-**	Read any nonnegative number of flags.
-**	One flag can be mentioned more than once
-**  No other chars expected here.
-**	Return a pointer to first non-flag char in f
-*/
-
-const char	*read_flags(const char *f, t_spec *spec)
-{
-	while (*f == '+' || *f == '-' || *f == ' ' || *f == '#' || *f == '0')
-		read_flag(*(f++), spec);
-	return (f);
-}
-
-/*
-**	Skip all digits if they exist in format spec.
-**  Fill the field "width"
-**	Return: ptr to first non-digit in f
-*/
-
-const char	*read_width(const char *f, t_spec *spec)
-{
-	if (ft_isdigit(*f))
-		spec->width = ft_atoi(f);
-	while (ft_isdigit(*f))
-		f++;
-	return (f);
-}
+#include "read_spec.h"
 
 /*
 **	Skip all digits if they exist in format spec.
@@ -80,7 +32,7 @@ const char	*read_precision(const char *f, t_spec *spec)
 **	Skip all digits if they exist in format spec.
 **  Fill the field "length"
 **	Return: ptr to first non-length specifier in f
-**	UPD: peers say, that we must process multiple length specifiers 
+**	UPD: peers say, that we must process multiple length specifiers
 **	and select max of them. Enum is ordered actually.
 */
 
@@ -106,10 +58,9 @@ const char	*read_length(const char *f, t_spec *spec)
 const char	*read_conv_spec(const char *f, t_spec *spec)
 {
 	if (\
-			*f != 'd' &&*f != 'i' && *f != 'o' && *f != 'u' && *f != 'x'\
-			&& *f !='X' && *f != 'f' && *f != 'c' && *f != 's'	&& *f != 'p'\
-			&& *f != '%'\
-		)
+			*f != 'd' && *f != 'i' && *f != 'o' && *f != 'u' && *f != 'x' \
+			&& *f != 'X' && *f != 'f' && *f != 'c' && *f != 's' && *f != 'p' \
+			&& *f != '%')
 		return (0);
 	spec->conv = *f;
 	return (++f);
@@ -117,10 +68,12 @@ const char	*read_conv_spec(const char *f, t_spec *spec)
 
 /*
 **	Read all arguments of conversion spceification
-**	Return 
+**	Return
 **	-pointer to first char after the end of conversion specification
 **	-0 in case of any problems (abscence of conversion specifier)
 **	Side effects: change a spec
+**	Copy of original UB (No precision spec provided but point exists)
+**	Initialize with zero instead of negative number in this case
 */
 
 const char	*read_spec(const char *format, t_spec *spec)
@@ -130,12 +83,10 @@ const char	*read_spec(const char *format, t_spec *spec)
 	format = read_width(format, spec);
 	if (*format == '.')
 	{
-		//Copy of original UB (No precision spec provided but point exists)
-		//Initialize with zero instead of negative number in this case
 		spec->precision = 0;
 		format = read_precision(++format, spec);
 	}
 	format = read_length(format, spec);
-	format = read_conv_spec(format, spec); 
+	format = read_conv_spec(format, spec);
 	return (format);
 }
