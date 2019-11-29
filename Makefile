@@ -38,9 +38,12 @@ OBJ = $(SRC:.c = o)
 
 all: $(NAME)
 
+#если необходимо проверить через собственный main, то следует
+#добавить -L ./libft
+
 $(NAME):
 	@make -C libft
-	@gcc -g $(SRC) -Wall -Wextra  -c -I . -I libft/includes -L ./libft -lft  -DMAC_OS
+	@gcc -g $(SRC) -Wall -Wextra  -c -I . -I libft/includes -lft  -DMAC_OS
 	@ar rc libftprintf.a *.o ./libft/*.o
 	@ranlib $(NAME)
 	@echo "\n\n\n	It's done! Use it  ( • )( • ) ԅ(‾⌣‾ԅ)  \n\n\n"
