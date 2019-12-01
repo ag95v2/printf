@@ -13,6 +13,8 @@
 #include "printf.h"
 #include "fp_type.h"
 
+i_extr_fun	    choose_i_extr(t_spec spec);
+
 /*
 **	If we understand rules of C language correctly, :-) this conversions
 **  do not lead to data corruption.

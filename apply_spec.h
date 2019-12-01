@@ -30,7 +30,7 @@ char	*add_suffix(char *s, char *suffix);
 
 char	*add_prefix(char *s, char *prefix);
 char	*prepend_zeros(char *s, int n);
-char	*str_insert(char *dst, char *src, int pos);;
+char	*str_insert(char *dst, char *src, int pos);
 int		only_zeros(char *s);
 char	*apply_hash(char *s, t_spec spec);
 

@@ -17,9 +17,14 @@
 
 typedef	void	*(*i_extr_fun)(t_spec, va_list *, long long *);
 
-int			is_usgn(t_spec spec);
-void		*extr_sint(t_spec spec, va_list *vl, long long *p);
-void		*extr_uint(t_spec spec, va_list *vl, long long *p);
-i_extr_fun	choose_i_extr(t_spec spec);
+int             is_usgn(t_spec spec);
+void            *extr_sint(t_spec spec, va_list *vl, long long *p);
+void		    *extr_uint(t_spec spec, va_list *vl, long long *p);
+i_extr_fun	    choose_i_extr(t_spec spec);
+
+/*
+** Здесь причина провала нормы скорее в том, что норма не компилит его с теми тремя функциями,
+** параметры которых я указал. Поэтому следует, скорее всего, перекинуть их в отдельных хейдер.
+*/
 
 #endif

@@ -164,4 +164,5 @@ struct				s_varftoa
 t_conv_f			*find_action(t_spec spec);
 
 int					ft_printf(const char *format, ...);
+
 #endif
