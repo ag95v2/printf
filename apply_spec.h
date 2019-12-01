@@ -12,6 +12,7 @@
 
 #ifndef APPLY_SPEC_H
 # define APPLY_SPEC_H
+
 # define DEFAULT_FLOAT_PRECISION 6
 
 char	*apply_spec(char *s, t_spec *spec);

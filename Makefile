@@ -6,7 +6,7 @@
 #    By: dpenney <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/29 14:53:58 by dpenney           #+#    #+#              #
-#    Updated: 2019/11/29 14:54:00 by dpenney          ###   ########.fr        #
+#    Updated: 2019/12/01 23:00:30 by dpenney          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC := arg_extractors.c \
 	   apply_spec3.c \
 	   apply_spec4.c \
 	   apply_spec5.c \
+	   apply_spec6.c \
 	   ftoa.c \
 	   int_len.c
 
@@ -39,11 +40,11 @@ OBJ = $(SRC:.c = o)
 all: $(NAME)
 
 #если необходимо проверить через собственный main, то следует
-#добавить -L ./libft
+#добавить -L ./libft -lft
 
 $(NAME):
 	@make -C libft
-	@gcc -g $(SRC) -Wall -Wextra  -c -I . -I libft/includes -lft  -DMAC_OS
+	@gcc -g $(SRC) -Wall -Wextra  -c -I . -I libft/includes 
 	@ar rc libftprintf.a *.o ./libft/*.o
 	@ranlib $(NAME)
 	@echo "\n\n\n	It's done! Use it  ( • )( • ) ԅ(‾⌣‾ԅ)  \n\n\n"

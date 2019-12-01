@@ -41,22 +41,6 @@ char	*apply_space(char *s, t_spec spec)
 }
 
 /*
-**  "+" " " "#"
-*/
-
-char	*apply_numeric_flags(char *s, t_spec spec)
-{
-	if (spec.conv == 'p')
-		return ((s = apply_hash(s, spec)));
-	if (is_numeric(spec) &&\
-		(s = apply_hash(s, spec)) && \
-		(s = apply_plus(s, spec)) && \
-		(s = apply_space(s, spec)))
-		return (s);
-	return (s);
-}
-
-/*
 **	Return number of chars in string after dot
 **	or 0 if no dot in char
 */
@@ -66,6 +50,15 @@ int		len_after_dot(char *s)
 	while (*s && *s != '.')
 		s++;
 	return (*s ? ft_strlen(++s) : 0);
+}
+
+char	*last_check(int carry_bit, char *digit, char *s, int precision)
+{
+	if (carry_bit && digit == s)
+		s = str_insert(s, ft_strdup("1"), ft_isdigit(*s) ? 0 : 1);
+	if (precision == 0)
+		return (str_replace(s, '.', 0));
+	return (s);
 }
 
 /*
@@ -98,9 +91,5 @@ char	*round_float(char *s, int precision)
 			carry_bit = 0;
 		}
 	}
-	if (carry_bit && digit == s)
-		s = str_insert(s, ft_strdup("1"), ft_isdigit(*s) ? 0 : 1);
-	if (precision == 0)
-		return (str_replace(s, '.', 0));
-	return (s);
+	return (last_check(carry_bit, digit, s, precision));
 }

@@ -13,6 +13,7 @@
 #include "printf.h"
 #include "apply_spec.h"
 #include "read_spec.h"
+#include "fp_type.h"
 
 /*
 **	Print all normal chars until % or '\0'
@@ -78,10 +79,10 @@ void		handle_stupid_c0_special_case(char *s, t_spec spec, int *i)
 
 int			ft_printf(const char *format, ...)
 {
-	va_list vl;
-	t_spec	spec;
-	char	*s;
-	int		i;
+	va_list		vl;
+	t_spec		spec;
+	char		*s;
+	int			i;
 
 	i = 0;
 	va_start(vl, format);
@@ -103,3 +104,11 @@ int			ft_printf(const char *format, ...)
 	va_end(vl);
 	return (i);
 }
+
+/*
+**int		main(void)
+**{
+**	ft_printf("%.10Lf", 0.87650894255l);
+** 	return (0);
+** }
+*/

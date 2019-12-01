@@ -17,7 +17,7 @@
 ** Than to fill string with fractional numbers;
 */
 
-char		*f_fill_fractional(varfloat *f)
+char		*f_fill_fractional(t_varfloat *f)
 {
 	f->i = 0;
 	(f->fractional < 0) ? f->fractional *= -1 : 0;
@@ -36,7 +36,7 @@ char		*f_fill_fractional(varfloat *f)
 ** for integer = 0 and some numbers in fracitonal
 */
 
-char		*f_fill_zero_fractional(varfloat *f)
+char		*f_fill_zero_fractional(t_varfloat *f)
 {
 	if (f->fractional < 0)
 	{
@@ -60,7 +60,7 @@ char		*f_fill_zero_fractional(varfloat *f)
 **  number.
 */
 
-char		*f_fill_integer_min(varfloat *f)
+char		*f_fill_integer_min(t_varfloat *f)
 {
 	if (f->integer == 0 && f->fractional < 0)
 		return (f_fill_zero_fractional(f));
@@ -78,7 +78,7 @@ char		*f_fill_integer_min(varfloat *f)
 	return (f_fill_fractional(f));
 }
 
-char		*f_fill_integer(varfloat *f)
+char		*f_fill_integer(t_varfloat *f)
 {
 	f->string[f->lenbef--] = '.';
 	while (0 <= f->lenbef)
@@ -91,7 +91,7 @@ char		*f_fill_integer(varfloat *f)
 
 char		*ftoa(long double num)
 {
-	varfloat f;
+	t_varfloat f;
 
 	f.sym = 0;
 	if (num < 0)

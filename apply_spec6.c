@@ -6,20 +6,25 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 18:54:51 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FP_TYPE_H
-# define FP_TYPE_H
+#include "printf.h"
+#include "apply_spec.h"
 
-# include "printf.h"
+/*
+**  "+" " " "#"
+*/
 
-typedef	void	*(*i_extr_fun)(t_spec, va_list *, long long *);
-
-int			is_usgn(t_spec spec);
-void		*extr_sint(t_spec spec, va_list *vl, long long *p);
-void		*extr_uint(t_spec spec, va_list *vl, long long *p);
-i_extr_fun	choose_i_extr(t_spec spec);
-
-#endif
+char	*apply_numeric_flags(char *s, t_spec spec)
+{
+	if (spec.conv == 'p')
+		return ((s = apply_hash(s, spec)));
+	if (is_numeric(spec) &&\
+		(s = apply_hash(s, spec)) && \
+		(s = apply_plus(s, spec)) && \
+		(s = apply_space(s, spec)))
+		return (s);
+	return (s);
+}

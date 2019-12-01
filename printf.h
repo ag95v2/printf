@@ -29,7 +29,7 @@
 
 # define ACTIONS A B C D E F G H I J
 
-enum				length
+enum				e_length
 {
 	none,
 	hh,
@@ -53,13 +53,13 @@ typedef struct		s_spec
 
 	int				width;
 	int				precision;
-	enum length		length;
+	enum e_length	length;
 
 	char			conv;
 	int				stupid_c0_special_case;
 }					t_spec;
 
-typedef struct		variablesforfloat
+typedef struct		s_variablesforfloat
 {
 	char			*string;
 	long long		integer;
@@ -77,7 +77,7 @@ typedef struct		variablesforfloat
 	int				number;
 	int				p;
 	char			*res;
-}					varfloat;
+}					t_varfloat;
 
 /*
 **	Generalized conversion function
@@ -150,7 +150,7 @@ void				*char_extractor(t_spec spec, va_list *vl);
 void				*str_extractor(t_spec spec, va_list *vl);
 void				*dummy_extractor(t_spec spec, va_list *vl);
 
-struct				varftoa
+struct				s_varftoa
 {
 	long double		fraction;
 	long long		inter;

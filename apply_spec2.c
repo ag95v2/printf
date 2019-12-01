@@ -54,13 +54,6 @@ char	*apply_precision(char *s, t_spec spec)
 {
 	char	*zeros;
 
-#ifndef MAC_OS
-	if (spec.conv == 'p' && !ft_strcmp(s, "0"))
-	{
-		free(s);
-		s = ft_strdup("(nil)");
-	}
-#endif
 	if (spec.precision < 0 && spec.conv == 'f')
 		spec.precision = DEFAULT_FLOAT_PRECISION;
 	if (spec.precision < 0)
@@ -77,7 +70,7 @@ char	*apply_precision(char *s, t_spec spec)
 	if (spec.precision > 0 && is_nonfloat_numeric(spec))
 	{
 		zeros = char_n_dup('0', spec.precision - ft_strlen(s) + (*s == '-'));
-		return (str_insert(s,zeros,(*s == '-') ? 1 : 0));
+		return (str_insert(s, zeros, (*s == '-') ? 1 : 0));
 	}
 	return (s);
 }
@@ -92,14 +85,8 @@ char	*apply_fzero(char *s, t_spec spec)
 	char	*zeros;
 
 	nzeros = spec.width - ft_strlen(s);
-#ifndef MAC_OS
-	if (nzeros <= 0 || !is_numeric(spec))
-		return (s);
-#endif
-#ifdef MAC_OS
 	if (nzeros <= 0 || (!is_numeric(spec) && spec.conv != '%'))
 		return (s);
-#endif
 	zeros = char_n_dup('0', nzeros);
 	if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
 		return (str_insert(s, zeros, 2));
@@ -126,16 +113,10 @@ char	*apply_fdash(char *s, t_spec spec)
 
 char	*apply_width(char *s, t_spec spec)
 {
-#ifndef MAC_OS
-	if (spec.conv == '%')
-		return (s);
-#endif
 	if (spec.flag_zero == 1 && (spec.precision <= 0 || spec.conv == 'f') \
 			&& !spec.flag_dash)
 		return (apply_fzero(s, spec));
-#ifdef MAC_OS
 	if (spec.flag_zero == 1 && spec.conv == '%' && !spec.flag_dash)
 		return (apply_fzero(s, spec));
-#endif
 	return (apply_fdash(s, spec));
 }
