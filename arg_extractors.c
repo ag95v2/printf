@@ -6,6 +6,7 @@ int		is_usgn(t_spec spec)
 {
 	if (\
 			spec.conv == 'u' ||\
+			spec.conv == 'p' ||\
 			spec.conv == 'o' ||\
 			spec.conv == 'x' ||\
 			spec.conv == 'X'\
@@ -29,7 +30,8 @@ void	*extr_uint(t_spec spec, va_list *vl, long long *p)
 {
 		if (spec.length == ll)
 			*p += va_arg(*vl, unsigned long long);
-		else if (spec.length == l)
+		// pointer is actually an unsigned long in 64bit systems
+		else if (spec.length == l || spec.conv == 'p')
 			*p += va_arg(*vl, unsigned long);
 		else
 			*p += va_arg(*vl, unsigned int);
@@ -96,9 +98,15 @@ void	*str_extractor(t_spec spec, va_list *vl)
 	char *arg;
 
 	arg = va_arg(*vl, char *);	
+	#ifdef MAC_OS
+	(void)spec;
+	#endif
+
+	#ifndef MAC_OS
 	// UB reproduction (small precision and NULL str)
 	if (!arg && spec.precision > 0 && spec.precision < 6)
 		arg = "";
+	#endif
 	if (!arg)
 		arg = "(null)";
 	return ((void *)arg);

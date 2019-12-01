@@ -4,10 +4,12 @@
 
 int main()
 {
-	int	x;
+	char	*s;
+	char	c;
 
-	printf("%f\n", 9.9999999);
-	ft_printf("%f\n", 9.9999999);
+	s = &c;
+	printf("%p\n", s);
+	ft_printf("%p\n", s);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
