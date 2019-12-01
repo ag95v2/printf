@@ -6,10 +6,16 @@ int main()
 {
 	char	*s;
 	char	c;
+	long double d;
 
 	s = &c;
-	printf("%p\n", s);
-	ft_printf("%p\n", s);
+	printf("%.10Lf\n", 0.87650894255l);
+	ft_printf("%.10Lf\n", 0.87650894255l);
+	
+	d = 111111111111111111111111.0l;
+	printf("\n\n");
+	printf("%Lf\n", d);
+	ft_printf("%Lf\n", d);
 
 	/*
 	ft_printf("\nUsing normal functions (already implemented)\n");
