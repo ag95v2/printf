@@ -36,6 +36,8 @@ int	to_ascii(t_decimal repr, char *s)
 	if (repr.is_negative)
 		s[i++] = '-';
 	n_digits = repr.end - repr.start + 1;
+	if (n_digits == repr.after_dot)
+		s[i++] = '0';
 	while (n_digits)
 	{
 		s[i++] = *(repr.start++) + '0';
