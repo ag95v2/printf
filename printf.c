@@ -105,10 +105,4 @@ int			ft_printf(const char *format, ...)
 	return (i);
 }
 
-/*
-**int		main(void)
-**{
-**	ft_printf("%.10Lf", 0.87650894255l);
-** 	return (0);
-** }
-*/
+

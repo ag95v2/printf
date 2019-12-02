@@ -6,14 +6,12 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 18:21:50 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/12/02 19:15:25 by dpenney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include "fp_type.h"
-
-i_extr_fun	    choose_i_extr(t_spec spec);
 
 /*
 **	If we understand rules of C language correctly, :-) this conversions
