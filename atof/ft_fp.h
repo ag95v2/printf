@@ -1,7 +1,7 @@
 #ifndef FT_FP_H
 #define FT_FP_H
 
-#define LD_MAX_DIGITS 100
+#define LD_MAX_DIGITS 20000
 
 /*
 **	Example:
@@ -31,5 +31,6 @@ int		to_ascii(t_decimal repr, char *s);
 void	positive_ascii_to(t_decimal *repr, char *s);
 void	add_positive_decimal(t_decimal *a, t_decimal *b);
 void	multiply_positive_decimal(t_decimal *a, t_decimal *b);
+void	power_positive_decimal(t_decimal *x, int pow);
 
 #endif
