@@ -1,7 +1,18 @@
 SRC = decimal_arithmetic.c 
 
+all: clean test_ascii_conv test_positive_addition test_positive_multiplication
+
+test_positive_multiplication:
+	gcc -o test_positive_multiplication $(SRC) test_multiplication.c -I . -ggdb
+
 test_positive_addition:
-	gcc -o test_positive_addition $(SRC) test_addition.c -I .
+	gcc -o test_positive_addition $(SRC) test_addition.c -I . -ggdb
 
 test_ascii_conv:
-	gcc -o test_ascii $(SRC) test_ascii_to.c -I .
+	gcc -o test_ascii $(SRC) test_ascii_to.c -I . -ggdb
+
+clean:
+	rm -f test_ascii test_positive_addition test_positive_multiplication
+
+
+

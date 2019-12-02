@@ -1,5 +1,9 @@
 #include "ft_fp.h"
 
+/************************************************************
+***************Conversion functions below********************
+************************************************************/
+
 static void	insert_point(int after_dot, char *s)
 {
 	char	tmp;
@@ -97,6 +101,10 @@ void	positive_ascii_to(t_decimal *repr, char *s)
 	copy_digits_numbers(s, repr->start);
 }
 
+/************************************************************
+***************Addition functions below**********************
+************************************************************/
+
 /*
 ** return number of excessive digits
 */
@@ -173,7 +181,7 @@ static void	adder_decimal(t_decimal *a, t_decimal *b, char *res)
 	{
 		if (a->start > a->end)
 			single_digit_b(b, &res, &carry);
-		if (b->start > b->end)
+		else if (b->start > b->end)
 			single_digit_a(a, &res, &carry);
 		else
 			single_digit_both(a, b, &res, &carry);
@@ -201,7 +209,6 @@ static int	max(int a, int b)
 
 /*
 **  Add 2 numbers in-place (result is stored in a)
-**	both ends are temporarily shifted
 */
 
 void			add_positive_decimal(t_decimal *a, t_decimal *b)
@@ -213,4 +220,82 @@ void			add_positive_decimal(t_decimal *a, t_decimal *b)
 	b->end = b->buff + LD_MAX_DIGITS - 1;
 	copy_from_buf(tmp, a);
 	a->after_dot = max(a->after_dot, b->after_dot);
+}
+
+/************************************************************
+***************Multiplication functions below****************
+************************************************************/
+
+static void		mul_digit(t_decimal *a, t_decimal *b,\
+		int degree, t_decimal *partial_product)
+{
+	int	carry;
+	
+	partial_product->end = partial_product->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+	partial_product->start = partial_product->end;
+	while (degree--)
+		*(partial_product->start--) = 0;
+	carry = 0;
+	while (a->start <= a->end)
+	{
+		*(partial_product->start) = (*(b->end) * *(a->end) + carry) % 10;
+		carry = (*(b->end) * *(a->end) + carry) / 10;
+		a->end--;
+		partial_product->start--;
+	}
+	partial_product->start++;
+	if (carry)
+	{
+		partial_product->start--; 
+		*(partial_product->start) = carry;
+	}
+	a->end = a->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+}
+
+void	copy_t_decimal(t_decimal *src, t_decimal *dst)
+{
+	char	*tmp;
+
+	tmp = src->end;
+	while (tmp >= src->start)
+	{
+		*(dst->end) = *tmp;
+		dst->end--;
+		tmp--;
+	}
+	dst->end++;
+	dst->start = dst->end;
+	dst->end = dst->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+	dst->after_dot = src->after_dot;
+	dst->is_negative = src->is_negative;
+}
+
+/*
+**  Multiply 2 numbers in-place (result is stored in a)
+*/
+
+void			multiply_positive_decimal(t_decimal *a, t_decimal *b)
+{
+	t_decimal	total;
+	t_decimal	partial_product;
+	int			degree;
+	int			after_dot_new;
+
+	positive_ascii_to(&partial_product, "0");
+	positive_ascii_to(&total, "0");
+	degree = 0;
+	while (b->end >= b->start)
+	{
+		if (*b->end)
+		{
+			mul_digit(a, b, degree, &partial_product);
+			add_positive_decimal(&total, &partial_product);
+		}
+		b->end--;
+		degree++;
+	}
+	b->end = b->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+	after_dot_new = a->after_dot + b->after_dot;
+	copy_t_decimal(&total, a);
+	a->after_dot = after_dot_new;
 }

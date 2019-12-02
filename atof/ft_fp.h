@@ -30,5 +30,6 @@ typedef struct	s_decimal
 int		to_ascii(t_decimal repr, char *s);
 void	positive_ascii_to(t_decimal *repr, char *s);
 void	add_positive_decimal(t_decimal *a, t_decimal *b);
+void	multiply_positive_decimal(t_decimal *a, t_decimal *b);
 
 #endif
