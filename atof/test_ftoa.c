@@ -6,7 +6,7 @@ int	main()
 {
 	long double	x;
 
-	x = 1.0l;
+	x = 121.05l;
 	printf("%s\n",ftoa(x));
 	return (0);
 }

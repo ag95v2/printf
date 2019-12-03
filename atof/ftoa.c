@@ -29,12 +29,12 @@ char	*eval_power_sum(t_float *num, int power_of2)
 	power_positive_decimal(&total, abs(power_of2));
 	while (num->mask_shift < 64)
 	{
-		if (num->mant_mask >> num->mask_shift)
+		if (num->mant_mask >> num->mask_shift & num->mant)
 		{
 			positive_ascii_to(&current, "0.5");
 			power_positive_decimal(&current, num->mask_shift);
-			multiply_positive_decimal(&total, &current);
-			add_positive_decimal(&accum, &total);
+			multiply_positive_decimal(&current, &total);
+			add_positive_decimal(&accum, &current);
 		}
 		num->mask_shift++;
 	}
