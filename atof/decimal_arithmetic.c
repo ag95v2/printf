@@ -344,6 +344,8 @@ void			power_positive_decimal(t_decimal *x, int pow)
 	t_decimal	result;
 	t_decimal	current_value;
 
+	if (!pow)
+		positive_ascii_to(x, "1");
 	init_t_decimal(&current_value);
 	positive_ascii_to(&result, "1");
 	while (pow)
