@@ -9,6 +9,7 @@ SRC := arg_extractors.c \
 	   conv_int.c \
 	   conv_wrappers_int.c\
 	   apply_spec.c \
+	   decimal_arithmetic.c\
 	   ftoa.c
 all:
 	make -C libft

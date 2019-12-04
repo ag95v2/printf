@@ -109,17 +109,6 @@ void	*dummy_extractor(t_spec spec, va_list *vl);
 	{0, 0, 0, 0}\
 }
 
-struct	varftoa
-{
-	long double		fraction;
-	long long		inter;
-	long double		tmp;
-	char			*str;
-	int				len_till_dot;
-	int				i;
-	int				len_af_dot;
-};
-
 t_conv_f	*find_action(t_spec spec);
 
 int			ft_printf(const char *format, ...);

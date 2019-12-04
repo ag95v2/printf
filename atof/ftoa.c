@@ -7,7 +7,7 @@ void	fill_t_float(long double x, t_float *num)
     num->mant = *((unsigned long int *)&x); 
 	num->exp = *(unsigned short *)((char *)&x + sizeof(unsigned long int));
 	num->sign = num->exp & (((unsigned short) 1) << 15);
-	num->exp = num->exp & ((~((unsigned short) 0)) >> 1);
+	num->exp = num->exp & ~(((unsigned short) 1) << 15);
 	num->mant_mask = (((unsigned long int) 1) << 63);
 	num->mask_shift = 0;
 }

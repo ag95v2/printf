@@ -1,143 +1,78 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "printf.h"
 
-typedef struct variablesforfloat
+#include "ft_fp.h"
+#include "t_float.h"
+
+void	fill_t_float(long double x, t_float *num)
 {
-    char                *string;
-    long long           integer;
-    long double         fractional;
-    long long           cp_integer;
-    long double         cp_fractional;
-    int                 sym;
-    long double         tmp;
-    long long           lenbef;
-    long long           lenaf;
-    long long           cp_lenbef;
-    long long           cp_lenaf;    
-    int                 i;
-    int                 tmp2;
-    int                 number;
-    int                 p;
-    char                *res;
-}                       varfloat;
+    num->mant = *((unsigned long int *)&x); 
+	num->exp = *(unsigned short *)((char *)&x + sizeof(unsigned long int));
+	num->sign = num->exp & (((unsigned short) 1) << 15);
+	num->exp = num->exp & ~(((unsigned short) 1) << 15);
+	num->mant_mask = (((unsigned long int) 1) << 63);
+	num->mask_shift = 0;
+}
 
-int	ft_inter_len(long long inter)
+static int	abs(int x)
 {
-	int				i;
+	return (x >= 0 ? x : -x);
+}
 
-	i = 0;
-	if (inter <= 0)
+char	*eval_power_sum(t_float *num, int power_of2)
+{
+	static char	res[LD_MAX_DIGITS];
+	static t_decimal	total;
+	static t_decimal	current;
+	static t_decimal	accum;
+
+	positive_ascii_to(&accum, "0");
+	positive_ascii_to(&total, power_of2 > 0 ? "2" : "0.5");
+	power_positive_decimal(&total, abs(power_of2));
+	while (num->mask_shift < 64)
 	{
-		inter = inter * (-1);
-		i++;
+		if (num->mant_mask >> num->mask_shift & num->mant)
+		{
+			positive_ascii_to(&current, "0.5");
+			power_positive_decimal(&current, num->mask_shift);
+			multiply_positive_decimal(&current, &total);
+			add_positive_decimal(&accum, &current);
+		}
+		num->mask_shift++;
 	}
-	while (inter > 0)
-	{
-		inter = inter / 10;
-		i++;
-	}
-	return (i);
+	if (num->sign)
+		accum.is_negative = 1;
+	to_ascii(accum, res);
+	return (res);
 }
 
-/*
-** Than to fill string with fractional numbers;
-*/
-
-char        *f_fill_fractional(varfloat *f)
+char	*normal_case(t_float *num)
 {
-    f->i = 0;
-    (f->fractional < 0) ? f->fractional *= -1 : 0;
-    while (f->i < 40)
-    {
-        f->fractional *= 10;
-        f->tmp2 = (int)f->fractional;
-        f->string[f->lenaf++] = f->tmp2 + '0';
-        f->fractional = f->fractional - f->tmp2;
-        f->i++;
-    }
-    return (f->string);
+	return (eval_power_sum(num, num->exp - 16383));
 }
 
-/*
-** for integer = 0 and some numbers in fracitonal
-*/
-
-char        *f_fill_zero_fractional(varfloat *f)
+char	*exp_all_zeros(t_float *num)
 {
-    if (f->fractional < 0)
-    {
-        f->string[0] = '-';
-        f->string[f->lenbef] = '0';
-        f->string[f->lenbef + 1] = '.';
-        f->lenaf++;
-    }
-    else
-        f->string[f->lenbef - 1] = '0';
-    return (f_fill_fractional(f));
+	if (!num->mant)
+		return (num->sign ? "-0.0" : "0.0");
+	return (eval_power_sum(num, -16382));
 }
 
-/*
-**  Our goal fill the string if input number less than 0;
-**  taking module of numbers;
-**  Put dot; Put minus;
-**  In cycle adding ever number to our string
-**  through receiving the remainder;
-**  After filling integer with minus filling fractional of
-**  number.
-*/
-
-char        *f_fill_integer_min(varfloat *f)
+char	*exp_all_ones(t_float *num)
 {
-    if (f->integer == 0 && f->fractional < 0)
-        return (f_fill_zero_fractional(f));
-    else
-    {
-        f->string[f->lenbef--] = '.';
-        f->string[0] = '-';
-    }
-    
-    f->integer *= -1;
-    while (0 < f->lenbef)
-    {
-        f->string[f->lenbef--] = f->integer % 10 + '0';
-        f->integer /= 10;
-    }
-    return (f_fill_fractional(f));
+	//62-0 bits of mant ==0 
+	if (!(num->mant & ~num->mant_mask))	
+		return (num->sign ? "-inf" : "inf");
+	return ("NaN");
 }
 
-char        *f_fill_integer(varfloat *f)
+char	*ftoa(long double x)
 {
-    f->string[f->lenbef--] = '.';
-    while (0 <= f->lenbef)
-    {
-        f->string[f->lenbef--] = f->integer % 10 + '0';
-        f->integer /= 10;
-    }
-    return (f_fill_fractional(f));
-}
+	t_float	num;
 
-char        *ftoa(long double num) //добавить точность для обрезки
-{
-    varfloat f;
-
-    f.sym = 0;
-    if (num < 0)
-        f.sym = 1;
-    f.integer = (long long)num;
-    f.tmp = num - f.integer;
-    f.fractional = f.tmp;
-    f.lenbef = ft_inter_len(num);
-    f.lenaf = f.lenbef + 1;
-    f.cp_lenbef = f.lenbef;
-    f.cp_lenaf = f.lenaf;
-    f.cp_fractional = f.fractional;
-    f.cp_integer = f.integer;
-    if (!(f.string = (char *)malloc(sizeof(char) * (f.lenbef + 2 + 40))))
-        return (NULL);
-    if (f.integer < 0 || f.fractional < 0)
-        return (f_fill_integer_min(&f));
-    else
-        return (f_fill_integer(&f));
-    return (NULL);
+	fill_t_float(x, &num);
+	if (!~((num.exp << 1) + 1))
+		return (exp_all_ones(&num));
+	else if (!(num.exp << 1))
+		return (exp_all_zeros(&num));
+	else
+		return (normal_case(&num));
 }
