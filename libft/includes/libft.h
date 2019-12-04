@@ -112,4 +112,6 @@ void				ft_bsort_int(int *a, unsigned int len, int ascending);
 void				ft_print_array(int *a, int len);
 int					*ft_array_subtract(int *arr, unsigned int len, int number,\
 		int in_place);
+char				*ftoa(long double x, int precision);
+		
 #endif

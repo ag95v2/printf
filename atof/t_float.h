@@ -5,7 +5,11 @@ typedef struct	s_float
 {
 	unsigned long int	mant;
 	unsigned short		exp;
+<<<<<<< HEAD
 	unsigned short		sign;
+=======
+	char				sign;
+>>>>>>> norma
 	unsigned long int	mant_mask;
 	int					mask_shift;
 	
