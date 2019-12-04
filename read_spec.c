@@ -90,11 +90,11 @@ const char	*read_length(const char *f, t_spec *spec)
 	{
 		if (*f == 'l' && *(f + 1) == 'l' && spec->length < ll)
 			spec->length = ll;
-		if (*f == 'l' && *(f + 1) != 'l' && spec->length < l)
+		if (*f == 'l' && *(f - 1) != 'l' && *(f + 1) != 'l' && spec->length < l)
 			spec->length = l;
 		if (*f == 'h' && *(f + 1) == 'h' && spec->length < hh)
 			spec->length = hh;
-		if (*f == 'h' && *(f + 1) != 'h' && spec->length < h)
+		if (*f == 'h' && *(f - 1) != 'h' && *(f + 1) != 'h' && spec->length < h)
 			spec->length = h;
 		if (*f == 'L' && spec->length < L)
 			spec->length = L;

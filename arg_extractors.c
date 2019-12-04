@@ -21,6 +21,10 @@ void	*extr_sint(t_spec spec, va_list *vl, long long *p)
 			*p += va_arg(*vl, long long);
 		else if (spec.length == l)
 			*p += va_arg(*vl, long);
+		else if (spec.length == h)
+			*p += (short)va_arg(*vl, int);
+		else if (spec.length == hh)
+			*p += (char)va_arg(*vl, int);
 		else
 			*p += va_arg(*vl, int);
 		return ((void *)p);
@@ -33,6 +37,10 @@ void	*extr_uint(t_spec spec, va_list *vl, long long *p)
 		// pointer is actually an unsigned long in 64bit systems
 		else if (spec.length == l || spec.conv == 'p')
 			*p += va_arg(*vl, unsigned long);
+		else if (spec.length == h)
+			*p += (unsigned short)va_arg(*vl, unsigned int);
+		else if (spec.length == hh)
+			*p += (unsigned char)va_arg(*vl, unsigned int);
 		else
 			*p += va_arg(*vl, unsigned int);
 		return ((void *)p);
