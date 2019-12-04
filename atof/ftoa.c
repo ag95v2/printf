@@ -77,10 +77,3 @@ char	*ftoa(long double x)
 		return (normal_case(&num));
 }
 
-int		main(void)
-{
-	double a = 0.12345789;
-	printf("ORIGINAL: %f\n", a);
-	printf("%s\n", ftoa(a));
-	return(0);
-}
