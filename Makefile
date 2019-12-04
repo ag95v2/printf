@@ -32,8 +32,6 @@ SRC := arg_extractors.c \
 	   apply_spec4.c \
 	   apply_spec5.c \
 	   apply_spec6.c \
-	   ftoa.c \
-	   int_len.c
 
 OBJ = $(SRC:.c = o)
 
@@ -44,7 +42,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@gcc -g $(SRC) -c -Wall -Wextra  -I . -I libft/includes -L ./libft -lft
+	@gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes -L ./libft -lft
 	@ar rc libftprintf.a *.o ./libft/*.o
 	@ranlib $(NAME)
 	@echo "\n\n\n	It's done! Use it  ( • )( • ) ԅ(‾⌣‾ԅ)  \n\n\n"

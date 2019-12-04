@@ -6,8 +6,6 @@
 
 static void	insert_point(int after_dot, char *s)
 {
-	char	tmp;
-
 	while (*s)
 		s++;
 	if (after_dot == 0)
@@ -288,8 +286,8 @@ static void adjust_dot_if_needed(t_decimal *a)
 
 void			multiply_positive_decimal(t_decimal *a, t_decimal *b)
 {
-	t_decimal	total;
-	t_decimal	partial_product;
+	static t_decimal	total;
+	static t_decimal	partial_product;
 	int			degree;
 	int			after_dot_new;
 

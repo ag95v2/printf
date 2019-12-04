@@ -12,9 +12,9 @@
 
 #include "printf.h"
 
-char	*w_ftoa(void *x)
+char	*w_ftoa(void *x, int precision)
 {
-	return (ftoa(*(long double *)x));
+	return (ftoa(*(long double *)x, precision));
 }
 
 char	*w_ctoa(void *x)

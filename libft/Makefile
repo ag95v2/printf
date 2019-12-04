@@ -19,13 +19,15 @@ endef
 
 $(NAME):
 	@echo "\n\n		🐅		\n	Please, some minutes, Monsieur!\n\n"
-	@gcc -g -Wall -Wextra -Werror -I includes -c $(SRC) 
-	@ar rc libft.a *.o
+	@make -C ftoa
+	@gcc -g -Wall -Wextra -Werror -I includes -c $(SRC)
+	@ar rc libft.a *.o ./ftoa/ftoa.o
 
 all: $(NAME)
 
 clean:
 	@rm -f ft*.o
+	@rm -f ./ftoa/*.o
 
 fclean: clean
 	@rm -f libft.a

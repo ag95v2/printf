@@ -2,6 +2,7 @@
 #define FT_FP_H
 
 #define LD_MAX_DIGITS 20000
+#define CRUTCH_FLOAT_PRECISION_CONSTANT 30
 
 /*
 **	Example:
@@ -26,6 +27,15 @@ typedef struct	s_decimal
 	int			is_negative;
 }				t_decimal;
 
+typedef struct	s_float
+{
+	unsigned long int	mant;
+	unsigned short		exp;
+	unsigned short		sign;
+	unsigned long int	mant_mask;
+	int					mask_shift;
+	int					precision;
+}				t_float;
 
 int		to_ascii(t_decimal repr, char *s);
 void	positive_ascii_to(t_decimal *repr, char *s);

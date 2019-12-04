@@ -104,7 +104,7 @@ char	*apply_fdash(char *s, t_spec spec)
 	if (len >= spec.width)
 		return (s);
 	spaces = char_n_dup(' ', spec.width - len);
-	return (spec.flag_dash ? add_suffix(s, spaces) : add_prefix(s, spaces));
+	return (spec.flag_dash ? add_suffix_free(s, spaces) : add_prefix_free(s, spaces));
 }
 
 /*

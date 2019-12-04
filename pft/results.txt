@@ -1,7 +1,0 @@
-Test 1885 (f_L_stress_prec10_rndu_pos) : FAILED.
-    First line of code: {return test("%.10Lf", 0.87650894255l);}
-      expected output : "0.8765089426"
-      your output     : "0.8765089425"
-      expected (nonprintable as hex) : "0.8765089426"
-      actual   (nonprintable as hex) : "0.8765089425"
-

@@ -59,26 +59,6 @@ typedef struct		s_spec
 	int				stupid_c0_special_case;
 }					t_spec;
 
-typedef struct		s_variablesforfloat
-{
-	char			*string;
-	long long		integer;
-	long double		fractional;
-	long long		cp_integer;
-	long double		cp_fractional;
-	int				sym;
-	long double		tmp;
-	long long		lenbef;
-	long long		lenaf;
-	long long		cp_lenbef;
-	long long		cp_lenaf;
-	int				i;
-	int				tmp2;
-	int				number;
-	int				p;
-	char			*res;
-}					t_varfloat;
-
 /*
 **	Generalized conversion function
 **	Generalized argument extractor function
@@ -124,7 +104,6 @@ char				*w_itoa_x(void *n);
 */
 
 int					ft_inter_len(long long inter);
-char				*ftoa(long double x);
 char				*ctoa(char c);
 char				*stoa(char *s);
 char				*ptoa(void *p);
@@ -149,17 +128,6 @@ void				*float_extractor(t_spec spec, va_list *vl);
 void				*char_extractor(t_spec spec, va_list *vl);
 void				*str_extractor(t_spec spec, va_list *vl);
 void				*dummy_extractor(t_spec spec, va_list *vl);
-
-struct				s_varftoa
-{
-	long double		fraction;
-	long long		inter;
-	long double		tmp;
-	char			*str;
-	int				len_till_dot;
-	int				i;
-	int				len_af_dot;
-};
 
 t_conv_f			*find_action(t_spec spec);
 

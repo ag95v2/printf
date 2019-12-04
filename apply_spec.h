@@ -17,6 +17,9 @@
 
 char	*apply_spec(char *s, t_spec *spec);
 char	*char_n_dup(char c, int n);
+char	*add_prefix_free(char *s, char *prefix);
+char	*add_suffix_free(char *s, char *suffix);
+
 
 int		is_signed_conversion(t_spec spec);
 int		is_numeric(t_spec spec);

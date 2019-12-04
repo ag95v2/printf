@@ -13,6 +13,23 @@
 #include "printf.h"
 #include "apply_spec.h"
 
+char	*add_suffix_free(char *s, char *suffix)
+{
+	char	*c;
+
+	c = add_suffix(s, suffix);
+	free(suffix);
+	return (c);
+}
+
+char	*add_prefix_free(char *s, char *prefix)
+{
+	char	*c;
+	c = add_prefix(s, prefix);
+	free(prefix);
+	return (c);
+}
+
 /*
 **  Return string that contains n chars c
 **	If n <= 0, return nonzero ptr to empty string
