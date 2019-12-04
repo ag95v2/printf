@@ -32,7 +32,7 @@ char		*get_arg_str(t_spec *spec, va_list *vl)
 	error = 0;
 	if (!(action = find_action(*spec)) ||
 		!(arg = action->arg_extract(*spec, vl)) ||
-		!(res = action->to_str(arg)))
+		!(res = action->to_str(arg, *spec)))
 		error = 1;
 	if (action->cleanup_needed)
 		free(arg);

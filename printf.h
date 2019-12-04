@@ -36,14 +36,13 @@ typedef struct		s_spec
 typedef struct		s_conv_f
 {
 	char			*specifiers;
-	char			*(*to_str)(void *arg);
+	char			*(*to_str)(void *arg, t_spec spec);
 	void			*(*arg_extract)(t_spec spec, va_list *vl);
 	int				cleanup_needed;
 }					t_conv_f;
 
 /*
 **	Integer convertors
-**  TODO: replace stubs with normal functions
 */
 
 char	*itoa_b10u(long long n);
@@ -57,19 +56,18 @@ char	*itoa_bx(long long n);
 **	Integer convertors wrappers
 */
 
-char	*w_itoa_b10u(void *n);
-char	*w_itoa_b10(void *n);
-char	*w_itoa_b2(void *n);
-char	*w_itoa_b8(void *n);
-char	*w_itoa_X(void *n);
-char	*w_itoa_x(void *n);
+char	*w_itoa_b10u(void *n, t_spec spec);
+char	*w_itoa_b10(void *n, t_spec spec);
+char	*w_itoa_b2(void *n, t_spec spec);
+char	*w_itoa_b8(void *n, t_spec spec);
+char	*w_itoa_X(void *n, t_spec spec);
+char	*w_itoa_x(void *n, t_spec spec);
 
 /*
 **	Non-integer convertors
-**  TODO: replace stubs with normal functions
 */
 
-char	*ftoa(long double x);
+char	*ftoa(long double x, int precisioin);
 char	*ctoa(char c);
 char	*stoa(char *s);
 char	*ptoa(void *p);
@@ -79,11 +77,11 @@ char	*percent_to_a();
 **	Non-integer convertors wrappers
 */
 
-char	*w_ftoa(void *x);
-char	*w_ctoa(void *x);
-char	*w_stoa(void *x);
-char	*w_ptoa(void *x);
-char	*w_percent(void *x);
+char	*w_ftoa(void *x, t_spec spec);
+char	*w_ctoa(void *x, t_spec spec);
+char	*w_stoa(void *x, t_spec spec);
+char	*w_ptoa(void *x, t_spec spec);
+char	*w_percent(void *x, t_spec spec);
 
 /*
 **	Argument extractors
