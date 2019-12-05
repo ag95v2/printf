@@ -6,7 +6,7 @@
 #    By: dpenney <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/29 14:53:58 by dpenney           #+#    #+#              #
-#    Updated: 2019/12/05 02:59:27 by dpenney          ###   ########.fr        #
+#    Updated: 2019/12/05 05:57:07 by dpenney          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@gcc -g -c $(SRC) -Wall -Wextra  -I . -I libft/includes -I libft/ftoa -L ./libft -lft
+	@gcc -c $(SRC) -Wall -Wextra  -I . -I libft/includes -I libft/ftoa -L ./libft -lft
 
 	@ar rc libftprintf.a *.o ./libft/*.o ./libft/ftoa/*.o
 	@ranlib $(NAME)
