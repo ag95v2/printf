@@ -12,7 +12,7 @@
 
 #include "ft_fp.h"
 
-void		fill_t_float(long double x, t_float *num, int precision)
+void	fill_t_float(long double x, t_float *num, int precision)
 {
     num->mant = *((unsigned long int *)&x); 
 	num->exp = *(unsigned short *)((char *)&x + sizeof(unsigned long int));
@@ -21,6 +21,8 @@ void		fill_t_float(long double x, t_float *num, int precision)
 	num->mant_mask = (((unsigned long int) 1) << 63);
 	num->mask_shift = 0;
 	num->precision = precision;
+	if (num->precision < 0)
+		num->precision = 6;
 }
 
 int			abs(int x)
@@ -32,7 +34,7 @@ int			abs(int x)
 **	8 < 10 < 16
 */
 
-void		cut_float(t_float *num, int *power_of2)
+void	cut_float(t_float *num, int *power_of2)
 {
 	int	ignore_pow;
 
@@ -41,7 +43,7 @@ void		cut_float(t_float *num, int *power_of2)
 		*power_of2 = -ignore_pow;
 }
 
-char		*eval_power_sum(t_float *num, int power_of2)
+char	*eval_power_sum(t_float *num, int power_of2)
 {
 	static char	res[LD_MAX_DIGITS];
 	static t_decimal	total;
