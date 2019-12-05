@@ -9,6 +9,8 @@ void	fill_t_float(long double x, t_float *num, int precision)
 	num->mant_mask = (((unsigned long int) 1) << 63);
 	num->mask_shift = 0;
 	num->precision = precision;
+	if (num->precision < 0)
+		num->precision = 6;
 }
 
 static int	abs(int x)

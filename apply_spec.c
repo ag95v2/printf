@@ -6,7 +6,7 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/12/05 03:30:50 by bgian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*apply_spec(char *s, t_spec *spec)
 	{
 		spec->stupid_c0_special_case = 1;
 	}
-	if (spec->conv != 's')
+	if (spec->conv != 's' && spec->conv !=  'f')
 		free(s);
 	return (new);
 }

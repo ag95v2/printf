@@ -6,7 +6,7 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/12/02 19:15:25 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/12/05 04:03:10 by bgian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*float_extractor(t_spec spec, va_list *vl)
 
 	if ((p = ft_memalloc(sizeof(long double))))
 	{
-		if (spec.length == ll || spec.length == l || spec.length == L)
+		if ( spec.length == L) //spec.length == ll || spec.length == l ||
 			*p += va_arg(*vl, long double);
 		else
 			*p += va_arg(*vl, double);

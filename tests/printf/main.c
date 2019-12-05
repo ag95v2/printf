@@ -1,7 +1,6 @@
 
 #include "printf.h"
 #include <stdio.h>
-
 #include <float.h>
 
 int main()
@@ -11,6 +10,13 @@ int main()
 	long double d;
 	short	x;
 	int		y;
+
+	d = 1.42;
+	d = 1.42l;
+
+	
+	//ft_printf("{%Lf}\n", 1.42l);
+	//printf("{%Lf}\n", 1.42l);
 
 	ft_printf("{%f}{%lf}{%Lf}\n", 1.42, 1.42, 1.42l);
 	printf("{%f}{%lf}{%Lf}\n", 1.42, 1.42, 1.42l);
