@@ -13,67 +13,74 @@
 #include "printf.h"
 #include "apply_spec.h"
 
-char	*add_suffix_free(char *s, char *suffix)
+int			is_signed_conversion(t_spec spec)
 {
-	char	*c;
-
-	c = add_suffix(s, suffix);
-	free(suffix);
-	return (c);
+	if (spec.conv == 'i' || spec.conv == 'f' || spec.conv == 'd')
+		return (1);
+	return (0);
 }
 
-char	*add_prefix_free(char *s, char *prefix)
+int			is_numeric(t_spec spec)
 {
-	char	*c;
-	c = add_prefix(s, prefix);
-	free(prefix);
-	return (c);
+	if (\
+		spec.conv == 'd' || spec.conv == 'i' || \
+		spec.conv == 'o' || spec.conv == 'u' || \
+		spec.conv == 'x' || spec.conv == 'X' || \
+		spec.conv == 'f')
+		return (1);
+	return (0);
 }
 
-/*
-**  Return string that contains n chars c
-**	If n <= 0, return nonzero ptr to empty string
-*/
-
-char	*char_n_dup(char c, int n)
+int			is_nonfloat_numeric(t_spec spec)
 {
-	char	*res;
-
-	res = 0;
-	if (n < 0)
-		n = 0;
-	if (n + 1 < n)
-		return (0);
-	res = ft_memalloc(n > 0 ? n + 1 : 1);
-	if (!res)
-		return (0);
-	if (n <= 0)
-		return (res);
-	while (n--)
-		res[n] = c;
-	return (res);
+	if (is_numeric(spec) || spec.conv != 'f')
+		return (1);
+	return (0);
 }
 
 /*
-**  Modify only the copy of original string
-**	Always return a copy. Copy always MUST be freed.
+** return initial string
 */
 
-char	*apply_spec(char *s, t_spec *spec)
+char		*str_replace(char *s, char pattern, char replacement)
 {
+	char	*start;
+
+	start = s;
+	while (*s)
+	{
+		if (*s == pattern)
+			*s = replacement;
+		s++;
+	}
+	return (start);
+}
+
+/*
+**  Warning!
+**  s is always freed. suffix is always not freed
+**	In case of NULL argument return NULL
+*/
+
+char		*add_suffix(char *s, char *suffix)
+{
+	int		len;
 	char	*new;
 
-	if (\
-		!(new = ft_strdup(s)) || \
-		!(new = apply_precision(new, *spec)) || \
-		!(new = apply_numeric_flags(new, *spec)) || \
-		!(new = apply_width(new, *spec)))
-		return (0);
-	if (ft_strlen(s) == 0 && spec->conv == 'c')
+	if (!s || !suffix)
 	{
-		spec->stupid_c0_special_case = 1;
-	}
-	if (spec->conv != 's')
 		free(s);
+		return (0);
+	}
+	len = ft_strlen(s);
+	new = ft_strnew(len + ft_strlen(suffix));
+	if (!new)
+	{
+		free(s);
+		return (0);
+	}
+	ft_strcpy(new, s);
+	ft_strcpy(new + len, suffix);
+	free(s);
 	return (new);
 }

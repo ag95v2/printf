@@ -1,25 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/27 17:03:03 by dpenney           #+#    #+#             */
+/*   Updated: 2019/11/27 17:03:06 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
-#include "read_spec.h"
 #include "apply_spec.h"
+#include "read_spec.h"
+#include "fp_type.h"
 
 /*
 **	Print all normal chars until % or '\0'
-**	Return: 
-**	-pointer to first '%' if string contains '%' 
+**	Return:
+**	-pointer to first '%' if string contains '%'
 **	-0 otherwise
 */
 
-const char	*print_until_percent(const char *format)
+const char	*print_until_percent(const char *format, int *i)
 {
 	while (*format && *format != '%')
+	{
 		ft_putchar(*(format++));
+		(*i)++;
+	}
 	return (*format ? ++format : 0);
 }
 
 /*
 **	Determine type of next arg according to spec
 **	Extract argument from original vl
-**	Return its string representation 
+**	Return its string representation
 */
 
 char		*get_arg_str(t_spec *spec, va_list *vl)
@@ -35,11 +51,13 @@ char		*get_arg_str(t_spec *spec, va_list *vl)
 		!(res = action->to_str(arg, *spec)))
 		error = 1;
 	if (action->cleanup_needed)
+	{
 		free(arg);
+	}
 	return (error || !(res = apply_spec(res, spec)) ? 0 : res);
 }
 
-void		handle_stupid_c0_special_case(char *s, t_spec spec)
+void		handle_stupid_c0_special_case(char *s, t_spec spec, int *i)
 {
 	int	len;
 
@@ -48,35 +66,43 @@ void		handle_stupid_c0_special_case(char *s, t_spec spec)
 	if (!spec.flag_dash)
 	{
 		ft_putstr(s);
+		*i += ft_strlen(s);
 		ft_putchar('\0');
+		*i += 1;
 	}
 	else
 	{
 		ft_putchar('\0');
+		*i += 1;
+		*i += ft_strlen(s);
 		ft_putstr(s);
 	}
 }
 
 int			ft_printf(const char *format, ...)
 {
-	va_list vl;
-	t_spec	spec;
-	char	*s;
+	va_list		vl;
+	t_spec		spec;
+	char		*s;
+	int			i;
 
-	va_start(vl, format); 
-	while ((format = print_until_percent(format))) 
+	i = 0;
+	va_start(vl, format);
+	while ((format = print_until_percent(format, &i)))
 	{
 		format = read_spec(format, &spec);
 		if (!format || !(s = get_arg_str(&spec, &vl)))
 			return (-1);
-		/* Stupid special case with %c and 0 char (which HAS to be printed) */
 		if (spec.stupid_c0_special_case)
-			handle_stupid_c0_special_case(s, spec);
+			handle_stupid_c0_special_case(s, spec, &i);
 		else
+		{
 			ft_putstr(s);
-		if (spec.conv != 's')
-			free(s);
+			i += ft_strlen(s);
+		}
+		free(s);
 	}
 	va_end(vl);
-	return (0);
+	return (i);
 }
+

@@ -1,6 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/29 16:59:23 by dpenney           #+#    #+#             */
+/*   Updated: 2019/11/29 17:01:55 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-/* Probably, 21 or 20, No problem here */
+/*
+** Probably, 21 or 20, No problem here
+*/
+
 #define MAX_DIGITS 22
 
 static int	our_abs(int n)
@@ -9,7 +24,7 @@ static int	our_abs(int n)
 }
 
 /*
-**	Fill string representation	
+**	Fill string representation
 */
 
 static void	fill(char *s, long long n, char *base, int sgn)
@@ -19,9 +34,9 @@ static void	fill(char *s, long long n, char *base, int sgn)
 
 	pos = 0;
 	if (!n)
-	{	
+	{
 		*s = base[0];
-		return;
+		return ;
 	}
 	b_len = ft_strlen(base);
 	while (n)
@@ -46,7 +61,7 @@ static void	fill(char *s, long long n, char *base, int sgn)
 **	Caller should provide a valid base
 */
 
-char        *ft_itoa_base(long long n, char *base, int sgn)
+char		*ft_itoa_base(long long n, char *base, int sgn)
 {
 	char	*s;
 

@@ -8,7 +8,7 @@
             "name": "(lldb) Запустить",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tests/ftoa/a.out",
+            "program": "${workspaceFolder}/a.out",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",

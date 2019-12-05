@@ -11,20 +11,20 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "apply_spec.h"
 
 /*
-**	Return appropritate action according to spec if such exists else 0
+**  "+" " " "#"
 */
 
-t_conv_f	*find_action(t_spec spec)
+char	*apply_numeric_flags(char *s, t_spec spec)
 {
-	static t_conv_f	actions[] = ACTIONS;
-	static t_conv_f	action;
-	int				i;
-
-	i = 0;
-	while ((action = actions[i++]).specifiers)
-		if (ft_strchr(action.specifiers, spec.conv))
-			return (&action);
-	return (0);
+	if (spec.conv == 'p')
+		return ((s = apply_hash(s, spec)));
+	if (is_numeric(spec) &&\
+		(s = apply_hash(s, spec)) && \
+		(s = apply_plus(s, spec)) && \
+		(s = apply_space(s, spec)))
+		return (s);
+	return (s);
 }
