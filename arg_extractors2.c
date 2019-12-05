@@ -6,7 +6,7 @@
 /*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:55:09 by dpenney           #+#    #+#             */
-/*   Updated: 2019/11/29 14:55:10 by dpenney          ###   ########.fr       */
+/*   Updated: 2019/12/05 04:53:27 by bgian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*extr_uint(t_spec spec, va_list *vl, long long *p)
 **	Choose integer extractor depending on signed/unsigned
 */
 
-i_extr_fun	choose_i_extr(t_spec spec)
+t_i_extr_fun	choose_i_extr(t_spec spec)
 {
 	return (is_usgn(spec) ? &extr_uint : &extr_sint);
 }
