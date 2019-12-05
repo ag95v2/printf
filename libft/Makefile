@@ -21,7 +21,7 @@ $(NAME):
 	@echo "\n\n		🐅		\n	Please, some minutes, Monsieur!\n\n"
 	@make -C ftoa
 	@gcc -g -Wall -Wextra -Werror -I includes -c $(SRC)
-	@ar rc libft.a *.o ./ftoa/ftoa.o
+	@ar rc libft.a *.o ./ftoa/*.o
 
 all: $(NAME)
 

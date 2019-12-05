@@ -6,7 +6,7 @@
 #    By: dpenney <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/29 14:53:58 by dpenney           #+#    #+#              #
-#    Updated: 2019/12/02 20:58:17 by dpenney          ###   ########.fr        #
+#    Updated: 2019/12/05 02:59:27 by dpenney          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,16 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@gcc -g $(SRC) -Wall -Wextra -c -I . -I libft/includes -L ./libft -lft
-	@ar rc libftprintf.a *.o ./libft/*.o
+	@gcc -g -c $(SRC) -Wall -Wextra  -I . -I libft/includes -I libft/ftoa -L ./libft -lft
+
+	@ar rc libftprintf.a *.o ./libft/*.o ./libft/ftoa/*.o
 	@ranlib $(NAME)
 	@echo "\n\n\n	It's done! Use it  ( • )( • ) ԅ(‾⌣‾ԅ)  \n\n\n"
 
 clean:
 	@rm -f *.o
 	@rm -f ./libft/*.o
+	@rm -f ./libft/ftoa/*.o
 
 fclean: clean
 	@rm -f libftprintf.a

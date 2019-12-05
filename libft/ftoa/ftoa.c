@@ -1,75 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ftoa.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpenney <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 04:01:51 by dpenney           #+#    #+#             */
+/*   Updated: 2019/12/05 04:01:52 by dpenney          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_fp.h"
 
-void	fill_t_float(long double x, t_float *num, int precision)
-{
-    num->mant = *((unsigned long int *)&x); 
-	num->exp = *(unsigned short *)((char *)&x + sizeof(unsigned long int));
-	num->sign = num->exp & (((unsigned short) 1) << 15);
-	num->exp = num->exp & ~(((unsigned short) 1) << 15);
-	num->mant_mask = (((unsigned long int) 1) << 63);
-	num->mask_shift = 0;
-	num->precision = precision;
-}
-
-static int	abs(int x)
-{
-	return (x >= 0 ? x : -x);
-}
-
-/*
-**	8 < 10 < 16
-*/
-
-void	cut_float(t_float *num, int *power_of2)
-{
-	int	ignore_pow;
-
-	ignore_pow = num->precision * 4 + CRUTCH_FLOAT_PRECISION_CONSTANT;
-	if (*power_of2 < -ignore_pow)
-		*power_of2 = -ignore_pow;
-}
-
-char	*eval_power_sum(t_float *num, int power_of2)
-{
-	static char	res[LD_MAX_DIGITS];
-	static t_decimal	total;
-	static t_decimal	current;
-	static t_decimal	accum;
-
-	cut_float(num, &power_of2);
-	positive_ascii_to(&accum, "0");
-	positive_ascii_to(&total, power_of2 > 0 ? "2" : "0.5");
-	power_positive_decimal(&total, abs(power_of2));
-	while (num->mask_shift < 64)
-	{
-		if (num->mant_mask >> num->mask_shift & num->mant)
-		{
-			positive_ascii_to(&current, "0.5");
-			power_positive_decimal(&current, num->mask_shift);
-			add_positive_decimal(&accum, &current);
-		}
-		num->mask_shift++;
-	}
-	multiply_positive_decimal(&accum, &total);
-	if (num->sign)
-		accum.is_negative = 1;
-	to_ascii(accum, res);
-	return (res);
-}
-
-char	*normal_case(t_float *num)
+char		*normal_case(t_float *num)
 {
 	return (eval_power_sum(num, num->exp - 16383));
 }
 
-char	*exp_all_zeros(t_float *num)
+char		*exp_all_zeros(t_float *num)
 {
 	if (!num->mant)
 		return (num->sign ? "-0.0" : "0.0");
 	return (eval_power_sum(num, -16382));
 }
 
-char	*exp_all_ones(t_float *num)
+char		*exp_all_ones(t_float *num)
 {
 	//62-0 bits of mant ==0 
 	if (!(num->mant & ~num->mant_mask))	
@@ -77,7 +32,7 @@ char	*exp_all_ones(t_float *num)
 	return ("NaN");
 }
 
-char	*ftoa(long double x, int precision)
+char		*ftoa(long double x, int precision)
 {
 	t_float	num;
 

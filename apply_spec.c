@@ -73,7 +73,7 @@ char	*apply_spec(char *s, t_spec *spec)
 	{
 		spec->stupid_c0_special_case = 1;
 	}
-	if (spec->conv != 's')
+	if (spec->conv != 's' && spec->conv != 'f')
 		free(s);
 	return (new);
 }

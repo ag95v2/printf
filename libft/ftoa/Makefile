@@ -1,7 +1,7 @@
 NAME =  ftoa.o
 
 define SRC 
-ftoa.c decimal_arithmetic.c
+ftoa.c ftoa2.c decimal_arithmetic.c decimal_arithmetic2.c decimal_arithmetic3.c decimal_arithmetic4.c decimal_arithmetic5.c
 
 endef
 
@@ -12,7 +12,7 @@ $(NAME):
 all: $(NAME)
 
 clean:
-	@rm -f ft*.o
+	@rm -f *.o
 
 fclean: clean
 
