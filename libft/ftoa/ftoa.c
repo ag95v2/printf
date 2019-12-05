@@ -24,10 +24,13 @@ char		*exp_all_zeros(t_float *num)
 	return (eval_power_sum(num, -16382));
 }
 
+/*
+** //62-0 bits of mant == 0
+*/
+
 char		*exp_all_ones(t_float *num)
 {
-	//62-0 bits of mant ==0 
-	if (!(num->mant & ~num->mant_mask))	
+	if (!(num->mant & ~num->mant_mask))
 		return (num->sign ? "-inf" : "inf");
 	return ("NaN");
 }

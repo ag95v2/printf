@@ -89,7 +89,6 @@ char				*itoa_bx(long long n);
 **	Integer convertors wrappers
 */
 
-
 char				*w_itoa_b10u(void *n, t_spec spec);
 char				*w_itoa_b10(void *n, t_spec spec);
 char				*w_itoa_b2(void *n, t_spec spec);

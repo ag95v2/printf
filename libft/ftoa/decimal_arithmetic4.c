@@ -32,7 +32,10 @@ void		adder_decimal(t_decimal *a, t_decimal *b, char *res)
 		else
 			single_digit_both(a, b, &res, &carry);
 	}
-	carry ? *(res++) = carry : ((*res) = -1);
+	if (carry)
+		*(res++) = carry;
+	else
+		((*res) = -1);
 	*res = -1;
 }
 
@@ -55,11 +58,12 @@ int			max(int a, int b)
 
 /*
 **  Add 2 numbers in-place (result is stored in a)
+**  inverse number will be stored here in line 66;
 */
 
 void		add_positive_decimal(t_decimal *a, t_decimal *b)
 {
-	char	tmp[LD_MAX_DIGITS]; //inverse number will be stored here
+	char	tmp[LD_MAX_DIGITS];
 
 	adder_decimal(a, b, tmp + shift_excessive_digits(a, b, tmp));
 	a->end = a->buff + LD_MAX_DIGITS - 1;
@@ -68,16 +72,18 @@ void		add_positive_decimal(t_decimal *a, t_decimal *b)
 	a->after_dot = max(a->after_dot, b->after_dot);
 }
 
-/************************************************************
-***************Multiplication functions below****************
-************************************************************/
+/*
+** Multiplication functions below
+** //end points to last digit! in line 86
+**  //end points to last digit!
+*/
 
-void		mul_digit(t_decimal *a, t_decimal *b,\
-		int degree, t_decimal *partial_product)
+void		mul_digit(t_decimal *a, t_decimal *b, \
+					int degree, t_decimal *partial_product)
 {
 	int	carry;
-	
-	partial_product->end = partial_product->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+
+	partial_product->end = partial_product->buff + LD_MAX_DIGITS - 1;
 	partial_product->start = partial_product->end;
 	while (degree--)
 		*(partial_product->start--) = 0;
@@ -92,8 +98,8 @@ void		mul_digit(t_decimal *a, t_decimal *b,\
 	partial_product->start++;
 	if (carry)
 	{
-		partial_product->start--; 
+		partial_product->start--;
 		*(partial_product->start) = carry;
 	}
-	a->end = a->buff + LD_MAX_DIGITS - 1; //end points to last digit!
+	a->end = a->buff + LD_MAX_DIGITS - 1;
 }
