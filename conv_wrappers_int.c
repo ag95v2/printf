@@ -29,4 +29,3 @@ char	*w_itoa_b2(void *n, t_spec spec)
 	(void)spec;
 	return (itoa_b2(*(long long *)n));
 }
-

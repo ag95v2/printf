@@ -28,13 +28,17 @@ void	*int_extractor(t_spec spec, va_list *vl)
 	return ((void *)p);
 }
 
+/*
+**  spec.length == ll || spec.length == l ||
+*/
+
 void	*float_extractor(t_spec spec, va_list *vl)
 {
 	long double	*p;
 
 	if ((p = ft_memalloc(sizeof(long double))))
 	{
-		if ( spec.length == L) //spec.length == ll || spec.length == l ||
+		if (spec.length == L)
 			*p += va_arg(*vl, long double);
 		else
 			*p += va_arg(*vl, double);

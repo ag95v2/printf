@@ -13,7 +13,7 @@
 #include "printf.h"
 #include "apply_spec.h"
 
-char	*add_suffix_free(char *s, char *suffix)
+char		*add_suffix_free(char *s, char *suffix)
 {
 	char	*c;
 
@@ -22,9 +22,10 @@ char	*add_suffix_free(char *s, char *suffix)
 	return (c);
 }
 
-char	*add_prefix_free(char *s, char *prefix)
+char		*add_prefix_free(char *s, char *prefix)
 {
 	char	*c;
+
 	c = add_prefix(s, prefix);
 	free(prefix);
 	return (c);
@@ -35,7 +36,7 @@ char	*add_prefix_free(char *s, char *prefix)
 **	If n <= 0, return nonzero ptr to empty string
 */
 
-char	*char_n_dup(char c, int n)
+char		*char_n_dup(char c, int n)
 {
 	char	*res;
 
@@ -59,7 +60,7 @@ char	*char_n_dup(char c, int n)
 **	Always return a copy. Copy always MUST be freed.
 */
 
-char	*apply_spec(char *s, t_spec *spec)
+char		*apply_spec(char *s, t_spec *spec)
 {
 	char	*new;
 
