@@ -6,7 +6,7 @@
 #    By: dpenney <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/29 14:53:58 by dpenney           #+#    #+#              #
-#    Updated: 2019/12/05 05:57:07 by dpenney          ###   ########.fr        #
+#    Updated: 2019/12/05 06:29:34 by bgian            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,9 @@ OBJ = $(SRC:.c = o)
 
 all: $(NAME)
 
-#если необходимо проверить через собственный main, то следует
-#добавить -L ./libft -lft
-
 $(NAME):
 	@make -C libft
-	@gcc -c $(SRC) -Wall -Wextra  -I . -I libft/includes -I libft/ftoa -L ./libft -lft
-
+	@gcc -c $(SRC) -Wall -Wextra  -I . -I libft/includes -I libft/ftoat
 	@ar rc libftprintf.a *.o ./libft/*.o ./libft/ftoa/*.o
 	@ranlib $(NAME)
 	@echo "\n\n\n	It's done! Use it  ( • )( • ) ԅ(‾⌣‾ԅ)  \n\n\n"
@@ -52,11 +48,10 @@ clean:
 	@rm -f *.o
 	@rm -f ./libft/*.o
 	@rm -f ./libft/ftoa/*.o
+	@rm -f *.gch
 
 fclean: clean
 	@rm -f libftprintf.a
 	@rm -f ./libft/libft.a
 
 re: fclean all
-
-.PHONY: all clean fclean re $(NAME)
